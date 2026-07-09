@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Social Content Dashboard</title>
+<style>
+  :root {
+    --surface-1: #fcfcfb;
+    --page-plane: #f9f9f7;
+    --text-primary: #0b0b0b;
+    --text-secondary: #52514e;
+    --muted: #898781;
+    --gridline: #e1e0d9;
+    --border: rgba(11,11,11,0.10);
+    --chip-bg: #f0efec;
+    --accent: #256abf;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --surface-1: #1a1a19;
+      --page-plane: #0d0d0d;
+      --text-primary: #ffffff;
+      --text-secondary: #c3c2b7;
+      --muted: #898781;
+      --gridline: #2c2c2a;
+      --border: rgba(255,255,255,0.10);
+      --chip-bg: #26261f;
+      --accent: #3987e5;
+    }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; }
+  body {
+    background: var(--page-plane);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding-bottom: 40px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+
+  /* Passcode gate */
+  #gate {
+    position: fixed;
+    inset: 0;
+    background: var(--page-plane);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+  }
+  #gate.hidden { display: none; }
+  .gate-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+  }
+  .gate-card h1 { font-size: 16px; margin: 0 0 16px; }
+  .gate-card input {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--page-plane);
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .gate-card button {
+    width: 100%;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+  }
+  .gate-error { color: #d03b3b; font-size: 12px; margin: 0 0 8px; display: none; }
+  .gate-error.show { display: block; }
+
+  #app.hidden { display: none; }
+
+  header { padding: 20px 0 12px; }
+  header h1 { font-size: 19px; margin: 0 0 4px; }
+  header p { color: var(--text-secondary); margin: 0; font-size: 12px; }
+
+  nav.tabs {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 10px 0;
+    background: var(--page-plane);
+    border-bottom: 1px solid var(--gridline);
+    margin-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  nav.tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: 0 0 auto;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface-1);
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .tab[aria-selected="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .panel { padding-bottom: 8px; }
+
+  .account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .account-header h2 { margin: 0; font-size: 17px; }
+  .stat-tiles { display: flex; gap: 18px; }
+  .stat-tile { text-align: right; }
+  .stat-value { display: block; font-size: 19px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .stat-label { display: block; font-size: 10px; color: var(--muted); }
+
+  .insight-box {
+    background: var(--chip-bg);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 22px;
+  }
+  .insight-box h3 { margin: 0 0 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); }
+  .insight-box ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.55; }
+  .insight-box li { margin-bottom: 8px; }
+  .insight-box li:last-child { margin-bottom: 0; }
+
+  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 0 0 10px; }
+  .bar-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+  .bar-row { display: grid; grid-template-columns: 1fr; gap: 3px; }
+  .bar-label {
+    font-size: 13px;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .bar-track { height: 8px; background: var(--gridline); border-radius: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 4px; }
+  .bar-value { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .chips-row { display: flex; flex-direction: column; gap: 10px; padding-top: 14px; border-top: 1px solid var(--gridline); margin-bottom: 12px; }
+  .chips-label { display: block; font-size: 10px; color: var(--muted); margin-bottom: 6px; }
+  .chip {
+    display: inline-block;
+    font-size: 11px;
+    background: var(--chip-bg);
+    color: var(--text-secondary);
+    padding: 5px 9px;
+    border-radius: 6px;
+    margin: 0 6px 6px 0;
+  }
+  .chip-muted { opacity: 0.8; }
+</style>
+</head>
+<body>
+  <div id="gate">
+    <div class="gate-card">
+      <h1>Enter passcode</h1>
+      <p class="gate-error" id="gate-error">Wrong passcode, try again.</p>
+      <input id="gate-input" type="password" inputmode="text" autocomplete="off" placeholder="Passcode" />
+      <button id="gate-submit">Unlock</button>
+    </div>
+  </div>
+
+  <div id="app" class="hidden">
+    <div class="wrap">
+      <header>
+        <h1>Social Content Dashboard</h1>
+        <p>4 accounts — generated 9 Jul 2026, 11:28 pm</p>
+      </header>
+      <nav class="tabs"><button class="tab" data-target="panel-lotb-instagram" aria-selected="true">LOTB Instagram</button><button class="tab" data-target="panel-lotb-tiktok" >LOTB TikTok</button><button class="tab" data-target="panel-pac-instagram" >PAC Instagram</button><button class="tab" data-target="panel-pac-facebook" >PAC Facebook</button></nav>
+      
+  <section class="panel" id="panel-lotb-instagram" >
+    <div class="account-header">
+      <h2>LOTB Instagram</h2>
+      <div class="stat-tiles">
+        <div class="stat-tile"><span class="stat-value">30</span><span class="stat-label">posts tracked</span></div>
+        <div class="stat-tile"><span class="stat-value">14</span><span class="stat-label">avg engagement</span></div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <h3>What's working</h3>
+      <ul><li>Specific hook + a clear ask beats generic tips. &quot;Comment TOPIC and I&#39;ll send you...&quot; (165) and the fraction-cards giveaway (77) both give a concrete reason to engage right now.</li><li>A real, relatable moment (&quot;your child stared at the question and gave up&quot;) outperforms broad advice. Every 0-engagement post opens with a generic statement (&quot;PSLE math is stressful...&quot;) and no specific scene.</li><li>Repeating the same 4-5 hashtags (#pslemathtuition #mathtrick #mathtutor) on the losing posts didn&#39;t help — the losers share tags with winners, so hashtags aren&#39;t the lever here. The hook is.</li></ul>
+    </div>
+
+    <h3 class="section-label">Top 5 performers</h3>
+    <div class="bar-list">
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DaJ3w7ASaOQ/" target="_blank" rel="noopener">Comment “TOPIC” and I’ll send you the full list + my analysis of what’s likely coming in 2026 🧮 </a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:#cde2fb;"></div>
+        </div>
+        <span class="bar-value">165</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DV00yKDkuw9/" target="_blank" rel="noopener">🎁 P5 FRACTION CARDS GIVEAWAY - yours for FREE!</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:46.666666666666664%; background:#9ec5f4;"></div>
+        </div>
+        <span class="bar-value">77</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DYzVKDBkvIB/" target="_blank" rel="noopener">Your child stared at the question and gave up.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:43.63636363636363%; background:#6da7ec;"></div>
+        </div>
+        <span class="bar-value">72</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DYywhmxRCS8/" target="_blank" rel="noopener">Four subjects. Four educators. One Sunday afternoon — and so much heart. 🤍</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:17.575757575757574%; background:#3987e5;"></div>
+        </div>
+        <span class="bar-value">29</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DY1YwX3EpUz/" target="_blank" rel="noopener">Most parents fold the paper when they see a folding angle question.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:7.878787878787878%; background:#256abf;"></div>
+        </div>
+        <span class="bar-value">13</span>
+      </div></div>
+
+    <h3 class="section-label">Bottom 5 performers</h3>
+    <div class="bar-list">
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DZmba73SnC0/" target="_blank" rel="noopener">Spot PSLE exam question types - part 1.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">0</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DV4xNJgkui7/" target="_blank" rel="noopener">PSLE math not easy and the normal thing is most stopped trying. It happened in my parents workshop for PSLE math. There’</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">0</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DV8e2LAEhz2/" target="_blank" rel="noopener">PSLE math is stressful to many P6s. There are many PSLE math techniques to lessen or manage the stress. These helped wit</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">0</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DV2ZOt3Emmy/" target="_blank" rel="noopener">PSLE math grades can go up and down. My student told me 85 marks is a bad mark. PSLE math journey is long. I shared with</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">0</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DWDVFgREhFb/" target="_blank" rel="noopener">Most kids can self study, without you nagging. PSLE math revision can be systemised, so it runs itself. Here’s how I tra</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">0</span>
+      </div></div>
+
+    <div class="chips-row">
+      <div><span class="chips-label">Format performance</span><span class="chip">Sidecar · 5 posts · avg 22</span><span class="chip">Video · 21 posts · avg 10</span><span class="chip">Reel · 3 posts · avg 37</span><span class="chip">Image · 1 posts · avg 1</span></div>
+      <div><span class="chips-label">Hashtags (winners ↑ / losers ↓)</span><span class="chip chip-muted">#pslemaths (2↑ / 0↓)</span><span class="chip chip-muted">#psle2026 (1↑ / 0↓)</span><span class="chip chip-muted">#psleprep (1↑ / 0↓)</span><span class="chip chip-muted">#sgparents (1↑ / 0↓)</span><span class="chip chip-muted">#primaryschool (1↑ / 0↓)</span><span class="chip chip-muted">#tool (1↑ / 0↓)</span></div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-lotb-tiktok" hidden>
+    <div class="account-header">
+      <h2>LOTB TikTok</h2>
+      <div class="stat-tiles">
+        <div class="stat-tile"><span class="stat-value">30</span><span class="stat-label">posts tracked</span></div>
+        <div class="stat-tile"><span class="stat-value">133</span><span class="stat-label">avg engagement</span></div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <h3>What's working</h3>
+      <ul><li>The single biggest gap on the whole dashboard: a personal parent/student anecdote with an emotional twist (2,681 engagement) beat listicle-style &quot;3 things you must do&quot; videos by 20-50x, even though format (video) and topic (PSLE math) are identical.</li><li>Story &gt; instruction. Top 2 posts are both narrated stories with a specific outcome (23-mark improvement, one book that changed a kid&#39;s score). Bottom 5 are all generic advice framing (&quot;here&#39;s how to...&quot;, &quot;want AL1?&quot;).</li><li>This is the platform where the story format is worth doubling down on hardest — the engagement swing between story and generic-tips is far larger here than on Instagram.</li></ul>
+    </div>
+
+    <h3 class="section-label">Top 5 performers</h3>
+    <div class="bar-list">
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7482747522172112135" target="_blank" rel="noopener">My P6 student improved by 23 marks but his Mum still asked him where is the 7 marks short to hit 90. As a tutor who is a</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:#cde2fb;"></div>
+        </div>
+        <span class="bar-value">2,681</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7497185808428977415" target="_blank" rel="noopener">How this one book helps an average kid who disliked math scored AL1 in PSLE maths. Dad&#39;s only regret is not using it ear</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:16.4863856769862%; background:#9ec5f4;"></div>
+        </div>
+        <span class="bar-value">442</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7644108782812794133" target="_blank" rel="noopener">Want AL1/2 for PSLE math? Here are three things you must do to get AL1/2 for PSLE math. The third point is the most impo</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:4.848936963819471%; background:#6da7ec;"></div>
+        </div>
+        <span class="bar-value">130</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7646269066818391316" target="_blank" rel="noopener">Want AL1 for P6/ PSLE math?</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#3987e5;"></div>
+        </div>
+        <span class="bar-value">53</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7646733456663170325" target="_blank" rel="noopener">Find PSLE math angle questions confusing? Follow my 5-step framework to master angle questions to score full marks for a</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#256abf;"></div>
+        </div>
+        <span class="bar-value">52</span>
+      </div></div>
+
+    <h3 class="section-label">Bottom 5 performers</h3>
+    <div class="bar-list">
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7638921975754132757" target="_blank" rel="noopener">Not satisfied with recent P6 Wa2 marks? Want higher marks? Check out our P6 holiday workshops to help your kids spot pro</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:33.33333333333333%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">3</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7618813029152673044" target="_blank" rel="noopener">Most kids can self study, without you nagging. PSLE math revision can be systemised, so it runs itself. Here’s how I tra</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:77.77777777777779%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">7</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7627788824352918804" target="_blank" rel="noopener">Did your child keep quiet when asked how to solve the PSLE math questions? It’s not about not having PSLE math confidenc</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:88.88888888888889%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">8</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7638905521562504469" target="_blank" rel="noopener">Tricky PSLE math questions with more than one fractions. Why always wrong? Here’s how to differentiate fractions with an</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">9</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7646056177482075413" target="_blank" rel="noopener">We had our first PSLE celebration: PSLE math party for kids. Thank you our parents for contributing lots of yummy food a</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">9</span>
+      </div></div>
+
+    <div class="chips-row">
+      <div><span class="chips-label">Format performance</span><span class="chip">Video · 30 posts · avg 133</span></div>
+      <div><span class="chips-label">Hashtags (winners ↑ / losers ↓)</span><span class="chip chip-muted">#pslemath (4↑ / 5↓)</span><span class="chip chip-muted">#mathtutor (4↑ / 4↓)</span><span class="chip chip-muted">#pslemathtuition (3↑ / 5↓)</span><span class="chip chip-muted">#primarymaths (3↑ / 3↓)</span><span class="chip chip-muted">#singaporemaths (3↑ / 1↓)</span><span class="chip chip-muted">#singaporemath (2↑ / 0↓)</span></div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-pac-instagram" hidden>
+    <div class="account-header">
+      <h2>PAC Instagram</h2>
+      <div class="stat-tiles">
+        <div class="stat-tile"><span class="stat-value">30</span><span class="stat-label">posts tracked</span></div>
+        <div class="stat-tile"><span class="stat-value">5</span><span class="stat-label">avg engagement</span></div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <h3>What's working</h3>
+      <ul><li>Vulnerable, first-person storytelling wins: &quot;I&#39;m an introvert...&quot;, &quot;She was my first girlfriend&quot; (used as a hook into a business point), and the community-event recap all outperform. These read as John, not generic tutor-coach content.</li><li>Abstract, quote-style openers underperform — &quot;Some weeks your inbox feels like a mirror...&quot; and &quot;I built an AI content system...&quot; scored 0-1 engagement. They open with a concept instead of a concrete moment.</li><li>AI-topic posts specifically underperformed twice in the bottom 5 — worth testing whether that topic needs a stronger personal hook before leading with the tool itself.</li></ul>
+    </div>
+
+    <h3 class="section-label">Top 5 performers</h3>
+    <div class="bar-list">
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DYywhmxRCS8/" target="_blank" rel="noopener">Four subjects. Four educators. One Sunday afternoon — and so much heart. 🤍</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:#cde2fb;"></div>
+        </div>
+        <span class="bar-value">29</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DXvPNWsEqUf/" target="_blank" rel="noopener">I’m an introvert who’s not very eloquent. Running a community event felt like a double whammy.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:75.86206896551724%; background:#9ec5f4;"></div>
+        </div>
+        <span class="bar-value">22</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DZIa7UqksxJ/" target="_blank" rel="noopener">The tutors who filled their group classes weren&#39;t more ready. They just stopped waiting.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:68.96551724137932%; background:#6da7ec;"></div>
+        </div>
+        <span class="bar-value">20</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DYO_IckjrnZ/" target="_blank" rel="noopener">She was my first girlfriend.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:41.37931034482759%; background:#3987e5;"></div>
+        </div>
+        <span class="bar-value">12</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DUpdwPkFoir/" target="_blank" rel="noopener">My friends who coach high-ticket clients think I’m crazy for choosing to serve tutors.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:31.03448275862069%; background:#256abf;"></div>
+        </div>
+        <span class="bar-value">9</span>
+      </div></div>
+
+    <h3 class="section-label">Bottom 5 performers</h3>
+    <div class="bar-list">
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DYg3YTYEtnZ/" target="_blank" rel="noopener">Some weeks your inbox feels like a mirror you didn’t ask to look into.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">0</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DYhPxsXErmm/" target="_blank" rel="noopener">“I’m busy.” “Too long to read.” “Can’t be bothered.”</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">0</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DYFGWnRkpGB/" target="_blank" rel="noopener">You&#39;ve rewritten your AI prompt three times.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">1</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DYUXvP3kkiH/" target="_blank" rel="noopener">I built an AI content system that saved me hours every week.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">1</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.instagram.com/p/DYT3rFxDgIB/" target="_blank" rel="noopener">This is what 1.5 years of working with AI taught me - save this for the next time you feel like the tool is running ahea</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">1</span>
+      </div></div>
+
+    <div class="chips-row">
+      <div><span class="chips-label">Format performance</span><span class="chip">Image · 13 posts · avg 4</span><span class="chip">Sidecar · 12 posts · avg 6</span><span class="chip">Reel · 2 posts · avg 17</span><span class="chip">Video · 3 posts · avg 2</span></div>
+      <div><span class="chips-label">Hashtags (winners ↑ / losers ↓)</span><span class="chip chip-muted">#TutorConnect (2↑ / 0↓)</span><span class="chip chip-muted">#CommunityOverCompetition (2↑ / 0↓)</span><span class="chip chip-muted">#PSLEReadiness (1↑ / 0↓)</span><span class="chip chip-muted">#PSLE2026 (1↑ / 0↓)</span><span class="chip chip-muted">#PSLEReady (1↑ / 0↓)</span><span class="chip chip-muted">#CollaborationOverCompetition (1↑ / 0↓)</span></div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-pac-facebook" hidden>
+    <div class="account-header">
+      <h2>PAC Facebook</h2>
+      <div class="stat-tiles">
+        <div class="stat-tile"><span class="stat-value">30</span><span class="stat-label">posts tracked</span></div>
+        <div class="stat-tile"><span class="stat-value">504</span><span class="stat-label">avg engagement</span></div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <h3>What's working</h3>
+      <ul><li>The single biggest outlier on the entire dashboard: the tribute post about your late father (&quot;My father was home every single day... And I thought he was jobless&quot;) pulled 14,677 engagement and 816K reach — about 180x every other post, with 1,119 shares alone. Deep, specific, vulnerable personal story, told in full — not a snippet.</li><li>Same pattern as PAC Instagram confirms itself here: even outside that one viral post, the next-best performers are still personal narrative (&quot;You saw someone calm in the middle of chaos&quot;, the overworking-tutor story) — generic prompts and short quote-openers (&quot;I&#39;m busy...&quot;, 3 engagement) sit at the bottom.</li><li>Reels underperformed Photos on this account (avg 8 vs avg 628) — but that gap is almost entirely the viral photo post dragging the average up. Worth re-checking Reel performance after a few more data pulls once the outlier&#39;s influence dilutes.</li></ul>
+    </div>
+
+    <h3 class="section-label">Top 5 performers</h3>
+    <div class="bar-list">
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid09wTKhse5t9Wp3PMZCg5SN2DSrYgnSM4sMoNVFW2hqpGgUr8ueqfvKZJQ2WYNAxi9l" target="_blank" rel="noopener">My father was home every single day when I was growing up. And I thought he was jobless.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:#cde2fb;"></div>
+        </div>
+        <span class="bar-value">14,677</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid04wwRKqUecXrvoueWSxo66EuMvQuDTK37JRCPwanusyfb8DAxvyz2sLXmfaK8jqFzl" target="_blank" rel="noopener">You saw someone calm in the middle of chaos.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#9ec5f4;"></div>
+        </div>
+        <span class="bar-value">80</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid02iaq3vJadbMJcKxd6zJYkMJ1swBf9JJ2bbYCVDdSM5kJ5W9fEhH5Tag2gTiDMqhkXl" target="_blank" rel="noopener">I thought working 7 days a week was what a committed tutor looked like.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#6da7ec;"></div>
+        </div>
+        <span class="bar-value">37</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid0Wmkm4C2ZN8BJPKs7VayPJ5KyEknuN9oXunWKR8vbUKnj1BSwq64ZqMkjh9GnHNx9l" target="_blank" rel="noopener">Nobody has ever told me they chose my tuition service because of my degree. (Though I have one engineering degree and on</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#3987e5;"></div>
+        </div>
+        <span class="bar-value">36</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid02bw6hrUrebGKjpw5K7BUrHAhiJNdjcebN3DtHAkv1QcrVb5sdzonFjHNsQKqLBTaxl" target="_blank" rel="noopener">“They say physical workshops are dead.”</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#256abf;"></div>
+        </div>
+        <span class="bar-value">30</span>
+      </div></div>
+
+    <h3 class="section-label">Bottom 5 performers</h3>
+    <div class="bar-list">
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid0wfd4Yu21BKvjHUQaWtosAyunU3RSsvpoyumZxCffPvSH7X3KrA1GL1TkLXoRMZZQl" target="_blank" rel="noopener">(no caption)</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">0</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.facebook.com/reel/1472221297700008/" target="_blank" rel="noopener">Tutors: what to say to counter when parents ask you for discounts. Here’s what works for my tutor coaching clients. #bus</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:66.66666666666666%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">2</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.facebook.com/reel/4173156556330767/" target="_blank" rel="noopener">Why your tutor friends’ slots are filling up faster than yours? Here’s what I realised. Watch till the end to get my cus</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">3</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid02DgtdQARCqHYxfDYQTKf7mARJ2KE9YYttgFtnJem2nFWxzReaRNrBrEHtcsPP4fGql" target="_blank" rel="noopener">&quot;I&#39;m busy.&quot; &quot;Too long to read.&quot; &quot;Can&#39;t be bothered.&quot;</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">3</span>
+      </div>
+      <div class="bar-row">
+        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid02ZSPw5BUNLtHE3QT6F3muJ2HgwSq1rCFCRkMUcupEfABiCBaSiahLEfvWNRxNSZ7il" target="_blank" rel="noopener">Revealing my entire AI workflow. Live. In front of tutors.</a>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+        </div>
+        <span class="bar-value">3</span>
+      </div></div>
+
+    <div class="chips-row">
+      <div><span class="chips-label">Format performance</span><span class="chip">Photo · 24 posts · avg 628</span><span class="chip">Reel · 4 posts · avg 8</span><span class="chip">Content · 2 posts · avg 19</span></div>
+      
+    </div>
+  </section>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var PASS = "juju";
+      var gate = document.getElementById("gate");
+      var app = document.getElementById("app");
+      var input = document.getElementById("gate-input");
+      var submit = document.getElementById("gate-submit");
+      var error = document.getElementById("gate-error");
+
+      function unlock() {
+        gate.classList.add("hidden");
+        app.classList.remove("hidden");
+        sessionStorage.setItem("dashboard-unlocked", "1");
+      }
+
+      function tryUnlock() {
+        if (input.value === PASS) {
+          unlock();
+        } else {
+          error.classList.add("show");
+        }
+      }
+
+      if (sessionStorage.getItem("dashboard-unlocked") === "1") {
+        unlock();
+      }
+
+      submit.addEventListener("click", tryUnlock);
+      input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") tryUnlock();
+      });
+
+      var tabs = document.querySelectorAll(".tab");
+      tabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+          tabs.forEach(function (t) { t.setAttribute("aria-selected", "false"); });
+          tab.setAttribute("aria-selected", "true");
+          document.querySelectorAll(".panel").forEach(function (p) { p.hidden = true; });
+          document.getElementById(tab.dataset.target).hidden = false;
+          window.scrollTo({ top: 0, behavior: "instant" });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
