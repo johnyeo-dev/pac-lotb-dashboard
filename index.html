@@ -283,11 +283,32 @@
   .ov-footnote { font-size: 15px; color: var(--muted); margin: 0; }
 
   /* Content ideas */
-  .ideas-block { margin-bottom: 24px; }
-  .ideas-summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px; }
+  .ideas-block { margin-bottom: 26px; }
+  .ideas-summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--acc);
+    color: #fff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.08);
+  }
   .ideas-summary::-webkit-details-marker { display: none; }
-  .ideas-summary::before { content: "▶"; font-size: 13px; transition: transform 0.15s; }
-  details[open] .ideas-summary::before { transform: rotate(90deg); }
+  .ideas-summary-icon { font-size: 26px; flex-shrink: 0; }
+  .ideas-summary-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+  .ideas-summary-title { font-size: 19px; font-weight: 700; }
+  .ideas-summary-sub { font-size: 14px; opacity: 0.9; }
+  .ideas-summary-chevron {
+    font-size: 26px;
+    font-weight: 700;
+    flex-shrink: 0;
+    transition: transform 0.15s;
+  }
+  details[open] .ideas-summary-chevron { transform: rotate(90deg); }
+  .ideas-summary:active { opacity: 0.85; }
   .ideas-list { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
   .idea-card {
     display: grid;
@@ -437,7 +458,14 @@
 
     
     <details class="ideas-block">
-      <summary class="section-label ideas-summary">10 post ideas for this account</summary>
+      <summary class="ideas-summary">
+        <span class="ideas-summary-icon">💡</span>
+        <span class="ideas-summary-text">
+          <span class="ideas-summary-title">10 post ideas</span>
+          <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
+        </span>
+        <span class="ideas-summary-chevron">›</span>
+      </summary>
       <div class="ideas-list">
         
         <div class="idea-card">
@@ -714,7 +742,14 @@
 
     
     <details class="ideas-block">
-      <summary class="section-label ideas-summary">10 post ideas for this account</summary>
+      <summary class="ideas-summary">
+        <span class="ideas-summary-icon">💡</span>
+        <span class="ideas-summary-text">
+          <span class="ideas-summary-title">10 post ideas</span>
+          <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
+        </span>
+        <span class="ideas-summary-chevron">›</span>
+      </summary>
       <div class="ideas-list">
         
         <div class="idea-card">
@@ -970,7 +1005,14 @@
 
     
     <details class="ideas-block">
-      <summary class="section-label ideas-summary">10 post ideas for this account</summary>
+      <summary class="ideas-summary">
+        <span class="ideas-summary-icon">💡</span>
+        <span class="ideas-summary-text">
+          <span class="ideas-summary-title">10 post ideas</span>
+          <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
+        </span>
+        <span class="ideas-summary-chevron">›</span>
+      </summary>
       <div class="ideas-list">
         
         <div class="idea-card">
@@ -1247,7 +1289,14 @@
 
     
     <details class="ideas-block">
-      <summary class="section-label ideas-summary">10 post ideas for this account</summary>
+      <summary class="ideas-summary">
+        <span class="ideas-summary-icon">💡</span>
+        <span class="ideas-summary-text">
+          <span class="ideas-summary-title">10 post ideas</span>
+          <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
+        </span>
+        <span class="ideas-summary-chevron">›</span>
+      </summary>
       <div class="ideas-list">
         
         <div class="idea-card">
