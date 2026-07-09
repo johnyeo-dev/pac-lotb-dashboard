@@ -37,7 +37,7 @@
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     padding-bottom: 40px;
   }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 18px; }
 
   /* Passcode gate */
   #gate {
@@ -55,62 +55,62 @@
     background: var(--surface-1);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 28px 24px;
+    padding: 32px 24px;
     width: 100%;
-    max-width: 320px;
+    max-width: 380px;
     text-align: center;
   }
-  .gate-card h1 { font-size: 16px; margin: 0 0 16px; }
+  .gate-card h1 { font-size: 30px; margin: 0 0 20px; }
   .gate-card input {
     width: 100%;
-    font-size: 16px;
-    padding: 12px 14px;
+    font-size: 24px;
+    padding: 16px 14px;
     border-radius: 8px;
     border: 1px solid var(--border);
     background: var(--page-plane);
     color: var(--text-primary);
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     text-align: center;
   }
   .gate-card button {
     width: 100%;
-    font-size: 15px;
+    font-size: 22px;
     font-weight: 600;
-    padding: 12px 14px;
+    padding: 16px 14px;
     border-radius: 8px;
     border: none;
     background: var(--accent);
     color: #fff;
   }
-  .gate-error { color: #d03b3b; font-size: 12px; margin: 0 0 8px; display: none; }
+  .gate-error { color: #d03b3b; font-size: 18px; margin: 0 0 10px; display: none; }
   .gate-error.show { display: block; }
 
   #app.hidden { display: none; }
 
-  header { padding: 20px 0 12px; }
-  header h1 { font-size: 19px; margin: 0 0 4px; }
-  header p { color: var(--text-secondary); margin: 0; font-size: 12px; }
+  header { padding: 22px 0 14px; }
+  header h1 { font-size: 34px; margin: 0 0 6px; }
+  header p { color: var(--text-secondary); margin: 0; font-size: 20px; }
 
   nav.tabs {
     position: sticky;
     top: 0;
     z-index: 10;
     display: flex;
-    gap: 6px;
+    gap: 8px;
     overflow-x: auto;
-    padding: 10px 0;
+    padding: 12px 0;
     background: var(--page-plane);
     border-bottom: 1px solid var(--gridline);
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
   nav.tabs::-webkit-scrollbar { display: none; }
   .tab {
     flex: 0 0 auto;
-    font-size: 13px;
+    font-size: 20px;
     font-weight: 600;
-    padding: 9px 14px;
+    padding: 12px 18px;
     border-radius: 999px;
     border: 1px solid var(--border);
     background: var(--surface-1);
@@ -123,38 +123,38 @@
     color: #fff;
   }
 
-  .panel { padding-bottom: 8px; }
+  .panel { padding-bottom: 10px; }
 
   .account-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 14px;
+    margin-bottom: 20px;
   }
-  .account-header h2 { margin: 0; font-size: 17px; }
-  .stat-tiles { display: flex; gap: 18px; }
+  .account-header h2 { margin: 0; font-size: 28px; }
+  .stat-tiles { display: flex; gap: 22px; }
   .stat-tile { text-align: right; }
-  .stat-value { display: block; font-size: 19px; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .stat-label { display: block; font-size: 10px; color: var(--muted); }
+  .stat-value { display: block; font-size: 32px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .stat-label { display: block; font-size: 17px; color: var(--muted); }
 
   .insight-box {
     background: var(--chip-bg);
     border-radius: 10px;
-    padding: 14px 16px;
-    margin-bottom: 22px;
+    padding: 18px 18px;
+    margin-bottom: 26px;
   }
-  .insight-box h3 { margin: 0 0 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); }
-  .insight-box ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.55; }
-  .insight-box li { margin-bottom: 8px; }
+  .insight-box h3 { margin: 0 0 12px; font-size: 18px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); }
+  .insight-box ul { margin: 0; padding-left: 22px; font-size: 22px; line-height: 1.5; }
+  .insight-box li { margin-bottom: 12px; }
   .insight-box li:last-child { margin-bottom: 0; }
 
-  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 0 0 10px; }
-  .bar-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
-  .bar-row { display: grid; grid-template-columns: 1fr; gap: 3px; }
+  .section-label { font-size: 18px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 0 0 14px; }
+  .bar-list { display: flex; flex-direction: column; gap: 18px; margin-bottom: 26px; }
+  .bar-row { display: grid; grid-template-columns: 1fr; gap: 6px; }
   .bar-label {
-    font-size: 13px;
+    font-size: 22px;
     color: var(--text-primary);
     text-decoration: none;
     display: -webkit-box;
@@ -162,20 +162,20 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .bar-track { height: 8px; background: var(--gridline); border-radius: 4px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 4px; }
-  .bar-value { font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .bar-track { height: 12px; background: var(--gridline); border-radius: 6px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 6px; }
+  .bar-value { font-size: 18px; color: var(--muted); font-variant-numeric: tabular-nums; }
 
-  .chips-row { display: flex; flex-direction: column; gap: 10px; padding-top: 14px; border-top: 1px solid var(--gridline); margin-bottom: 12px; }
-  .chips-label { display: block; font-size: 10px; color: var(--muted); margin-bottom: 6px; }
+  .chips-row { display: flex; flex-direction: column; gap: 14px; padding-top: 18px; border-top: 1px solid var(--gridline); margin-bottom: 14px; }
+  .chips-label { display: block; font-size: 17px; color: var(--muted); margin-bottom: 8px; }
   .chip {
     display: inline-block;
-    font-size: 11px;
+    font-size: 18px;
     background: var(--chip-bg);
     color: var(--text-secondary);
-    padding: 5px 9px;
-    border-radius: 6px;
-    margin: 0 6px 6px 0;
+    padding: 8px 14px;
+    border-radius: 8px;
+    margin: 0 8px 8px 0;
   }
   .chip-muted { opacity: 0.8; }
 </style>
