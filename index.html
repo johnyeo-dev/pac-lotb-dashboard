@@ -87,9 +87,30 @@
 
   #app.hidden { display: none; }
 
-  header { padding: 22px 0 14px; }
+  header { padding: 22px 0 14px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
   header h1 { font-size: 34px; margin: 0 0 6px; }
-  header p { color: var(--text-secondary); margin: 0; font-size: 20px; }
+  header p { color: var(--text-secondary); margin: 0; font-size: 18px; }
+  .refresh-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: var(--chip-bg);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 14px;
+    white-space: nowrap;
+  }
+  .refresh-pill::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #0ca30c;
+    display: inline-block;
+  }
 
   nav.tabs {
     position: sticky;
@@ -101,14 +122,14 @@
     padding: 12px 0;
     background: var(--page-plane);
     border-bottom: 1px solid var(--gridline);
-    margin-bottom: 22px;
+    margin-bottom: 24px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
   nav.tabs::-webkit-scrollbar { display: none; }
   .tab {
     flex: 0 0 auto;
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 600;
     padding: 12px 18px;
     border-radius: 999px;
@@ -125,19 +146,24 @@
 
   .panel { padding-bottom: 10px; }
 
-  .account-header {
+  .account-header { margin-bottom: 18px; }
+  .account-header h2 { margin: 0; font-size: 28px; display: flex; align-items: center; gap: 10px; }
+  .acc-icon { font-size: 28px; line-height: 1; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+  .kpi-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 10px;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 14px;
-    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
   }
-  .account-header h2 { margin: 0; font-size: 28px; }
-  .stat-tiles { display: flex; gap: 22px; }
-  .stat-tile { text-align: right; }
-  .stat-value { display: block; font-size: 32px; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .stat-label { display: block; font-size: 17px; color: var(--muted); }
+  .kpi-value { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .kpi-label { font-size: 13px; color: var(--muted); line-height: 1.2; }
 
   .insight-box {
     background: var(--chip-bg);
@@ -146,38 +172,99 @@
     margin-bottom: 26px;
   }
   .insight-box h3 { margin: 0 0 12px; font-size: 18px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); }
-  .insight-box ul { margin: 0; padding-left: 22px; font-size: 22px; line-height: 1.5; }
+  .insight-box ul { margin: 0; padding-left: 22px; font-size: 21px; line-height: 1.5; }
   .insight-box li { margin-bottom: 12px; }
   .insight-box li:last-child { margin-bottom: 0; }
 
-  .section-label { font-size: 18px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 0 0 14px; }
-  .bar-list { display: flex; flex-direction: column; gap: 18px; margin-bottom: 26px; }
-  .bar-row { display: grid; grid-template-columns: 1fr; gap: 6px; }
-  .bar-label {
-    font-size: 22px;
+  .section-label { font-size: 17px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 0 0 14px; font-weight: 700; }
+
+  .rank-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+  .rank-row { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; }
+  .rank-badge {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--chip-bg);
+    color: var(--text-secondary);
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .rank-body { min-width: 0; }
+  .rank-label {
+    display: block;
+    font-size: 20px;
     color: var(--text-primary);
     text-decoration: none;
+    margin-bottom: 6px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .bar-track { height: 12px; background: var(--gridline); border-radius: 6px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 6px; }
-  .bar-value { font-size: 18px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .bar-track { height: 10px; background: var(--gridline); border-radius: 5px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 5px; }
+  .rank-value { font-size: 18px; font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
-  .chips-row { display: flex; flex-direction: column; gap: 14px; padding-top: 18px; border-top: 1px solid var(--gridline); margin-bottom: 14px; }
-  .chips-label { display: block; font-size: 17px; color: var(--muted); margin-bottom: 8px; }
+  .fmt-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+  .fmt-row { display: grid; grid-template-columns: 1fr; gap: 6px; }
+  .fmt-label { font-size: 18px; font-weight: 600; }
+  .fmt-count { font-weight: 400; color: var(--muted); font-size: 15px; }
+  .fmt-value { font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  .chips-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
   .chip {
-    display: inline-block;
-    font-size: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
     background: var(--chip-bg);
     color: var(--text-secondary);
     padding: 8px 14px;
     border-radius: 8px;
-    margin: 0 8px 8px 0;
   }
-  .chip-muted { opacity: 0.8; }
+  .chip-sub { font-size: 13px; opacity: 0.75; }
+
+  /* Overview tab */
+  .ov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+  .ov-card {
+    text-align: left;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--acc);
+    border-radius: 12px;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .ov-icon { font-size: 22px; margin-bottom: 2px; }
+  .ov-name { font-size: 15px; font-weight: 700; color: var(--text-secondary); }
+  .ov-value { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; margin-top: 4px; }
+  .ov-label { font-size: 13px; color: var(--muted); }
+  .ov-sub { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  .spotlight {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--acc);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 20px;
+  }
+  .spotlight-icon { font-size: 28px; }
+  .spotlight-caption { display: block; font-size: 21px; color: var(--text-primary); text-decoration: none; margin-bottom: 6px; }
+  .spotlight-meta { font-size: 15px; color: var(--muted); }
+
+  .ov-footnote { font-size: 15px; color: var(--muted); margin: 0; }
 </style>
 </head>
 <body>
@@ -193,17 +280,80 @@
   <div id="app" class="hidden">
     <div class="wrap">
       <header>
-        <h1>Social Content Dashboard</h1>
-        <p>4 accounts — generated 9 Jul 2026, 11:28 pm</p>
+        <div>
+          <h1>Social Content Dashboard</h1>
+          <p>4 accounts tracked</p>
+        </div>
+        <span class="refresh-pill">Data refreshed 9 Jul 2026, 11:28 pm</span>
       </header>
-      <nav class="tabs"><button class="tab" data-target="panel-lotb-instagram" aria-selected="true">LOTB Instagram</button><button class="tab" data-target="panel-lotb-tiktok" >LOTB TikTok</button><button class="tab" data-target="panel-pac-instagram" >PAC Instagram</button><button class="tab" data-target="panel-pac-facebook" >PAC Facebook</button></nav>
+      <nav class="tabs"><button class="tab" data-target="panel-overview" aria-selected="true">✨ Overview</button><button class="tab" data-target="panel-lotb-instagram" >📸 LOTB Instagram</button><button class="tab" data-target="panel-lotb-tiktok" >🎵 LOTB TikTok</button><button class="tab" data-target="panel-pac-instagram" >📸 PAC Instagram</button><button class="tab" data-target="panel-pac-facebook" >👍 PAC Facebook</button></nav>
       
-  <section class="panel" id="panel-lotb-instagram" >
+  <section class="panel" id="panel-overview">
+    <h3 class="section-label">All accounts</h3>
+    <div class="ov-grid">
+      <button class="ov-card" data-jump="panel-lotb-instagram" style="--acc:#2a78d6;">
+        <span class="ov-icon">📸</span>
+        <span class="ov-name">LOTB Instagram</span>
+        <span class="ov-value">14</span>
+        <span class="ov-label">avg engagement</span>
+        <span class="ov-sub">30 posts tracked</span>
+      </button>
+      <button class="ov-card" data-jump="panel-lotb-tiktok" style="--acc:#1baf7a;">
+        <span class="ov-icon">🎵</span>
+        <span class="ov-name">LOTB TikTok</span>
+        <span class="ov-value">133</span>
+        <span class="ov-label">avg engagement</span>
+        <span class="ov-sub">30 posts tracked</span>
+      </button>
+      <button class="ov-card" data-jump="panel-pac-instagram" style="--acc:#e87ba4;">
+        <span class="ov-icon">📸</span>
+        <span class="ov-name">PAC Instagram</span>
+        <span class="ov-value">5</span>
+        <span class="ov-label">avg engagement</span>
+        <span class="ov-sub">30 posts tracked</span>
+      </button>
+      <button class="ov-card" data-jump="panel-pac-facebook" style="--acc:#eb6834;">
+        <span class="ov-icon">👍</span>
+        <span class="ov-name">PAC Facebook</span>
+        <span class="ov-value">504</span>
+        <span class="ov-label">avg engagement</span>
+        <span class="ov-sub">30 posts tracked</span>
+      </button></div>
+
+    <h3 class="section-label">Best post across everything</h3>
+    <div class="spotlight" style="--acc:#eb6834;">
+      <span class="spotlight-icon">👍</span>
+      <div class="spotlight-body">
+        <a class="spotlight-caption" href="https://www.facebook.com/johnyeojr/posts/pfbid09wTKhse5t9Wp3PMZCg5SN2DSrYgnSM4sMoNVFW2hqpGgUr8ueqfvKZJQ2WYNAxi9l" target="_blank" rel="noopener">My father was home every single day when I was growing up. And I thought he was jobless.</a>
+        <span class="spotlight-meta">PAC Facebook · 14,677 engagement</span>
+      </div>
+    </div>
+
+    <p class="ov-footnote">120 posts tracked across 4 accounts. Tap a card to jump into that account.</p>
+  </section>
+      
+  <section class="panel" id="panel-lotb-instagram" hidden>
+    <style>
+      #panel-lotb-instagram { --acc: #2a78d6; }
+      @media (prefers-color-scheme: dark) { #panel-lotb-instagram { --acc: #3987e5; } }
+    </style>
     <div class="account-header">
-      <h2>LOTB Instagram</h2>
-      <div class="stat-tiles">
-        <div class="stat-tile"><span class="stat-value">30</span><span class="stat-label">posts tracked</span></div>
-        <div class="stat-tile"><span class="stat-value">14</span><span class="stat-label">avg engagement</span></div>
+      <h2><span class="acc-icon">📸</span>LOTB Instagram</h2>
+    </div>
+
+    
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <span class="kpi-value">30</span>
+        <span class="kpi-label">posts tracked</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-value">14</span>
+        <span class="kpi-label">avg engagement</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-value">165</span>
+        <span class="kpi-label">top post</span>
       </div>
     </div>
 
@@ -213,93 +363,167 @@
     </div>
 
     <h3 class="section-label">Top 5 performers</h3>
-    <div class="bar-list">
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DaJ3w7ASaOQ/" target="_blank" rel="noopener">Comment “TOPIC” and I’ll send you the full list + my analysis of what’s likely coming in 2026 🧮 </a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:100%; background:#cde2fb;"></div>
+    <div class="rank-list">
+      <div class="rank-row">
+        <span class="rank-badge">1</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DaJ3w7ASaOQ/" target="_blank" rel="noopener">Comment “TOPIC” and I’ll send you the full list + my analysis of what’s likely coming in 2026 🧮 </a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">165</span>
+        <span class="rank-value">165</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DV00yKDkuw9/" target="_blank" rel="noopener">🎁 P5 FRACTION CARDS GIVEAWAY - yours for FREE!</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:46.666666666666664%; background:#9ec5f4;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">2</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DV00yKDkuw9/" target="_blank" rel="noopener">🎁 P5 FRACTION CARDS GIVEAWAY - yours for FREE!</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:46.666666666666664%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">77</span>
+        <span class="rank-value">77</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DYzVKDBkvIB/" target="_blank" rel="noopener">Your child stared at the question and gave up.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:43.63636363636363%; background:#6da7ec;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">3</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DYzVKDBkvIB/" target="_blank" rel="noopener">Your child stared at the question and gave up.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:43.63636363636363%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">72</span>
+        <span class="rank-value">72</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DYywhmxRCS8/" target="_blank" rel="noopener">Four subjects. Four educators. One Sunday afternoon — and so much heart. 🤍</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:17.575757575757574%; background:#3987e5;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">4</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DYywhmxRCS8/" target="_blank" rel="noopener">Four subjects. Four educators. One Sunday afternoon — and so much heart. 🤍</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:17.575757575757574%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">29</span>
+        <span class="rank-value">29</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DY1YwX3EpUz/" target="_blank" rel="noopener">Most parents fold the paper when they see a folding angle question.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:7.878787878787878%; background:#256abf;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">5</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DY1YwX3EpUz/" target="_blank" rel="noopener">Most parents fold the paper when they see a folding angle question.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:7.878787878787878%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">13</span>
+        <span class="rank-value">13</span>
       </div></div>
 
     <h3 class="section-label">Bottom 5 performers</h3>
-    <div class="bar-list">
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DZmba73SnC0/" target="_blank" rel="noopener">Spot PSLE exam question types - part 1.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+    <div class="rank-list">
+      <div class="rank-row">
+        <span class="rank-badge">1</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DZmba73SnC0/" target="_blank" rel="noopener">Spot PSLE exam question types - part 1.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">0</span>
+        <span class="rank-value">0</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DV4xNJgkui7/" target="_blank" rel="noopener">PSLE math not easy and the normal thing is most stopped trying. It happened in my parents workshop for PSLE math. There’</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">2</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DV4xNJgkui7/" target="_blank" rel="noopener">PSLE math not easy and the normal thing is most stopped trying. It happened in my parents workshop for PSLE math. There’</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">0</span>
+        <span class="rank-value">0</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DV8e2LAEhz2/" target="_blank" rel="noopener">PSLE math is stressful to many P6s. There are many PSLE math techniques to lessen or manage the stress. These helped wit</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">3</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DV8e2LAEhz2/" target="_blank" rel="noopener">PSLE math is stressful to many P6s. There are many PSLE math techniques to lessen or manage the stress. These helped wit</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">0</span>
+        <span class="rank-value">0</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DV2ZOt3Emmy/" target="_blank" rel="noopener">PSLE math grades can go up and down. My student told me 85 marks is a bad mark. PSLE math journey is long. I shared with</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">4</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DV2ZOt3Emmy/" target="_blank" rel="noopener">PSLE math grades can go up and down. My student told me 85 marks is a bad mark. PSLE math journey is long. I shared with</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">0</span>
+        <span class="rank-value">0</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DWDVFgREhFb/" target="_blank" rel="noopener">Most kids can self study, without you nagging. PSLE math revision can be systemised, so it runs itself. Here’s how I tra</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">5</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DWDVFgREhFb/" target="_blank" rel="noopener">Most kids can self study, without you nagging. PSLE math revision can be systemised, so it runs itself. Here’s how I tra</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">0</span>
+        <span class="rank-value">0</span>
       </div></div>
 
-    <div class="chips-row">
-      <div><span class="chips-label">Format performance</span><span class="chip">Sidecar · 5 posts · avg 22</span><span class="chip">Video · 21 posts · avg 10</span><span class="chip">Reel · 3 posts · avg 37</span><span class="chip">Image · 1 posts · avg 1</span></div>
-      <div><span class="chips-label">Hashtags (winners ↑ / losers ↓)</span><span class="chip chip-muted">#pslemaths (2↑ / 0↓)</span><span class="chip chip-muted">#psle2026 (1↑ / 0↓)</span><span class="chip chip-muted">#psleprep (1↑ / 0↓)</span><span class="chip chip-muted">#sgparents (1↑ / 0↓)</span><span class="chip chip-muted">#primaryschool (1↑ / 0↓)</span><span class="chip chip-muted">#tool (1↑ / 0↓)</span></div>
-    </div>
+    <h3 class="section-label">Format performance</h3>
+    <div class="fmt-list">
+      <div class="fmt-row">
+        <span class="fmt-label">Reel <span class="fmt-count">3 posts</span></span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
+        </div>
+        <span class="fmt-value">avg 37</span>
+      </div>
+      <div class="fmt-row">
+        <span class="fmt-label">Sidecar <span class="fmt-count">5 posts</span></span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:59.45945945945946%; background:var(--acc);"></div>
+        </div>
+        <span class="fmt-value">avg 22</span>
+      </div>
+      <div class="fmt-row">
+        <span class="fmt-label">Video <span class="fmt-count">21 posts</span></span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:27.027027027027028%; background:var(--acc);"></div>
+        </div>
+        <span class="fmt-value">avg 10</span>
+      </div>
+      <div class="fmt-row">
+        <span class="fmt-label">Image <span class="fmt-count">1 posts</span></span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
+        </div>
+        <span class="fmt-value">avg 1</span>
+      </div></div>
+
+    <h3 class="section-label">Hashtags (winners ↑ / losers ↓)</h3><div class="chips-row"><span class="chip">#pslemaths <span class="chip-sub">2↑ / 0↓</span></span><span class="chip">#psle2026 <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#psleprep <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#sgparents <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#primaryschool <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#tool <span class="chip-sub">1↑ / 0↓</span></span></div>
   </section>
 
   <section class="panel" id="panel-lotb-tiktok" hidden>
+    <style>
+      #panel-lotb-tiktok { --acc: #1baf7a; }
+      @media (prefers-color-scheme: dark) { #panel-lotb-tiktok { --acc: #199e70; } }
+    </style>
     <div class="account-header">
-      <h2>LOTB TikTok</h2>
-      <div class="stat-tiles">
-        <div class="stat-tile"><span class="stat-value">30</span><span class="stat-label">posts tracked</span></div>
-        <div class="stat-tile"><span class="stat-value">133</span><span class="stat-label">avg engagement</span></div>
+      <h2><span class="acc-icon">🎵</span>LOTB TikTok</h2>
+    </div>
+
+    
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <span class="kpi-value">30</span>
+        <span class="kpi-label">posts tracked</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-value">133</span>
+        <span class="kpi-label">avg engagement</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-value">2,681</span>
+        <span class="kpi-label">top post</span>
       </div>
     </div>
 
@@ -309,93 +533,146 @@
     </div>
 
     <h3 class="section-label">Top 5 performers</h3>
-    <div class="bar-list">
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7482747522172112135" target="_blank" rel="noopener">My P6 student improved by 23 marks but his Mum still asked him where is the 7 marks short to hit 90. As a tutor who is a</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:100%; background:#cde2fb;"></div>
+    <div class="rank-list">
+      <div class="rank-row">
+        <span class="rank-badge">1</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.tiktok.com/@coach.johnyeo/video/7482747522172112135" target="_blank" rel="noopener">My P6 student improved by 23 marks but his Mum still asked him where is the 7 marks short to hit 90. As a tutor who is a</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">2,681</span>
+        <span class="rank-value">2,681</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7497185808428977415" target="_blank" rel="noopener">How this one book helps an average kid who disliked math scored AL1 in PSLE maths. Dad&#39;s only regret is not using it ear</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:16.4863856769862%; background:#9ec5f4;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">2</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.tiktok.com/@coach.johnyeo/video/7497185808428977415" target="_blank" rel="noopener">How this one book helps an average kid who disliked math scored AL1 in PSLE maths. Dad&#39;s only regret is not using it ear</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:16.4863856769862%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">442</span>
+        <span class="rank-value">442</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7644108782812794133" target="_blank" rel="noopener">Want AL1/2 for PSLE math? Here are three things you must do to get AL1/2 for PSLE math. The third point is the most impo</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:4.848936963819471%; background:#6da7ec;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">3</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.tiktok.com/@coach.johnyeo/video/7644108782812794133" target="_blank" rel="noopener">Want AL1/2 for PSLE math? Here are three things you must do to get AL1/2 for PSLE math. The third point is the most impo</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:4.848936963819471%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">130</span>
+        <span class="rank-value">130</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7646269066818391316" target="_blank" rel="noopener">Want AL1 for P6/ PSLE math?</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#3987e5;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">4</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.tiktok.com/@coach.johnyeo/video/7646269066818391316" target="_blank" rel="noopener">Want AL1 for P6/ PSLE math?</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">53</span>
+        <span class="rank-value">53</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7646733456663170325" target="_blank" rel="noopener">Find PSLE math angle questions confusing? Follow my 5-step framework to master angle questions to score full marks for a</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#256abf;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">5</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.tiktok.com/@coach.johnyeo/video/7646733456663170325" target="_blank" rel="noopener">Find PSLE math angle questions confusing? Follow my 5-step framework to master angle questions to score full marks for a</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">52</span>
+        <span class="rank-value">52</span>
       </div></div>
 
     <h3 class="section-label">Bottom 5 performers</h3>
-    <div class="bar-list">
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7638921975754132757" target="_blank" rel="noopener">Not satisfied with recent P6 Wa2 marks? Want higher marks? Check out our P6 holiday workshops to help your kids spot pro</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:33.33333333333333%; background:#c3c2b7;"></div>
+    <div class="rank-list">
+      <div class="rank-row">
+        <span class="rank-badge">1</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.tiktok.com/@coach.johnyeo/video/7638921975754132757" target="_blank" rel="noopener">Not satisfied with recent P6 Wa2 marks? Want higher marks? Check out our P6 holiday workshops to help your kids spot pro</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:33.33333333333333%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">3</span>
+        <span class="rank-value">3</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7618813029152673044" target="_blank" rel="noopener">Most kids can self study, without you nagging. PSLE math revision can be systemised, so it runs itself. Here’s how I tra</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:77.77777777777779%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">2</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.tiktok.com/@coach.johnyeo/video/7618813029152673044" target="_blank" rel="noopener">Most kids can self study, without you nagging. PSLE math revision can be systemised, so it runs itself. Here’s how I tra</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:77.77777777777779%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">7</span>
+        <span class="rank-value">7</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7627788824352918804" target="_blank" rel="noopener">Did your child keep quiet when asked how to solve the PSLE math questions? It’s not about not having PSLE math confidenc</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:88.88888888888889%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">3</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.tiktok.com/@coach.johnyeo/video/7627788824352918804" target="_blank" rel="noopener">Did your child keep quiet when asked how to solve the PSLE math questions? It’s not about not having PSLE math confidenc</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:88.88888888888889%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">8</span>
+        <span class="rank-value">8</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7638905521562504469" target="_blank" rel="noopener">Tricky PSLE math questions with more than one fractions. Why always wrong? Here’s how to differentiate fractions with an</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">4</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.tiktok.com/@coach.johnyeo/video/7638905521562504469" target="_blank" rel="noopener">Tricky PSLE math questions with more than one fractions. Why always wrong? Here’s how to differentiate fractions with an</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">9</span>
+        <span class="rank-value">9</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.tiktok.com/@coach.johnyeo/video/7646056177482075413" target="_blank" rel="noopener">We had our first PSLE celebration: PSLE math party for kids. Thank you our parents for contributing lots of yummy food a</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">5</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.tiktok.com/@coach.johnyeo/video/7646056177482075413" target="_blank" rel="noopener">We had our first PSLE celebration: PSLE math party for kids. Thank you our parents for contributing lots of yummy food a</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">9</span>
+        <span class="rank-value">9</span>
       </div></div>
 
-    <div class="chips-row">
-      <div><span class="chips-label">Format performance</span><span class="chip">Video · 30 posts · avg 133</span></div>
-      <div><span class="chips-label">Hashtags (winners ↑ / losers ↓)</span><span class="chip chip-muted">#pslemath (4↑ / 5↓)</span><span class="chip chip-muted">#mathtutor (4↑ / 4↓)</span><span class="chip chip-muted">#pslemathtuition (3↑ / 5↓)</span><span class="chip chip-muted">#primarymaths (3↑ / 3↓)</span><span class="chip chip-muted">#singaporemaths (3↑ / 1↓)</span><span class="chip chip-muted">#singaporemath (2↑ / 0↓)</span></div>
-    </div>
+    <h3 class="section-label">Format performance</h3>
+    <div class="fmt-list">
+      <div class="fmt-row">
+        <span class="fmt-label">Video <span class="fmt-count">30 posts</span></span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
+        </div>
+        <span class="fmt-value">avg 133</span>
+      </div></div>
+
+    <h3 class="section-label">Hashtags (winners ↑ / losers ↓)</h3><div class="chips-row"><span class="chip">#pslemath <span class="chip-sub">4↑ / 5↓</span></span><span class="chip">#mathtutor <span class="chip-sub">4↑ / 4↓</span></span><span class="chip">#pslemathtuition <span class="chip-sub">3↑ / 5↓</span></span><span class="chip">#primarymaths <span class="chip-sub">3↑ / 3↓</span></span><span class="chip">#singaporemaths <span class="chip-sub">3↑ / 1↓</span></span><span class="chip">#singaporemath <span class="chip-sub">2↑ / 0↓</span></span></div>
   </section>
 
   <section class="panel" id="panel-pac-instagram" hidden>
+    <style>
+      #panel-pac-instagram { --acc: #e87ba4; }
+      @media (prefers-color-scheme: dark) { #panel-pac-instagram { --acc: #d55181; } }
+    </style>
     <div class="account-header">
-      <h2>PAC Instagram</h2>
-      <div class="stat-tiles">
-        <div class="stat-tile"><span class="stat-value">30</span><span class="stat-label">posts tracked</span></div>
-        <div class="stat-tile"><span class="stat-value">5</span><span class="stat-label">avg engagement</span></div>
+      <h2><span class="acc-icon">📸</span>PAC Instagram</h2>
+    </div>
+
+    
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <span class="kpi-value">30</span>
+        <span class="kpi-label">posts tracked</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-value">5</span>
+        <span class="kpi-label">avg engagement</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-value">29</span>
+        <span class="kpi-label">top post</span>
       </div>
     </div>
 
@@ -405,93 +682,167 @@
     </div>
 
     <h3 class="section-label">Top 5 performers</h3>
-    <div class="bar-list">
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DYywhmxRCS8/" target="_blank" rel="noopener">Four subjects. Four educators. One Sunday afternoon — and so much heart. 🤍</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:100%; background:#cde2fb;"></div>
+    <div class="rank-list">
+      <div class="rank-row">
+        <span class="rank-badge">1</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DYywhmxRCS8/" target="_blank" rel="noopener">Four subjects. Four educators. One Sunday afternoon — and so much heart. 🤍</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">29</span>
+        <span class="rank-value">29</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DXvPNWsEqUf/" target="_blank" rel="noopener">I’m an introvert who’s not very eloquent. Running a community event felt like a double whammy.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:75.86206896551724%; background:#9ec5f4;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">2</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DXvPNWsEqUf/" target="_blank" rel="noopener">I’m an introvert who’s not very eloquent. Running a community event felt like a double whammy.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:75.86206896551724%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">22</span>
+        <span class="rank-value">22</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DZIa7UqksxJ/" target="_blank" rel="noopener">The tutors who filled their group classes weren&#39;t more ready. They just stopped waiting.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:68.96551724137932%; background:#6da7ec;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">3</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DZIa7UqksxJ/" target="_blank" rel="noopener">The tutors who filled their group classes weren&#39;t more ready. They just stopped waiting.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:68.96551724137932%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">20</span>
+        <span class="rank-value">20</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DYO_IckjrnZ/" target="_blank" rel="noopener">She was my first girlfriend.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:41.37931034482759%; background:#3987e5;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">4</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DYO_IckjrnZ/" target="_blank" rel="noopener">She was my first girlfriend.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:41.37931034482759%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">12</span>
+        <span class="rank-value">12</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DUpdwPkFoir/" target="_blank" rel="noopener">My friends who coach high-ticket clients think I’m crazy for choosing to serve tutors.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:31.03448275862069%; background:#256abf;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">5</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DUpdwPkFoir/" target="_blank" rel="noopener">My friends who coach high-ticket clients think I’m crazy for choosing to serve tutors.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:31.03448275862069%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">9</span>
+        <span class="rank-value">9</span>
       </div></div>
 
     <h3 class="section-label">Bottom 5 performers</h3>
-    <div class="bar-list">
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DYg3YTYEtnZ/" target="_blank" rel="noopener">Some weeks your inbox feels like a mirror you didn’t ask to look into.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+    <div class="rank-list">
+      <div class="rank-row">
+        <span class="rank-badge">1</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DYg3YTYEtnZ/" target="_blank" rel="noopener">Some weeks your inbox feels like a mirror you didn’t ask to look into.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">0</span>
+        <span class="rank-value">0</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DYhPxsXErmm/" target="_blank" rel="noopener">“I’m busy.” “Too long to read.” “Can’t be bothered.”</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">2</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DYhPxsXErmm/" target="_blank" rel="noopener">“I’m busy.” “Too long to read.” “Can’t be bothered.”</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">0</span>
+        <span class="rank-value">0</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DYFGWnRkpGB/" target="_blank" rel="noopener">You&#39;ve rewritten your AI prompt three times.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">3</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DYFGWnRkpGB/" target="_blank" rel="noopener">You&#39;ve rewritten your AI prompt three times.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">1</span>
+        <span class="rank-value">1</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DYUXvP3kkiH/" target="_blank" rel="noopener">I built an AI content system that saved me hours every week.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">4</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DYUXvP3kkiH/" target="_blank" rel="noopener">I built an AI content system that saved me hours every week.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">1</span>
+        <span class="rank-value">1</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.instagram.com/p/DYT3rFxDgIB/" target="_blank" rel="noopener">This is what 1.5 years of working with AI taught me - save this for the next time you feel like the tool is running ahea</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">5</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.instagram.com/p/DYT3rFxDgIB/" target="_blank" rel="noopener">This is what 1.5 years of working with AI taught me - save this for the next time you feel like the tool is running ahea</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">1</span>
+        <span class="rank-value">1</span>
       </div></div>
 
-    <div class="chips-row">
-      <div><span class="chips-label">Format performance</span><span class="chip">Image · 13 posts · avg 4</span><span class="chip">Sidecar · 12 posts · avg 6</span><span class="chip">Reel · 2 posts · avg 17</span><span class="chip">Video · 3 posts · avg 2</span></div>
-      <div><span class="chips-label">Hashtags (winners ↑ / losers ↓)</span><span class="chip chip-muted">#TutorConnect (2↑ / 0↓)</span><span class="chip chip-muted">#CommunityOverCompetition (2↑ / 0↓)</span><span class="chip chip-muted">#PSLEReadiness (1↑ / 0↓)</span><span class="chip chip-muted">#PSLE2026 (1↑ / 0↓)</span><span class="chip chip-muted">#PSLEReady (1↑ / 0↓)</span><span class="chip chip-muted">#CollaborationOverCompetition (1↑ / 0↓)</span></div>
-    </div>
+    <h3 class="section-label">Format performance</h3>
+    <div class="fmt-list">
+      <div class="fmt-row">
+        <span class="fmt-label">Reel <span class="fmt-count">2 posts</span></span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
+        </div>
+        <span class="fmt-value">avg 17</span>
+      </div>
+      <div class="fmt-row">
+        <span class="fmt-label">Sidecar <span class="fmt-count">12 posts</span></span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:35.294117647058826%; background:var(--acc);"></div>
+        </div>
+        <span class="fmt-value">avg 6</span>
+      </div>
+      <div class="fmt-row">
+        <span class="fmt-label">Image <span class="fmt-count">13 posts</span></span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:23.52941176470588%; background:var(--acc);"></div>
+        </div>
+        <span class="fmt-value">avg 4</span>
+      </div>
+      <div class="fmt-row">
+        <span class="fmt-label">Video <span class="fmt-count">3 posts</span></span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:11.76470588235294%; background:var(--acc);"></div>
+        </div>
+        <span class="fmt-value">avg 2</span>
+      </div></div>
+
+    <h3 class="section-label">Hashtags (winners ↑ / losers ↓)</h3><div class="chips-row"><span class="chip">#TutorConnect <span class="chip-sub">2↑ / 0↓</span></span><span class="chip">#CommunityOverCompetition <span class="chip-sub">2↑ / 0↓</span></span><span class="chip">#PSLEReadiness <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#PSLE2026 <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#PSLEReady <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#CollaborationOverCompetition <span class="chip-sub">1↑ / 0↓</span></span></div>
   </section>
 
   <section class="panel" id="panel-pac-facebook" hidden>
+    <style>
+      #panel-pac-facebook { --acc: #eb6834; }
+      @media (prefers-color-scheme: dark) { #panel-pac-facebook { --acc: #d95926; } }
+    </style>
     <div class="account-header">
-      <h2>PAC Facebook</h2>
-      <div class="stat-tiles">
-        <div class="stat-tile"><span class="stat-value">30</span><span class="stat-label">posts tracked</span></div>
-        <div class="stat-tile"><span class="stat-value">504</span><span class="stat-label">avg engagement</span></div>
+      <h2><span class="acc-icon">👍</span>PAC Facebook</h2>
+    </div>
+
+    
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <span class="kpi-value">30</span>
+        <span class="kpi-label">posts tracked</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-value">504</span>
+        <span class="kpi-label">avg engagement</span>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-value">14,677</span>
+        <span class="kpi-label">top post</span>
       </div>
     </div>
 
@@ -501,85 +852,136 @@
     </div>
 
     <h3 class="section-label">Top 5 performers</h3>
-    <div class="bar-list">
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid09wTKhse5t9Wp3PMZCg5SN2DSrYgnSM4sMoNVFW2hqpGgUr8ueqfvKZJQ2WYNAxi9l" target="_blank" rel="noopener">My father was home every single day when I was growing up. And I thought he was jobless.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:100%; background:#cde2fb;"></div>
+    <div class="rank-list">
+      <div class="rank-row">
+        <span class="rank-badge">1</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.facebook.com/johnyeojr/posts/pfbid09wTKhse5t9Wp3PMZCg5SN2DSrYgnSM4sMoNVFW2hqpGgUr8ueqfvKZJQ2WYNAxi9l" target="_blank" rel="noopener">My father was home every single day when I was growing up. And I thought he was jobless.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">14,677</span>
+        <span class="rank-value">14,677</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid04wwRKqUecXrvoueWSxo66EuMvQuDTK37JRCPwanusyfb8DAxvyz2sLXmfaK8jqFzl" target="_blank" rel="noopener">You saw someone calm in the middle of chaos.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#9ec5f4;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">2</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.facebook.com/johnyeojr/posts/pfbid04wwRKqUecXrvoueWSxo66EuMvQuDTK37JRCPwanusyfb8DAxvyz2sLXmfaK8jqFzl" target="_blank" rel="noopener">You saw someone calm in the middle of chaos.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">80</span>
+        <span class="rank-value">80</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid02iaq3vJadbMJcKxd6zJYkMJ1swBf9JJ2bbYCVDdSM5kJ5W9fEhH5Tag2gTiDMqhkXl" target="_blank" rel="noopener">I thought working 7 days a week was what a committed tutor looked like.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#6da7ec;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">3</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.facebook.com/johnyeojr/posts/pfbid02iaq3vJadbMJcKxd6zJYkMJ1swBf9JJ2bbYCVDdSM5kJ5W9fEhH5Tag2gTiDMqhkXl" target="_blank" rel="noopener">I thought working 7 days a week was what a committed tutor looked like.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">37</span>
+        <span class="rank-value">37</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid0Wmkm4C2ZN8BJPKs7VayPJ5KyEknuN9oXunWKR8vbUKnj1BSwq64ZqMkjh9GnHNx9l" target="_blank" rel="noopener">Nobody has ever told me they chose my tuition service because of my degree. (Though I have one engineering degree and on</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#3987e5;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">4</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.facebook.com/johnyeojr/posts/pfbid0Wmkm4C2ZN8BJPKs7VayPJ5KyEknuN9oXunWKR8vbUKnj1BSwq64ZqMkjh9GnHNx9l" target="_blank" rel="noopener">Nobody has ever told me they chose my tuition service because of my degree. (Though I have one engineering degree and on</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">36</span>
+        <span class="rank-value">36</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid02bw6hrUrebGKjpw5K7BUrHAhiJNdjcebN3DtHAkv1QcrVb5sdzonFjHNsQKqLBTaxl" target="_blank" rel="noopener">“They say physical workshops are dead.”</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#256abf;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">5</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.facebook.com/johnyeojr/posts/pfbid02bw6hrUrebGKjpw5K7BUrHAhiJNdjcebN3DtHAkv1QcrVb5sdzonFjHNsQKqLBTaxl" target="_blank" rel="noopener">“They say physical workshops are dead.”</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
+          </div>
         </div>
-        <span class="bar-value">30</span>
+        <span class="rank-value">30</span>
       </div></div>
 
     <h3 class="section-label">Bottom 5 performers</h3>
-    <div class="bar-list">
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid0wfd4Yu21BKvjHUQaWtosAyunU3RSsvpoyumZxCffPvSH7X3KrA1GL1TkLXoRMZZQl" target="_blank" rel="noopener">(no caption)</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:2%; background:#c3c2b7;"></div>
+    <div class="rank-list">
+      <div class="rank-row">
+        <span class="rank-badge">1</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.facebook.com/johnyeojr/posts/pfbid0wfd4Yu21BKvjHUQaWtosAyunU3RSsvpoyumZxCffPvSH7X3KrA1GL1TkLXoRMZZQl" target="_blank" rel="noopener">(no caption)</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">0</span>
+        <span class="rank-value">0</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.facebook.com/reel/1472221297700008/" target="_blank" rel="noopener">Tutors: what to say to counter when parents ask you for discounts. Here’s what works for my tutor coaching clients. #bus</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:66.66666666666666%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">2</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.facebook.com/reel/1472221297700008/" target="_blank" rel="noopener">Tutors: what to say to counter when parents ask you for discounts. Here’s what works for my tutor coaching clients. #bus</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:66.66666666666666%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">2</span>
+        <span class="rank-value">2</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.facebook.com/reel/4173156556330767/" target="_blank" rel="noopener">Why your tutor friends’ slots are filling up faster than yours? Here’s what I realised. Watch till the end to get my cus</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">3</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.facebook.com/reel/4173156556330767/" target="_blank" rel="noopener">Why your tutor friends’ slots are filling up faster than yours? Here’s what I realised. Watch till the end to get my cus</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">3</span>
+        <span class="rank-value">3</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid02DgtdQARCqHYxfDYQTKf7mARJ2KE9YYttgFtnJem2nFWxzReaRNrBrEHtcsPP4fGql" target="_blank" rel="noopener">&quot;I&#39;m busy.&quot; &quot;Too long to read.&quot; &quot;Can&#39;t be bothered.&quot;</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">4</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.facebook.com/johnyeojr/posts/pfbid02DgtdQARCqHYxfDYQTKf7mARJ2KE9YYttgFtnJem2nFWxzReaRNrBrEHtcsPP4fGql" target="_blank" rel="noopener">&quot;I&#39;m busy.&quot; &quot;Too long to read.&quot; &quot;Can&#39;t be bothered.&quot;</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">3</span>
+        <span class="rank-value">3</span>
       </div>
-      <div class="bar-row">
-        <a class="bar-label" href="https://www.facebook.com/johnyeojr/posts/pfbid02ZSPw5BUNLtHE3QT6F3muJ2HgwSq1rCFCRkMUcupEfABiCBaSiahLEfvWNRxNSZ7il" target="_blank" rel="noopener">Revealing my entire AI workflow. Live. In front of tutors.</a>
-        <div class="bar-track">
-          <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+      <div class="rank-row">
+        <span class="rank-badge">5</span>
+        <div class="rank-body">
+          <a class="rank-label" href="https://www.facebook.com/johnyeojr/posts/pfbid02ZSPw5BUNLtHE3QT6F3muJ2HgwSq1rCFCRkMUcupEfABiCBaSiahLEfvWNRxNSZ7il" target="_blank" rel="noopener">Revealing my entire AI workflow. Live. In front of tutors.</a>
+          <div class="bar-track">
+            <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
+          </div>
         </div>
-        <span class="bar-value">3</span>
+        <span class="rank-value">3</span>
       </div></div>
 
-    <div class="chips-row">
-      <div><span class="chips-label">Format performance</span><span class="chip">Photo · 24 posts · avg 628</span><span class="chip">Reel · 4 posts · avg 8</span><span class="chip">Content · 2 posts · avg 19</span></div>
-      
-    </div>
+    <h3 class="section-label">Format performance</h3>
+    <div class="fmt-list">
+      <div class="fmt-row">
+        <span class="fmt-label">Photo <span class="fmt-count">24 posts</span></span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
+        </div>
+        <span class="fmt-value">avg 628</span>
+      </div>
+      <div class="fmt-row">
+        <span class="fmt-label">Content <span class="fmt-count">2 posts</span></span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:3.0254777070063694%; background:var(--acc);"></div>
+        </div>
+        <span class="fmt-value">avg 19</span>
+      </div>
+      <div class="fmt-row">
+        <span class="fmt-label">Reel <span class="fmt-count">4 posts</span></span>
+        <div class="bar-track">
+          <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
+        </div>
+        <span class="fmt-value">avg 8</span>
+      </div></div>
+
+    
   </section>
     </div>
   </div>
@@ -616,15 +1018,21 @@
         if (e.key === "Enter") tryUnlock();
       });
 
-      var tabs = document.querySelectorAll(".tab");
-      tabs.forEach(function (tab) {
-        tab.addEventListener("click", function () {
-          tabs.forEach(function (t) { t.setAttribute("aria-selected", "false"); });
-          tab.setAttribute("aria-selected", "true");
-          document.querySelectorAll(".panel").forEach(function (p) { p.hidden = true; });
-          document.getElementById(tab.dataset.target).hidden = false;
-          window.scrollTo({ top: 0, behavior: "instant" });
+      function goToPanel(targetId) {
+        var tabs = document.querySelectorAll(".tab");
+        tabs.forEach(function (t) {
+          t.setAttribute("aria-selected", t.dataset.target === targetId ? "true" : "false");
         });
+        document.querySelectorAll(".panel").forEach(function (p) { p.hidden = true; });
+        document.getElementById(targetId).hidden = false;
+        window.scrollTo({ top: 0, behavior: "instant" });
+      }
+
+      document.querySelectorAll(".tab").forEach(function (tab) {
+        tab.addEventListener("click", function () { goToPanel(tab.dataset.target); });
+      });
+      document.querySelectorAll(".ov-card").forEach(function (card) {
+        card.addEventListener("click", function () { goToPanel(card.dataset.jump); });
       });
     })();
   </script>
