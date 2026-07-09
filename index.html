@@ -352,6 +352,32 @@
     flex-shrink: 0;
   }
   .idea-title { margin: 0 0 8px; font-size: 20px; }
+  .idea-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
+  .idea-tag {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .idea-tag-trust { background: rgba(10,191,188,0.18); color: #7fe6e4; }
+  .idea-tag-proof { background: rgba(74,154,240,0.18); color: #9cc5f7; }
+  .idea-tag-harvest { background: rgba(240,180,60,0.18); color: #f2ce8a; }
+  .idea-tag-effort { background: rgba(255,255,255,0.10); color: var(--text-secondary); }
+
+  /* Fable analysis page */
+  .fable-subtitle { font-size: 18px; color: var(--text-secondary); line-height: 1.5; margin: 0 0 24px; }
+  .fable-section {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+  .fable-section h3 { margin: 0 0 10px; font-size: 21px; color: var(--text-primary); }
+  .fable-section p { margin: 0; font-size: 18px; line-height: 1.55; color: var(--text-secondary); }
   .idea-hook {
     margin: 0 0 10px;
     font-size: 18px;
@@ -421,7 +447,7 @@
           <span id="nav-toggle-label">Overview</span>
           <span class="nav-toggle-chevron">⌄</span>
         </button>
-        <div class="nav-menu" id="nav-menu" role="listbox" hidden><button class="nav-item" data-target="panel-overview" data-icon="✨" data-label="Overview" role="option" aria-selected="true">✨ Overview</button><button class="nav-item" data-target="panel-lotb-instagram" data-icon="📸" data-label="LOTB Instagram" role="option" >📸 LOTB Instagram</button><button class="nav-item" data-target="panel-lotb-tiktok" data-icon="🎵" data-label="LOTB TikTok" role="option" >🎵 LOTB TikTok</button><button class="nav-item" data-target="panel-pac-instagram" data-icon="📸" data-label="PAC Instagram" role="option" >📸 PAC Instagram</button><button class="nav-item" data-target="panel-pac-facebook" data-icon="👍" data-label="PAC Facebook" role="option" >👍 PAC Facebook</button></div>
+        <div class="nav-menu" id="nav-menu" role="listbox" hidden><button class="nav-item" data-target="panel-overview" data-icon="✨" data-label="Overview" role="option" aria-selected="true">✨ Overview</button><button class="nav-item" data-target="panel-lotb-instagram" data-icon="📸" data-label="LOTB Instagram" role="option" >📸 LOTB Instagram</button><button class="nav-item" data-target="panel-lotb-tiktok" data-icon="🎵" data-label="LOTB TikTok" role="option" >🎵 LOTB TikTok</button><button class="nav-item" data-target="panel-pac-instagram" data-icon="📸" data-label="PAC Instagram" role="option" >📸 PAC Instagram</button><button class="nav-item" data-target="panel-pac-facebook" data-icon="👍" data-label="PAC Facebook" role="option" >👍 PAC Facebook</button><button class="nav-item" data-target="panel-fable-analysis" data-icon="🧠" data-label="Fable Analysis" role="option" >🧠 Fable Analysis</button></div>
       </div>
       
   <section class="panel" id="panel-overview">
@@ -487,7 +513,7 @@
       <summary class="ideas-summary">
         <span class="ideas-summary-icon">💡</span>
         <span class="ideas-summary-text">
-          <span class="ideas-summary-title">10 post ideas</span>
+          <span class="ideas-summary-title">20 post ideas</span>
           <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
         </span>
         <span class="ideas-summary-chevron">›</span>
@@ -498,9 +524,13 @@
           <div class="idea-num">1</div>
           <div class="idea-body">
             <h4 class="idea-title">The 7-Mark Question Every P6 Skips</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-harvest">harvest</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
             <p class="idea-hook">This one question cost my student 7 marks. And he knew how to solve it.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Show the actual question (or a lookalike). Name the exact step kids skip and why smart kids skip it. Close with a comment-keyword CTA: &quot;Comment FIX and I&#39;ll send you the checklist.&quot; Use a real student&#39;s paper from this week&#39;s marking, not a made-up example.</p>
-            <p class="idea-context"><strong>Why:</strong> Direct repeat of the #1 post&#39;s exact mechanic (165 engagement): specific curiosity hook + concrete comment-to-unlock CTA.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Show the actual question (or a lookalike). Name the exact step kids skip and why smart kids skip it. Close with a comment-keyword CTA: &quot;Comment FIX and I&#39;ll send you the checklist.&quot; Use a real student&#39;s paper from this week&#39;s marking.</p>
+            <p class="idea-context"><strong>Why:</strong> Repeats the #1 post&#39;s proven mechanic: specific curiosity hook + comment-to-unlock. One of only three gated posts in this batch — don&#39;t run them the same week.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (165 engagement): "Comment “TOPIC” and I’ll send you the full list + my analysis of what’s likely coming in 2026"</p>
           </div>
         </div>
@@ -508,9 +538,13 @@
           <div class="idea-num">2</div>
           <div class="idea-body">
             <h4 class="idea-title">When Your Own Kid Hits the Wall</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">Last week, one of my girls pushed her worksheet away and said she&#39;s just bad at math.</p>
             <p class="idea-angle"><strong>Angle:</strong> Swap in a real recent moment with one of your daughters (don&#39;t invent one). Scene first, no context-setting. Then the one thing you did differently as a dad, not a coach. End warm: &quot;If your child says this too, try it tonight.&quot;</p>
-            <p class="idea-context"><strong>Why:</strong> The &#39;relatable moment&#39; pattern beat every generic advice post on this account. Coming from John&#39;s own home makes it a mirror for parents, not a window.</p>
+            <p class="idea-context"><strong>Why:</strong> The relatable-moment pattern beat every generic advice post on this account. Coming from John&#39;s own home makes it a mirror for parents.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (72 engagement): "Your child stared at the question and gave up."</p>
           </div>
         </div>
@@ -518,9 +552,13 @@
           <div class="idea-num">3</div>
           <div class="idea-body">
             <h4 class="idea-title">The One Line Nobody Draws</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
             <p class="idea-hook">Your child knows all the angle rules. So why do they still lose marks?</p>
-            <p class="idea-angle"><strong>Angle:</strong> Carousel: slide 1 is the hook, slides 2-6 walk one angle question step by step, with the double-line setup step highlighted as the thing everyone skips. Last slide: comment keyword for the summary sheet.</p>
-            <p class="idea-context"><strong>Why:</strong> Sidecar (carousel) is already the winning format on this account (avg 22 vs 10 for video). This packages a proven teaching moment into it.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Carousel: slide 1 is the hook, slides 2-6 walk one angle question step by step, with the double-line setup highlighted as the step everyone skips. Last slide: &quot;Save this for revision week.&quot; No comment gate — this one earns saves.</p>
+            <p class="idea-context"><strong>Why:</strong> Carousel is the winning format on this account. Save-CTA instead of a gate keeps the gated posts rare.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (13 engagement): "Most parents fold the paper when they see a folding angle question."</p>
           </div>
         </div>
@@ -528,9 +566,13 @@
           <div class="idea-num">4</div>
           <div class="idea-body">
             <h4 class="idea-title">P6 Rate Drill Pack Giveaway</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-harvest">harvest</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">I&#39;m giving away our P6 Rate Drill Pack. Free.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Keep it short. What&#39;s inside (be specific: how many questions, which sub-types — per-hour method, consumption-over-time, reduce-to-1), who it&#39;s for, one line on why Rate is the hidden mark-loser. CTA: &quot;Comment DRILL and I&#39;ll send it over.&quot; Add urgency only if it&#39;s real.</p>
-            <p class="idea-context"><strong>Why:</strong> The fraction-cards giveaway was #2 on this account (77 engagement). Same mechanic, new asset — Rate (not the old &#39;Speed&#39; terminology, which isn&#39;t in the current PSLE syllabus).</p>
+            <p class="idea-angle"><strong>Angle:</strong> Keep it short. What&#39;s inside (per-hour method, consumption-over-time, reduce-to-1), who it&#39;s for, one line on why Rate quietly loses marks. CTA: &quot;Comment DRILL and I&#39;ll send it over.&quot; Gated post two of three.</p>
+            <p class="idea-context"><strong>Why:</strong> The fraction-cards giveaway was this account&#39;s second-best post. Same mechanic, new asset, current syllabus topic.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (77 engagement): "P5 FRACTION CARDS GIVEAWAY - yours for FREE!"</p>
           </div>
         </div>
@@ -538,19 +580,27 @@
           <div class="idea-num">5</div>
           <div class="idea-body">
             <h4 class="idea-title">Why AL1 Kids Still Fail This Question</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
             <p class="idea-hook">AL1 students get this question wrong too. Same mistake every time.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Counter-intuitive authority hook. Name the question type, show the trap, explain why being &#39;good at math&#39; makes the trap worse. Comment-keyword CTA for the worked solution.</p>
-            <p class="idea-context"><strong>Why:</strong> Same curiosity-gap + concrete-CTA mechanism as the #1 post, aimed at parents of high performers (an audience the account hasn&#39;t hooked yet).</p>
+            <p class="idea-angle"><strong>Angle:</strong> Counter-intuitive authority hook. Name the question type, show the trap, explain why being good at math makes the trap worse. End with the full worked fix in the carousel itself — no gate, let it earn shares from proud-but-worried parents.</p>
+            <p class="idea-context"><strong>Why:</strong> Curiosity-gap hook aimed at parents of high performers, an audience this account hasn&#39;t hooked yet.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (165 engagement): "Comment “TOPIC” and I’ll send you the full list..."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">6</div>
           <div class="idea-body">
-            <h4 class="idea-title">What Marking 50 Scripts Taught Me</h4>
-            <p class="idea-hook">I marked 50 papers this week. The same mistake showed up in more than half.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Use your real marking numbers from a real week (the worksheet-marking flow gives you these). One pattern, one fix, one CTA. The specificity of the count is the hook, so don&#39;t round it into vagueness.</p>
-            <p class="idea-context"><strong>Why:</strong> Untested &#39;authority through real numbers&#39; angle. John&#39;s voice already leans on specific numbers; this account hasn&#39;t used them as a hook yet.</p>
+            <h4 class="idea-title">What Marking Fifty Scripts Taught Me</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">I marked fifty papers this week. The same mistake showed up in more than half.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Use your real marking numbers from a real week — the worksheet-marking flow gives you these. One pattern, one fix. The specific count is the hook, so don&#39;t round it into vagueness.</p>
+            <p class="idea-context"><strong>Why:</strong> Authority through real numbers — John&#39;s voice already leans on specifics; this account hasn&#39;t used them as a hook yet.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (77 engagement): "P5 FRACTION CARDS GIVEAWAY - yours for FREE!"</p>
           </div>
         </div>
@@ -558,9 +608,13 @@
           <div class="idea-num">7</div>
           <div class="idea-body">
             <h4 class="idea-title">Sunday Night, 9pm</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
             <p class="idea-hook">Sunday, 9pm. The worksheet is still blank.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Pure scene for the first three lines: the kid, the parent, the blank page. Every PSLE parent has lived it. Then one system change (not a pep talk) that removes the Sunday fight. Keep it under 150 words.</p>
-            <p class="idea-context"><strong>Why:</strong> &#39;Relatable moment beats broad advice&#39; is this account&#39;s clearest pattern. This is that moment, compressed.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Pure scene for the first three lines: the kid, the parent, the blank page. Then one system change (not a pep talk) that removes the Sunday fight. Keep it under 150 words.</p>
+            <p class="idea-context"><strong>Why:</strong> Relatable moment beats broad advice — this account&#39;s clearest pattern, compressed into one scene.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (72 engagement): "Your child stared at the question and gave up."</p>
           </div>
         </div>
@@ -568,9 +622,13 @@
           <div class="idea-num">8</div>
           <div class="idea-body">
             <h4 class="idea-title">Three Topics That Never Skip a Year</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-harvest">harvest</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
             <p class="idea-hook">Three topics have appeared in every PSLE paper since 2020. Every single year.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Name one of the three in the post to prove you&#39;re not bluffing, hold back the other two behind the comment keyword. Same prediction-authority framing that made the #1 post work.</p>
-            <p class="idea-context"><strong>Why:</strong> Direct repeat of the proven &#39;predict the paper + comment for list&#39; mechanic with a fresh claim.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Name one of the three in the post to prove you&#39;re not bluffing, hold the other two behind the comment keyword. Gated post three of three — space it at least a week from the others.</p>
+            <p class="idea-context"><strong>Why:</strong> Direct repeat of the account&#39;s best mechanic (predict the paper + comment for the list) with a fresh claim.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (165 engagement): "Comment “TOPIC” and I’ll send you the full list..."</p>
           </div>
         </div>
@@ -578,19 +636,167 @@
           <div class="idea-num">9</div>
           <div class="idea-body">
             <h4 class="idea-title">My Worst Marking Mistake</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">I&#39;ve marked thousands of questions. This is the one I still think about.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Use a real mistake from your own teaching (there will be one — a mark given wrongly, a method dismissed too fast). Vulnerability from the coach, then what it changed about how you mark now. No CTA needed; let it breathe.</p>
-            <p class="idea-context"><strong>Why:</strong> Cross-pollinates the &#39;coach vulnerability&#39; pattern proven on PAC and LOTB TikTok. Untested on this account.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Use a real mistake from your own teaching — a mark given wrongly, a method dismissed too fast. Vulnerability from the coach, then what it changed about how you mark now. No CTA; let it breathe.</p>
+            <p class="idea-context"><strong>Why:</strong> Coach-vulnerability pattern proven on TikTok and Facebook, untested here.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (80 engagement): "You saw someone calm in the middle of chaos."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">10</div>
           <div class="idea-body">
-            <h4 class="idea-title">Ratio Cheat Sheet Drop</h4>
-            <p class="idea-hook">Ratio trips up more P5s than fractions do. Comment RATIO and I&#39;ll send you our cheat sheet.</p>
-            <p class="idea-angle"><strong>Angle:</strong> One-two punch: surprising claim + instant CTA in the first two lines. Body is just 3 bullet-style lines on what the sheet covers. Shortest post of the batch by design, to test whether brevity + CTA alone carries it.</p>
-            <p class="idea-context"><strong>Why:</strong> Repeatability test of the two proven formats (comment-to-unlock, giveaway) with a new topic and minimal body.</p>
+            <h4 class="idea-title">Ratio Cheat Sheet, No Strings</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">Ratio trips up more P5s than fractions do. So the whole cheat sheet is in this post.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Post the cheat sheet directly as the carousel — no keyword, no DM, the full value in the slides. CTA: &quot;Save this. You&#39;ll want it before the next weighted assessment.&quot; Tests whether pure generosity out-earns the gate.</p>
+            <p class="idea-context"><strong>Why:</strong> Deliberate experiment: same topic value as a gated post, zero friction. Compare its saves against the gated posts&#39; comments.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (77 engagement): "P5 FRACTION CARDS GIVEAWAY - yours for FREE!"</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">11</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Your Child Doesn&#39;t Need More Practice Papers</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">Your child doesn&#39;t need more practice papers. There, I said it.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Myth-buster: what piles of papers actually train (speed on familiar questions) versus what loses marks (reading, setup, checking). One alternative habit that beats another stack of papers.</p>
+            <p class="idea-context"><strong>Why:</strong> Explore slot — contrarian claims are untested on this account but fit the direct voice that wins elsewhere.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (72 engagement): "Your child stared at the question and gave up."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">12</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Before and After: One Working</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">Same student. Same question type. Two weeks apart.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Side-by-side carousel: the messy working that lost marks, then the corrected working after coaching (anonymized, permission first). Let the visual difference do the talking — captions stay minimal.</p>
+            <p class="idea-context"><strong>Why:</strong> Visual proof content this account has never tried. Working-shown posts are highly savable for parents.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (13 engagement): "Most parents fold the paper when they see a folding angle question."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">13</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Two-Minute Check</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">Two minutes at the end of the paper is worth more than twenty minutes of practice the night before.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Teach the checking routine (keyword, concept, method — the KCM habit) as a simple carousel parents can hand to their child. Save-CTA.</p>
+            <p class="idea-context"><strong>Why:</strong> Utility carousel in the account&#39;s winning format, built from what you actually teach in class.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (13 engagement): "Most parents fold the paper when they see a folding angle question."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">14</div>
+          <div class="idea-body">
+            <h4 class="idea-title">What AL1 Families Do Differently</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">The AL1 families I work with don&#39;t do more. They do less, on purpose.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Observation post from real families you coach (no names): the habits that repeat across top scorers&#39; homes. Must be genuinely observed, not imagined — pick three you&#39;ve actually seen.</p>
+            <p class="idea-context"><strong>Why:</strong> Aspirational-observation angle for the parents-of-strong-kids audience, grounded in your real client base.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (72 engagement): "Your child stared at the question and gave up."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">15</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Exam-Week Dinner Table Rules</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">The week of the exam, what you say at dinner matters more than what they revise after.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Three things to stop saying during exam week and what to say instead — drawn from real parent conversations you&#39;ve had. Timed for the weighted-assessment and prelim windows.</p>
+            <p class="idea-context"><strong>Why:</strong> Emotional-support content for the exact weeks parents are most anxious and most likely to share.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (72 engagement): "Your child stared at the question and gave up."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">16</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Costliest Careless Mistake</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">It&#39;s not the hard questions that separate AL1 from AL3. It&#39;s this.</p>
+            <p class="idea-angle"><strong>Angle:</strong> One specific careless-mistake type (transfer error, unit drop, misread keyword — pick the one you see most), a real anonymized example, and the one-line fix you drill in class.</p>
+            <p class="idea-context"><strong>Why:</strong> Careless mistakes are the top parent pain point in your exam-analysis reports — proven demand, never posted about here.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (165 engagement): "Comment “TOPIC” and I’ll send you the full list..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">17</div>
+          <div class="idea-body">
+            <h4 class="idea-title">A Parent Asked Me This at Pickup</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">&quot;Is it too late for my son?&quot; A mum asked me that at pickup on Tuesday.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Open with the real verbatim question (anonymized). Your honest answer — including the uncomfortable part. Ends with the question back to readers: &quot;What would you have said?&quot;</p>
+            <p class="idea-context"><strong>Why:</strong> Verbatim-question format, proven on PAC, ported here. Real quote only — don&#39;t polish it.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (72 engagement): "Your child stared at the question and gave up."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">18</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Revision Timetable Myth</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">The prettiest revision timetable I ever saw belonged to a child who failed.</p>
+            <p class="idea-angle"><strong>Angle:</strong> The gap between a beautiful plan and actual revision. What to check instead of the timetable (output, not schedule). One real anonymized case.</p>
+            <p class="idea-context"><strong>Why:</strong> Myth-buster explore slot — pairs a striking image with a checkable claim.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (72 engagement): "Your child stared at the question and gave up."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">19</div>
+          <div class="idea-body">
+            <h4 class="idea-title">What Matters This Term</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-harvest">harvest</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">It&#39;s July. If your child is sitting PSLE in September, this is what actually matters now.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Calendar-anchored priority post: what to focus on at this exact point before the exam, and what to stop doing. Refresh the framing each school term. Mention the holiday workshop only in the last line, as an option not a pitch.</p>
+            <p class="idea-context"><strong>Why:</strong> Timely authority content that ladders softly to enrolment — proof posts should peak as parents decide.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (165 engagement): "Comment “TOPIC” and I’ll send you the full list..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">20</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Show Me One Question</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-harvest">harvest</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">Pick the one question your child got wrong this week. DM me a photo of the working.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Open invitation: parents DM one photo, you reply with a one-line read of what the working shows. Cap it honestly (&quot;first ten DMs this week&quot;). Direct line to your marking skill — the thing parents actually pay for.</p>
+            <p class="idea-context"><strong>Why:</strong> Lead-generation through demonstration rather than a freebie — DM-based, so it doesn&#39;t burn the comment-gate mechanic.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (77 engagement): "P5 FRACTION CARDS GIVEAWAY - yours for FREE!"</p>
           </div>
         </div>
@@ -771,7 +977,7 @@
       <summary class="ideas-summary">
         <span class="ideas-summary-icon">💡</span>
         <span class="ideas-summary-text">
-          <span class="ideas-summary-title">10 post ideas</span>
+          <span class="ideas-summary-title">20 post ideas</span>
           <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
         </span>
         <span class="ideas-summary-chevron">›</span>
@@ -782,100 +988,280 @@
           <div class="idea-num">1</div>
           <div class="idea-body">
             <h4 class="idea-title">The Mark That Made a Mum Cry</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">Her son jumped 19 marks. She cried. Not for the reason you think.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Swap in a real student and the real number. Narrate to camera, one continuous story: the before, the jump, the parent&#39;s unexpected reaction, what it says about how we measure kids. No tips section. The twist in the parent&#39;s reaction is the whole video.</p>
-            <p class="idea-context"><strong>Why:</strong> Direct repeat of the #1 video&#39;s structure — parent reaction with an emotional twist — the single biggest winner on the whole dashboard (2,681).</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (2,681 engagement): "My P6 student improved by 23 marks but his Mum still asked him where is the 7 marks short to hit 90."</p>
+            <p class="idea-angle"><strong>Angle:</strong> Swap in a real student and the real number. One continuous story to camera: the before, the jump, the parent&#39;s unexpected reaction, what it says about how we measure kids. No tips section — the twist in the reaction is the whole video.</p>
+            <p class="idea-context"><strong>Why:</strong> Direct repeat of the only proven organic winner on this account: parent reaction with an emotional twist.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked him where is the 7 marks short to hit 90."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">2</div>
           <div class="idea-body">
-            <h4 class="idea-title">The Book I Almost Didn&#39;t Recommend</h4>
-            <p class="idea-hook">I almost didn&#39;t tell this dad about the book. It felt too simple.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Hesitation-then-payoff arc: why you doubted the recommendation, the moment you gave it anyway, what happened to the kid. Name the book at the end, not the start, so they watch through.</p>
-            <p class="idea-context"><strong>Why:</strong> Mirrors the #2 video&#39;s book-origin format (442). The withheld book name adds a watch-through mechanic the original didn&#39;t have.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (442 engagement): "How this one book helps an average kid who disliked math scored AL1 in PSLE maths."</p>
+            <h4 class="idea-title">The Book on My Marking Desk</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">One book has sat on my marking desk for three years. A dad asked me why.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Story of the book through one real family&#39;s outcome, told as narrative not recommendation. Name the book at the end so people watch through. Note: the earlier book video&#39;s numbers came from paid promotion, so treat this as a fresh test, not a proven repeat.</p>
+            <p class="idea-context"><strong>Why:</strong> Rebuilds the book premise on honest footing — modeled on the organic mum-story format, not the boosted video.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">3</div>
           <div class="idea-body">
             <h4 class="idea-title">I Almost Gave Up on This Student</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">I almost gave up on this student. I&#39;m glad I didn&#39;t.</p>
-            <p class="idea-angle"><strong>Angle:</strong> First-person confession with real stakes: the sessions that went nowhere, the moment you nearly suggested they find another tutor, the turn. Must be a real student (change the name). The coach admitting doubt is the differentiator; don&#39;t soften it.</p>
-            <p class="idea-context"><strong>Why:</strong> Tests whether the coach&#39;s own doubt carries the same story advantage as a parent&#39;s reaction did in the #1 video.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (2,681 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+            <p class="idea-angle"><strong>Angle:</strong> First-person confession with real stakes: the sessions that went nowhere, the moment you nearly suggested another tutor, the turn. Real student, name changed. This is the one &quot;almost&quot; opener kept for this account — don&#39;t add more.</p>
+            <p class="idea-context"><strong>Why:</strong> Tests whether the coach&#39;s own doubt carries the same story power as the parent&#39;s reaction did.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">4</div>
           <div class="idea-body">
             <h4 class="idea-title">What My Daughter Asked Me</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">My daughter asked me why I spend my evenings teaching other people&#39;s kids.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Use a real question one of your girls actually asked (don&#39;t script a fake one — kids&#39; real phrasing is always better). Your honest answer, and the part of it you didn&#39;t say out loud. Family story, zero teaching content.</p>
-            <p class="idea-context"><strong>Why:</strong> Tests whether personal-life stories carry the same advantage as student stories. The dad-of-3 identity is already in the bio; this activates it.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (2,681 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+            <p class="idea-angle"><strong>Angle:</strong> Use a real question one of your girls actually asked — kids&#39; real phrasing always beats a scripted one. Your honest answer, and the part you didn&#39;t say out loud. Family story, zero teaching content.</p>
+            <p class="idea-context"><strong>Why:</strong> Tests whether personal-life stories carry the same power as student stories. The dad-of-3 identity is already in the bio.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">5</div>
           <div class="idea-body">
             <h4 class="idea-title">The Mum Who Didn&#39;t Believe Me</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">A mum told me tuition wouldn&#39;t work for her son. Six months later, she sent me a message.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Skepticism-proof-payoff arc. Real case, real timeline, and read out (or paraphrase) the actual message she sent at the end. The receipt is the payoff; don&#39;t summarize it.</p>
-            <p class="idea-context"><strong>Why:</strong> Same story mechanics as the top 2 videos applied to a conflict-resolution arc, which neither of them used.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (442 engagement): "How this one book helps an average kid who disliked math scored AL1..."</p>
+            <p class="idea-angle"><strong>Angle:</strong> Skepticism, proof, payoff. Real case, real timeline, and read out the actual (anonymized) message at the end — the receipt is the payoff, don&#39;t summarize it.</p>
+            <p class="idea-context"><strong>Why:</strong> The proven story mechanics applied to a conflict arc the winner didn&#39;t use.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">6</div>
           <div class="idea-body">
             <h4 class="idea-title">23 Marks, Week by Week</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">23 marks in 6 weeks. Nobody believes me until I show them the week-by-week.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Take a real improvement case and narrate it as a timeline: week 1 disaster, week 2 small shift, the plateau, the jump. Timelines create natural open loops every 10 seconds. End on what week 3 taught you (the counterintuitive middle, not the ending).</p>
-            <p class="idea-context"><strong>Why:</strong> Repeats the proven format (specific number + emotional arc) restructured as a timeline for retention.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (2,681 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+            <p class="idea-angle"><strong>Angle:</strong> Narrate a real improvement case as a timeline: week one disaster, the small shift, the plateau, the jump. Timelines create a new open loop every few seconds. End on what the middle week taught you, not the ending.</p>
+            <p class="idea-context"><strong>Why:</strong> The proven ingredients (specific number + emotional arc) restructured as a timeline for watch-through.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">7</div>
           <div class="idea-body">
             <h4 class="idea-title">The Question I Got Wrong</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">I got a P6 question wrong. In front of my whole class.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Self-deprecating story with a real incident: the question, the silence, what you said next. Land on the lesson you now teach kids about being wrong out loud. Coach fallibility is rare content in the SG tuition space; that&#39;s the wedge.</p>
-            <p class="idea-context"><strong>Why:</strong> Untested, but aligns exactly with the account-wide finding that personal narrative beats instruction 20-50x.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (442 engagement): "How this one book helps an average kid who disliked math scored AL1..."</p>
+            <p class="idea-angle"><strong>Angle:</strong> Self-deprecating story with a real incident: the question, the silence, what you said next. Land on what you now teach kids about being wrong out loud. Coach fallibility is rare in the SG tuition space — that&#39;s the wedge.</p>
+            <p class="idea-context"><strong>Why:</strong> Personal narrative beats instruction by a wide margin on this account; this is the humblest version of it.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">8</div>
           <div class="idea-body">
             <h4 class="idea-title">From Social Worker to Math Coach</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
             <p class="idea-hook">I was a social worker before I taught math. That&#39;s not a career change. It&#39;s the same job.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Origin story with the reframe as the spine: what social work taught you about kids that no math training ever did. One specific case from each life that rhymes. This is bio-true and nobody else in the niche can copy it.</p>
-            <p class="idea-context"><strong>Why:</strong> Untested origin-story angle. High ceiling given how strongly personal narrative wins here, and it&#39;s a durable evergreen video.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (2,681 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+            <p class="idea-angle"><strong>Angle:</strong> Origin story with the reframe as the spine: what social work taught you about kids that no math training did. One specific case from each life that rhymes. Bio-true — nobody in the niche can copy it.</p>
+            <p class="idea-context"><strong>Why:</strong> Evergreen origin story with a high ceiling given how strongly personal narrative wins here.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">9</div>
           <div class="idea-body">
             <h4 class="idea-title">The 11pm Text</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">A mum texted me at 11pm. It started with: &#39;Can I be honest with you?&#39;</p>
-            <p class="idea-angle"><strong>Angle:</strong> Screen-recording or text-overlay style: show the (anonymized) exchange unfolding message by message while you narrate. Real exchange only. The format is new for this account; the DNA (specific + emotional, zero advice framing) is the proven one.</p>
-            <p class="idea-context"><strong>Why:</strong> Same specific-plus-emotional DNA as the top post in a message-reveal format built for watch time.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (2,681 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+            <p class="idea-angle"><strong>Angle:</strong> Text-overlay style: the (anonymized) exchange unfolds message by message while you narrate. Real exchange only. New format for this account; same specific-plus-emotional DNA as the winner.</p>
+            <p class="idea-context"><strong>Why:</strong> Message-reveal format built for watch time, wrapped around the proven emotional-specific core.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">10</div>
           <div class="idea-body">
-            <h4 class="idea-title">One Book, One Year Later</h4>
-            <p class="idea-hook">Remember the book that helped my student score AL1? Here&#39;s what happened a year later.</p>
-            <p class="idea-angle"><strong>Angle:</strong> A direct sequel: where the kid is now, whether the book habit stuck, what the dad says today. Sequels convert existing proof into new content — pin the original video in the comments.</p>
-            <p class="idea-context"><strong>Why:</strong> Capitalizes on an already-validated hook (442). Sequel format also nudges new viewers back to the original.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (442 engagement): "How this one book helps an average kid who disliked math scored AL1..."</p>
+            <h4 class="idea-title">The Student Who Changed How I Teach</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">A ten-year-old asked me a question I couldn&#39;t answer. It changed how I teach.</p>
+            <p class="idea-angle"><strong>Angle:</strong> One real moment where a student&#39;s question or odd method genuinely shifted your teaching. The kid as the teacher — flips the authority dynamic every other tutor video uses.</p>
+            <p class="idea-context"><strong>Why:</strong> Fresh premise on the proven personal-story formula, replacing the sequel idea that depended on the paid-ad video.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">11</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Marking, Live</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">This is a real P6 paper. Watch what happens at question thirteen.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Over-the-shoulder marking of one real (anonymized) question, narrating what the working reveals about the child&#39;s thinking. Your marking skill on camera — the exact thing parents pay for, shown not claimed.</p>
+            <p class="idea-context"><strong>Why:</strong> Demonstration format, untested here. Turns your daily work into content with near-zero extra effort.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">12</div>
+          <div class="idea-body">
+            <h4 class="idea-title">What a 90-Mark Paper Looks Like</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">Parents always ask what an AL1 paper looks like. It&#39;s not what they expect.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Show (anonymized) working from a top paper: the checking marks, the setup lines, the crossed-out false starts. The surprise is that top papers look messy in a disciplined way.</p>
+            <p class="idea-context"><strong>Why:</strong> Curiosity + proof in one — answers the question every ambitious parent silently has.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">13</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Sentence I Ban in My Class</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">There&#39;s one sentence I don&#39;t allow in my classroom. Your child says it every week.</p>
+            <p class="idea-angle"><strong>Angle:</strong> The sentence is &quot;I&#39;m just bad at math.&quot; What you say back, word for word, and why it works. Short, punchy, ends on the exact phrase parents can use at home tonight.</p>
+            <p class="idea-context"><strong>Why:</strong> Gives parents a script — the most shareable kind of parenting content — wrapped in a curiosity hook.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">14</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Three Kids, Same Question, Three Mistakes</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">I gave three kids the same question. All three got it wrong. All differently.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Walk the three (anonymized) wrong workings and what each reveals — rushing, misreading, wrong method. Parents self-diagnose which one is their child. End: which one is yours?</p>
+            <p class="idea-context"><strong>Why:</strong> Pattern-recognition format that makes parents see their own kid in the video — a built-in comment prompt.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">15</div>
+          <div class="idea-body">
+            <h4 class="idea-title">My Daughter Grades My Teaching</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">I asked my daughter to grade me as a teacher. She didn&#39;t hold back.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Light family video: one of your girls reviews dad&#39;s teaching honestly (only if she&#39;s game and it stays natural). Explore slot — pure charm, zero strategy, tests family content on this account.</p>
+            <p class="idea-context"><strong>Why:</strong> Explore experiment. If personal-life stories work here, this is the most fun version of them.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">16</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Parent Meeting That Changed My Rules</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">One parent meeting changed how I run my classes. It wasn&#39;t a happy one.</p>
+            <p class="idea-angle"><strong>Angle:</strong> The real (anonymized) conversation that led to one of your actual class policies — the complaint or hard question, what you realized, what changed. Policies-with-origin-stories build more trust than policies stated.</p>
+            <p class="idea-context"><strong>Why:</strong> Behind-the-business honesty, proven on PAC, ported to the parent audience.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">17</div>
+          <div class="idea-body">
+            <h4 class="idea-title">PSLE Countdown Check-In</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-harvest">harvest</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">Ten weeks to PSLE. If your child does only one thing this week, make it this.</p>
+            <p class="idea-angle"><strong>Angle:</strong> One priority per stage of the countdown, refreshed as the exam approaches. Concrete, doable this week, no fluff. Mention the holiday workshop once, plainly, at the end.</p>
+            <p class="idea-context"><strong>Why:</strong> Timely series that ladders to enrolment as September decisions get made — the harvest posts should peak now.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">18</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Quietest Kid in Class</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">The quietest kid in my class never asked a single question. Then one day she did.</p>
+            <p class="idea-angle"><strong>Angle:</strong> A real (anonymized) quiet student&#39;s arc: what silence looked like, the moment it broke, what changed after. Speaks to every parent of a child who &quot;doesn&#39;t ask when stuck.&quot;</p>
+            <p class="idea-context"><strong>Why:</strong> The proven emotional-specific story applied to the most common unspoken parent worry.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">19</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Why I Show Parents the Ugly Working</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">I send parents photos of their child&#39;s messiest working. On purpose.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Your actual practice of sharing real working with parents, and why the mess is the information. One example (anonymized) where the ugly page told the whole story.</p>
+            <p class="idea-context"><strong>Why:</strong> Turns an existing habit of yours into a differentiator video — shows how you communicate, which is what parents compare tutors on.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">20</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Ask Me Anything, PSLE Math Edition</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-harvest">harvest</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">Every parent has one PSLE math question they&#39;ve never asked anyone. Ask me yours.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Invite questions in the comments, answer the best ones in follow-up videos. Creates a content pipeline from real demand and tells the algorithm this account answers questions.</p>
+            <p class="idea-context"><strong>Why:</strong> Engagement engine: each answer video comes pre-validated because a real parent asked for it.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,683 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
           </div>
         </div>
       </div>
@@ -883,7 +1269,7 @@
 
     <div class="insight-box">
       <h3>What's working</h3>
-      <ul><li>The single biggest gap on the whole dashboard: a personal parent/student anecdote with an emotional twist (2,681 engagement) beat listicle-style &quot;3 things you must do&quot; videos by 20-50x, even though format (video) and topic (PSLE math) are identical.</li><li>Story &gt; instruction. Top 2 posts are both narrated stories with a specific outcome (23-mark improvement, one book that changed a kid&#39;s score). Bottom 5 are all generic advice framing (&quot;here&#39;s how to...&quot;, &quot;want AL1?&quot;).</li><li>This is the platform where the story format is worth doubling down on hardest — the engagement swing between story and generic-tips is far larger here than on Instagram.</li></ul>
+      <ul><li>The single biggest gap on the whole dashboard: a personal parent/student anecdote with an emotional twist (2,683 engagement, fully organic) beat listicle-style &quot;3 things you must do&quot; videos by 20-50x, even though format (video) and topic (PSLE math) are identical.</li><li>Important correction: the #2 video (the book story, 441) was a paid promotion — its raw data carries an ad flag, so its reach was bought, not earned. The mum-story video is the only proven organic winner; treat book-style content as untested, not validated.</li><li>Story &gt; instruction still holds on the honest data: the one organic winner is a narrated story with a specific outcome, while the bottom 5 are all generic advice framing (&quot;here&#39;s how to...&quot;, &quot;want AL1?&quot;). Double down on story here hardest — the swing is far larger than on Instagram.</li></ul>
     </div>
 
     <h3 class="section-label">Top 5 performers</h3>
@@ -1034,7 +1420,7 @@
       <summary class="ideas-summary">
         <span class="ideas-summary-icon">💡</span>
         <span class="ideas-summary-text">
-          <span class="ideas-summary-title">10 post ideas</span>
+          <span class="ideas-summary-title">20 post ideas</span>
           <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
         </span>
         <span class="ideas-summary-chevron">›</span>
@@ -1044,101 +1430,281 @@
         <div class="idea-card">
           <div class="idea-num">1</div>
           <div class="idea-body">
-            <h4 class="idea-title">The Day I Almost Shut It Down</h4>
-            <p class="idea-hook">There was a week I seriously considered shutting PAC down.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Only post if true — and it usually is true for any founder; find the real week. Name what triggered it (a number, a message, an empty room), the conversation or moment that turned it, and why you stayed. End with &#39;John&#39;. No lesson-listing.</p>
-            <p class="idea-context"><strong>Why:</strong> Matches the vulnerable first-person pattern that tops this account. Founder-doubt is its strongest untapped version.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (22 engagement): "I’m an introvert who’s not very eloquent. Running a community event felt like a double whammy."</p>
+            <h4 class="idea-title">The Dad Post, As a Carousel</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">My father was home every single day when I was growing up. And I thought he was jobless.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Cut the viral Facebook dad story into an 8-10 slide carousel — the strongest lines only, one beat per slide. The content already exists and already proved itself; this is a formatting job, not a writing job.</p>
+            <p class="idea-context"><strong>Why:</strong> Your PAC audience lives on Facebook — the same story did huge numbers there and tiny numbers never happened here because it was never posted here. Recycle the proof.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up. And I thought he was jobless."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">2</div>
           <div class="idea-body">
-            <h4 class="idea-title">What My Daughters Think I Do</h4>
-            <p class="idea-hook">My daughters think my job is talking to teachers on Zoom.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Open with what they actually say about your work (use their real words). Pivot: they&#39;re not wrong — and why &#39;talking to teachers&#39; is the whole business. Light misdirection into a sincere point about serving tutors.</p>
-            <p class="idea-context"><strong>Why:</strong> Mirrors the misdirection-hook structure of &#39;She was my first girlfriend&#39; — a light personal open that lands a business point.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (12 engagement): "She was my first girlfriend."</p>
+            <h4 class="idea-title">Seven Days a Week (IG Version)</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">For two years I worked seven days a week. I thought that was what commitment looked like.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Carousel version of the Facebook burnout story: the schedule, the crack, the rebuild, the week you keep now. Burnout is the most relatable tutor topic — format the FB material, don&#39;t rewrite it.</p>
+            <p class="idea-context"><strong>Why:</strong> Repurposing a validated Facebook theme instead of guessing at new IG content.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (37 engagement): "I thought working 7 days a week was what a committed tutor looked like."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">3</div>
           <div class="idea-body">
-            <h4 class="idea-title">Two Weeks Before Tutor Connect</h4>
-            <p class="idea-hook">Two weeks before Tutor Connect, I wanted to cancel it.</p>
-            <p class="idea-angle"><strong>Angle:</strong> The behind-the-scenes fear before the event that became your #1 post. Name the specific worry (empty seats? speaking? cost?), the moment you decided to run it anyway, then callback to how it actually went. Sequel energy to a proven winner.</p>
-            <p class="idea-context"><strong>Why:</strong> Direct prequel to the #1 post on this account (29). The event already proved it resonates; this adds the vulnerability layer that wins here.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (29 engagement): "Four subjects. Four educators. One Sunday afternoon — and so much heart."</p>
+            <h4 class="idea-title">The Degree That Never Got Me a Client (IG Version)</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">My engineering degree has never gotten me a single client. Not one.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Carousel: the qualifications you collected, the moment you noticed parents never asked, what they asked instead. Ends on what tutors should lead with. Same material as the FB post, resliced.</p>
+            <p class="idea-context"><strong>Why:</strong> Credentials-versus-connection is a core PAC belief with a validated FB post behind it.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (36 engagement): "Nobody has ever told me they chose my tuition service because of my degree."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">4</div>
           <div class="idea-body">
-            <h4 class="idea-title">The Deal I Said No To</h4>
-            <p class="idea-hook">I said no to the biggest cheque anyone has offered me this year.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Only if there&#39;s a real instance (there was, per your &#39;my friends think I&#39;m crazy&#39; post — extend that same decision). What the offer was, the exact moment you knew it was a no, and the value underneath it. Contrarian but calm, not preachy.</p>
-            <p class="idea-context"><strong>Why:</strong> Extends the existing &#39;friends think I&#39;m crazy for serving tutors&#39; premise (9) into a fuller, more concrete story.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (9 engagement): "My friends who coach high-ticket clients think I’m crazy for choosing to serve tutors."</p>
+            <h4 class="idea-title">Calm Is Not a Personality Trait (IG Version)</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">I used to think calm people were born that way.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Short reel or carousel from the Facebook theme: the season you weren&#39;t calm, what you watched someone else do, the practice that built it. One idea, five slides.</p>
+            <p class="idea-context"><strong>Why:</strong> The theme already validated on Facebook at short length — porting it costs almost nothing.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (80 engagement): "You saw someone calm in the middle of chaos."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">5</div>
           <div class="idea-body">
-            <h4 class="idea-title">Only Three People Signed Up</h4>
-            <p class="idea-hook">Only three people signed up. I ran the class anyway.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Real numbers or don&#39;t post it. What you expected vs what came, the temptation to cancel, what running it small taught you (or earned you) that a full room wouldn&#39;t have. Speaks directly to every tutor waiting for &#39;enough&#39; signups.</p>
-            <p class="idea-context"><strong>Why:</strong> Concrete-story version of the &#39;they just stopped waiting&#39; post (20) — same message, but shown instead of stated.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (20 engagement): "The tutors who filled their group classes weren’t more ready. They just stopped waiting."</p>
+            <h4 class="idea-title">Tutor Connect, In Photos</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">Four subjects. Four educators. One Sunday afternoon.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Photo carousel from the actual event — faces, the room, the whiteboards. Minimal captions. Community proof needs no persuasion copy; the photos are the argument.</p>
+            <p class="idea-context"><strong>Why:</strong> The event recap was this account&#39;s best-received post — the photo-dump version is the lowest-effort repeat.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (29 engagement): "Four subjects. Four educators. One Sunday afternoon — and so much heart."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">6</div>
           <div class="idea-body">
-            <h4 class="idea-title">Three Months of AI, Zero Hours Saved</h4>
-            <p class="idea-hook">My first three months using AI saved me nothing. Not one hour.</p>
-            <p class="idea-angle"><strong>Angle:</strong> The fix for your weakest topic: lead with the failure, not the tool. What you did wrong (real specifics: rewriting prompts, redoing outputs), the one change that flipped it, and only then the payoff. The AI content flops because it opens with the win; invert it.</p>
-            <p class="idea-context"><strong>Why:</strong> Direct repair of this account&#39;s worst performers — all three AI posts sit in the bottom 5 (0-1 engagement) because they open tool-first.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (1 engagement): "I built an AI content system that saved me hours every week."</p>
+            <h4 class="idea-title">Two Weeks Before Tutor Connect</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">Two weeks before Tutor Connect, I wanted to cancel it.</p>
+            <p class="idea-angle"><strong>Angle:</strong> The behind-the-scenes fear before the event: the specific worry (empty seats, speaking, cost), the decision to run it anyway, the callback to how it went. Treat as an experiment — this account has no proven pattern yet.</p>
+            <p class="idea-context"><strong>Why:</strong> Prequel to the event content, adding the vulnerability layer. Honest framing: a test, not a proven repeat.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (29 engagement): "Four subjects. Four educators. One Sunday afternoon — and so much heart."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">7</div>
           <div class="idea-body">
-            <h4 class="idea-title">What a Client Said on Our Call</h4>
-            <p class="idea-hook">&quot;I don&#39;t need more students. I need my weekends back.&quot;</p>
-            <p class="idea-angle"><strong>Angle:</strong> Open with a real verbatim line from a coaching call (anonymized, permission if identifiable). Sit with why it stopped you, then the reframe you offered. Quote-as-hook only works when the quote is real — don&#39;t polish it.</p>
-            <p class="idea-context"><strong>Why:</strong> New &#39;verbatim moment&#39; hook style — combines the specific-scene pattern that wins here with client proof.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (22 engagement): "I’m an introvert who’s not very eloquent..."</p>
+            <h4 class="idea-title">Three Months of AI, Zero Hours Saved</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">My first three months using AI saved me nothing. Not one hour.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Lead with the failure, not the tool: what you did wrong (rewriting prompts, redoing outputs), the one change that flipped it, and only then the payoff. Your earlier AI posts opened with the win — invert it.</p>
+            <p class="idea-context"><strong>Why:</strong> Direct repair of this account&#39;s weakest topic: every AI post flopped because it opened tool-first.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (1 engagement): "I built an AI content system that saved me hours every week."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">8</div>
           <div class="idea-body">
-            <h4 class="idea-title">The Call That Stayed With Me</h4>
-            <p class="idea-hook">One coaching call last month stayed with me for days.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Use a real call that genuinely moved you — a client win, a hard moment, a breakthrough. Tell it as it happened and let the emotion be whatever it actually was; don&#39;t manufacture tears. The stayed-with-me framing keeps it honest either way.</p>
-            <p class="idea-context"><strong>Why:</strong> The highest-alignment attempt at this account&#39;s &#39;vulnerable wins&#39; pattern, reframed from the original idea so nothing is invented.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (22 engagement): "I’m an introvert who’s not very eloquent..."</p>
+            <h4 class="idea-title">What a Client Said on Our Call</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">&quot;I don&#39;t need more students. I need my weekends back.&quot;</p>
+            <p class="idea-angle"><strong>Angle:</strong> Open with a real verbatim line from a coaching call (anonymized, permission if identifiable). Why it stopped you, then the reframe you offered. The quote must be real — don&#39;t polish it.</p>
+            <p class="idea-context"><strong>Why:</strong> Verbatim-moment hook: client proof and a specific scene in one. An experiment, honestly labeled.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (22 engagement): "I’m an introvert who’s not very eloquent. Running a community event felt like a double whammy."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">9</div>
           <div class="idea-body">
-            <h4 class="idea-title">Ten Minutes Before the Workshop</h4>
-            <p class="idea-hook">Ten minutes before the workshop, I almost deleted half my slides.</p>
-            <p class="idea-angle"><strong>Angle:</strong> A small real moment of self-doubt with a physical scene (the laptop, the clock, the cursor on delete). Why you almost cut it, what made you keep it, how the room responded to exactly that part. Concrete beats concept — this is the fix for the abstract posts that flopped.</p>
-            <p class="idea-context"><strong>Why:</strong> Rebuilds the failed abstract-opener theme (&#39;inbox feels like a mirror&#39;, 0 engagement) as a concrete scene, which is what its winners do.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (0 engagement): "Some weeks your inbox feels like a mirror you didn’t ask to look into."</p>
+            <h4 class="idea-title">Only Three People Signed Up</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">Only three people signed up. I ran the class anyway.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Real numbers or don&#39;t post it: what you expected, what came, the temptation to cancel, what running it small earned you that a full room wouldn&#39;t have. Speaks to every tutor waiting for enough signups.</p>
+            <p class="idea-context"><strong>Why:</strong> Concrete-story version of the stopped-waiting theme — shown instead of stated.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (20 engagement): "The tutors who filled their group classes weren’t more ready. They just stopped waiting."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">10</div>
           <div class="idea-body">
-            <h4 class="idea-title">Why I Stopped Chasing Bigger</h4>
-            <p class="idea-hook">I stopped chasing bigger launches. Here&#39;s the moment I decided.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Anchor the philosophy to one real decision with a date and a number (a launch you didn&#39;t run, a cap you set). The &#39;peace over profit&#39; theme flops as a statement and wins as a story — so the moment of decision is the post, the philosophy is one closing line.</p>
-            <p class="idea-context"><strong>Why:</strong> Tests whether the peace-over-profit theme converts when anchored to a concrete story, like the &#39;stopped waiting&#39; post (20) did.</p>
-            <p class="idea-mirror"><strong>Mirror post</strong> (20 engagement): "The tutors who filled their group classes weren’t more ready..."</p>
+            <h4 class="idea-title">What My Daughters Think I Do</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">My daughters think my job is talking to teachers on Zoom.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Open with what they actually say about your work (their real words). Pivot: they&#39;re not wrong — and why talking to teachers is the whole business. Light experiment; keep it under a minute of reading.</p>
+            <p class="idea-context"><strong>Why:</strong> Light misdirection hook as a low-stakes test on an account still finding its footing.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (12 engagement): "She was my first girlfriend."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">11</div>
+          <div class="idea-body">
+            <h4 class="idea-title">A Client Win, Told Properly</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">Six months ago she was giving discounts to keep students. Last week she raised her rates.</p>
+            <p class="idea-angle"><strong>Angle:</strong> One real client&#39;s before-and-after with permission (anonymized if preferred): the situation, the single decision that mattered, where they are now. Numbers if the client allows them.</p>
+            <p class="idea-context"><strong>Why:</strong> This account has never posted a proper client-result story — the most standard trust asset a coaching brand can hold.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (20 engagement): "The tutors who filled their group classes weren’t more ready. They just stopped waiting."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">12</div>
+          <div class="idea-body">
+            <h4 class="idea-title">My Week as a Coach, Honestly</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">Monday: two calls and a school run. Tuesday: I marked worksheets in a carpark.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Unglamorous day-in-the-life carousel — the real calendar, family blocks included. The anti-hustle rhythm is the message; no lesson stated.</p>
+            <p class="idea-context"><strong>Why:</strong> Shows the family-first business model instead of claiming it. Differentiates against hustle-coach content.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (22 engagement): "I’m an introvert who’s not very eloquent. Running a community event felt like a double whammy."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">13</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Tutor I Turned Away</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">A tutor asked to join PAC last month. I said no.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Only if true. Why the fit was wrong, what you told them, what you&#39;d need to see to say yes. Saying no publicly is the strongest positioning move a small coaching brand can make.</p>
+            <p class="idea-context"><strong>Why:</strong> Qualification-by-story: defines who PAC is for by showing who it isn&#39;t for.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (9 engagement): "My friends who coach high-ticket clients think I’m crazy for choosing to serve tutors."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">14</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Before PAC, After PAC</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">Same tutor. Same students. Completely different week.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Visual before/after of one client&#39;s actual weekly calendar (with permission, anonymized): the crammed version, then the redesigned one. Calendars are more believable than income claims.</p>
+            <p class="idea-context"><strong>Why:</strong> Proof content that sidesteps money-claim skepticism by showing time instead.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (20 engagement): "The tutors who filled their group classes weren’t more ready. They just stopped waiting."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">15</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Question Every Tutor Asks Me First</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-harvest">harvest</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">Every tutor who books a call asks me the same first question.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Name the question (it&#39;ll be about filling classes or pricing), then answer it the way you actually do on calls — including the part they don&#39;t expect. A free sample of the coaching itself.</p>
+            <p class="idea-context"><strong>Why:</strong> FAQ-as-story: demonstrates the coaching conversation instead of describing it.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (22 engagement): "I’m an introvert who’s not very eloquent. Running a community event felt like a double whammy."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">16</div>
+          <div class="idea-body">
+            <h4 class="idea-title">One Idea in Ten Seconds</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">The fastest pricing fix I give tutors takes ten seconds to explain.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Deliberate format test: a single sharp reel under fifteen seconds, one idea, no setup. Run two or three of these and compare against carousels before concluding anything about reels here.</p>
+            <p class="idea-context"><strong>Why:</strong> Format experiment — this account&#39;s video sample is too small to judge; this generates the data cheaply.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (12 engagement): "She was my first girlfriend."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">17</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Why I Coach Tutors, Not Students</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">I could earn more coaching students. I coach their tutors instead.</p>
+            <p class="idea-angle"><strong>Angle:</strong> The positioning story: the social-work thread, the moment you saw that helping one tutor helps every student they teach. Multiplication as the motive — personal, not preachy.</p>
+            <p class="idea-context"><strong>Why:</strong> The core brand question answered as a story. Evergreen pinned-post material.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (9 engagement): "My friends who coach high-ticket clients think I’m crazy for choosing to serve tutors."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">18</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Spreadsheet That Scared Me</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">I opened my numbers one night and closed the laptop within a minute.</p>
+            <p class="idea-angle"><strong>Angle:</strong> A real founder moment with your own numbers — the month the spreadsheet frightened you, what you did in the following week. Only if true, with the real (or honestly rounded) figure.</p>
+            <p class="idea-context"><strong>Why:</strong> Money vulnerability from the coach builds more trust with struggling tutors than any win post.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (22 engagement): "I’m an introvert who’s not very eloquent. Running a community event felt like a double whammy."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">19</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Deal I Said No To</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">I said no to the biggest cheque anyone has offered me this year.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Only if there&#39;s a real instance. What the offer was, the exact moment you knew it was a no, and the value underneath it. Contrarian but calm — no preaching.</p>
+            <p class="idea-context"><strong>Why:</strong> Extends the friends-think-I&#39;m-crazy premise into a concrete story. An experiment on this account, honestly labeled.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (9 engagement): "My friends who coach high-ticket clients think I’m crazy for choosing to serve tutors."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">20</div>
+          <div class="idea-body">
+            <h4 class="idea-title">DM Me One Word: STUCK</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-harvest">harvest</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">Tutors: if your business feels stuck, DM me the one word STUCK and tell me where.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Open invitation with a genuine reply promise — you answer each DM with one specific suggestion, no pitch. Cap it honestly. The replies are the top of your coaching funnel.</p>
+            <p class="idea-context"><strong>Why:</strong> Direct harvest post: turns followers into conversations, which is the actual PAC funnel step.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (22 engagement): "I’m an introvert who’s not very eloquent. Running a community event felt like a double whammy."</p>
           </div>
         </div>
       </div>
@@ -1318,7 +1884,7 @@
       <summary class="ideas-summary">
         <span class="ideas-summary-icon">💡</span>
         <span class="ideas-summary-text">
-          <span class="ideas-summary-title">10 post ideas</span>
+          <span class="ideas-summary-title">20 post ideas</span>
           <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
         </span>
         <span class="ideas-summary-chevron">›</span>
@@ -1329,19 +1895,27 @@
           <div class="idea-num">1</div>
           <div class="idea-body">
             <h4 class="idea-title">What My Daughters Taught Me About Business</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">My three daughters have taught me more about running a business than any course I&#39;ve paid for.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Full long-form, same architecture as the dad post: open with the claim, then three real scenes (one per daughter if it fits), each landing a business truth without naming it as one. Ellipsis section breaks, short lines, sign off &#39;John&#39;. 600+ words is fine — length was part of why the dad post worked.</p>
-            <p class="idea-context"><strong>Why:</strong> Direct structural repeat of the #1 post — 180x every other post on this account (14,677, 1,119 shares).</p>
+            <p class="idea-angle"><strong>Angle:</strong> THE MONTHLY EPIC. Full long-form, same architecture as the dad post: the claim, then three real scenes, each landing a business truth without naming it. Ellipsis breaks, short lines, sign off &#39;John&#39;. Run only one epic per month — the rarity is part of why the dad post worked.</p>
+            <p class="idea-context"><strong>Why:</strong> Direct structural heir to the page&#39;s one true viral post. Pick this or another epic for the month — never two.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up. And I thought he was jobless."</p>
           </div>
         </div>
         <div class="idea-card">
           <div class="idea-num">2</div>
           <div class="idea-body">
-            <h4 class="idea-title">The Year I Almost Gave Up Stay-at-Home Fatherhood</h4>
-            <p class="idea-hook">There was a year I almost gave up being a stay-at-home dad.</p>
-            <p class="idea-angle"><strong>Angle:</strong> The honest middle of the story the viral post only touched: &#39;days I felt invisible&#39; expanded into specific days. The eyebrows raised, the money fear, the moment you nearly took a job — and what kept you. This is the sequel readers of the dad post are primed for.</p>
-            <p class="idea-context"><strong>Why:</strong> Extends the exact section of the viral post (&#39;Was it easy? Definitely not.&#39;) that was compressed — same voice, same audience, deeper cut.</p>
+            <h4 class="idea-title">The Year Stay-at-Home Fatherhood Stopped Making Sense</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">There was a year when being a stay-at-home dad stopped making sense to me.</p>
+            <p class="idea-angle"><strong>Angle:</strong> MONTHLY EPIC candidate. The honest middle the viral post compressed: the invisible days, the eyebrows, the money fear, the week you nearly took a job — and what kept you. The sequel readers of the dad post are primed for.</p>
+            <p class="idea-context"><strong>Why:</strong> Expands the exact section of the viral post readers responded to most. One epic per month — queue it, don&#39;t stack it.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up..."</p>
           </div>
         </div>
@@ -1349,9 +1923,13 @@
           <div class="idea-num">3</div>
           <div class="idea-body">
             <h4 class="idea-title">Calm Is Not a Personality Trait</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">I used to think calm people were born that way.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Expand the 80-engagement one-liner into a full story: the season you were not calm (name it), what you watched someone else do, the practice that built it. The short version proved the theme; the long version applies the format that made the dad post explode.</p>
-            <p class="idea-context"><strong>Why:</strong> The #2 post validated this theme at short length. Long-specific-vulnerable is this account&#39;s proven multiplier.</p>
+            <p class="idea-angle"><strong>Angle:</strong> MONTHLY EPIC candidate. The full story behind the one-liner that already worked here: the season you weren&#39;t calm, what you watched someone else do, the practice that built it.</p>
+            <p class="idea-context"><strong>Why:</strong> The short version already proved the theme on this page; the long version applies the viral post&#39;s format to it.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (80 engagement): "You saw someone calm in the middle of chaos."</p>
           </div>
         </div>
@@ -1359,9 +1937,13 @@
           <div class="idea-num">4</div>
           <div class="idea-body">
             <h4 class="idea-title">Seven Days a Week</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">For two years I worked seven days a week. I thought that was what commitment looked like.</p>
-            <p class="idea-angle"><strong>Angle:</strong> The full burnout arc with real numbers: hours, missed dinners, the moment something cracked (a specific day, a specific sentence from your wife or a kid), the rebuild. End on what your week looks like now — concrete schedule, not philosophy.</p>
-            <p class="idea-context"><strong>Why:</strong> Extends the 3rd-best post (37) to the full-length format. Burnout is also the single most shareable topic for the tutor audience.</p>
+            <p class="idea-angle"><strong>Angle:</strong> MONTHLY EPIC candidate. The full burnout arc with real numbers: the hours, the missed dinners, the specific day something cracked, the rebuild. End on your actual current week — schedule, not philosophy.</p>
+            <p class="idea-context"><strong>Why:</strong> Burnout is the most shareable topic for the tutor audience, and the theme already registered here at short length.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (37 engagement): "I thought working 7 days a week was what a committed tutor looked like."</p>
           </div>
         </div>
@@ -1369,9 +1951,13 @@
           <div class="idea-num">5</div>
           <div class="idea-body">
             <h4 class="idea-title">The Degree That Never Got Me a Client</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
             <p class="idea-hook">My engineering degree has never gotten me a single client. Not one.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Origin story: why you collected the qualifications, the moment you realized parents never asked about them, what they actually asked about instead (be specific — the real questions). Lands on what tutors should lead with. Personal proof, not advice framing.</p>
-            <p class="idea-context"><strong>Why:</strong> Extends the 4th-best post (36) to full length. Credentials-vs-connection is a core PAC belief with a real story under it.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Medium-length, not an epic. Why you collected the qualifications, the moment you noticed parents never asked, the questions they asked instead — the real ones. Lands on what tutors should lead with.</p>
+            <p class="idea-context"><strong>Why:</strong> Extends a post that already worked here, at a sustainable length between epics.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (36 engagement): "Nobody has ever told me they chose my tuition service because of my degree."</p>
           </div>
         </div>
@@ -1379,9 +1965,13 @@
           <div class="idea-num">6</div>
           <div class="idea-body">
             <h4 class="idea-title">The Workshop Everyone Said Was Dead</h4>
-            <p class="idea-hook">&quot;Physical workshops are dead.&quot; I almost believed it.</p>
-            <p class="idea-angle"><strong>Angle:</strong> The full behind-the-scenes: who said it, the booking numbers that seemed to prove it, the sunk cost moment, then the actual turnout and one specific thing that happened in the room that Zoom could never do. Numbers throughout.</p>
-            <p class="idea-context"><strong>Why:</strong> Extends the 5th-best post (30) into the long format. Contrarian + receipts is a proven FB combination for this page.</p>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">&quot;Physical workshops are dead.&quot; I nearly believed it.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Medium-length. Who said it, the booking numbers that seemed to prove it, then the turnout — and one thing that happened in the room that Zoom could never do. Numbers throughout.</p>
+            <p class="idea-context"><strong>Why:</strong> Contrarian plus receipts, extending a post that already registered here.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (30 engagement): "They say physical workshops are dead."</p>
           </div>
         </div>
@@ -1389,9 +1979,13 @@
           <div class="idea-num">7</div>
           <div class="idea-body">
             <h4 class="idea-title">The Night Before Her First Big Exam</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">The night before my daughter&#39;s first big exam, we didn&#39;t talk about math.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Use the real night when it comes (or the most recent real one). What you did instead and why — the math coach who doesn&#39;t drill his own kid the night before is the story. Connect it back to your father staying up at 2am for you: one generation of love shaping the next. That callback is the share-trigger.</p>
-            <p class="idea-context"><strong>Why:</strong> A fresh premise built from the viral post&#39;s exact DNA — parenting, generational echo, specific night, full length.</p>
+            <p class="idea-angle"><strong>Angle:</strong> MONTHLY EPIC candidate — save it for when the real night happens. What you did instead and why, connected back to your father staying up at 2am for you. The generational callback is the share-trigger.</p>
+            <p class="idea-context"><strong>Why:</strong> Fresh premise from the viral post&#39;s exact DNA. Wait for the real moment; don&#39;t manufacture it.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up..."</p>
           </div>
         </div>
@@ -1399,9 +1993,13 @@
           <div class="idea-num">8</div>
           <div class="idea-body">
             <h4 class="idea-title">The Discount Conversation</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
             <p class="idea-hook">A parent once asked me for a discount. My answer surprised her.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Rebuild the flopped discount Reel (2 engagement) as one real conversation told in full: her exact words, your pause, what you said, what she signed up for anyway. The advice (&#39;how to counter discounts&#39;) becomes visible through the story without ever being stated as tips.</p>
-            <p class="idea-context"><strong>Why:</strong> Directly fixes this account&#39;s failure pattern — the same topic died as generic advice; the story version is how its winners behave.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Short-to-medium. One real conversation told in full: her exact words, your pause, what you said, what she signed up for anyway. The advice becomes visible through the story without being stated as tips.</p>
+            <p class="idea-context"><strong>Why:</strong> Rebuilds the topic that flopped as generic advice into the story form this page&#39;s winners use.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (2 engagement): "Tutors: what to say to counter when parents ask you for discounts."</p>
           </div>
         </div>
@@ -1409,9 +2007,13 @@
           <div class="idea-num">9</div>
           <div class="idea-body">
             <h4 class="idea-title">My Slowest Student</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
             <p class="idea-hook">My slowest student taught me more than my fastest one ever did.</p>
-            <p class="idea-angle"><strong>Angle:</strong> A full confession arc about misjudging a real student: what you privately assumed, the moment that proved you wrong (a specific question, a specific answer), what you changed in how you teach. Anonymize the student. Ends on the reframe, not a moral.</p>
-            <p class="idea-context"><strong>Why:</strong> New premise on the proven long-specific-vulnerable formula. Teacher-humility stories are highly shareable among the parent-heavy FB audience too.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Medium-length confession arc about misjudging a real student: the private assumption, the moment that proved you wrong, what you changed. Anonymize. End on the reframe, not a moral.</p>
+            <p class="idea-context"><strong>Why:</strong> Teacher-humility story — highly shareable with the parent-heavy portion of this page&#39;s audience.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up..."</p>
           </div>
         </div>
@@ -1419,10 +2021,154 @@
           <div class="idea-num">10</div>
           <div class="idea-body">
             <h4 class="idea-title">The Post I Almost Didn&#39;t Publish</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
             <p class="idea-hook">I almost didn&#39;t publish the post about my father.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Meta-story about the viral post itself: why you hesitated (too personal? nobody cares?), the moment you hit post anyway, and one message you received that made it worth it. Only works because the referenced post is real and your audience saw it — that&#39;s the unfair advantage no one can copy.</p>
-            <p class="idea-context"><strong>Why:</strong> The long-form-personal formula applied to the story behind the page&#39;s own biggest moment. Referencing a post 800k people saw is built-in distribution.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Short meta-story: why you hesitated, the moment you hit post, and one message you received that made it worth it. The one &quot;almost&quot; opener kept on this account — it earns the exception because the referenced post is real and your audience saw it.</p>
+            <p class="idea-context"><strong>Why:</strong> Referencing a post hundreds of thousands saw is built-in distribution no new premise can match.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">11</div>
+          <div class="idea-body">
+            <h4 class="idea-title">One Photo, One Story</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">This photo is from last month&#39;s workshop. The man on the left almost didn&#39;t come.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Short post: a single real photo, five to eight lines about one person in it (permission first, or keep them unidentifiable). Fills the space between epics with human proof at minimal cost.</p>
+            <p class="idea-context"><strong>Why:</strong> Between-epics filler format: light, fast, and keeps the page warm without burning big-story material.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (29 engagement): "Four subjects. Four educators. One Sunday afternoon — and so much heart."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">12</div>
+          <div class="idea-body">
+            <h4 class="idea-title">A Message I Keep</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">There&#39;s one message in my phone I&#39;ve never deleted.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Short post around one real message from a parent, student, or tutor that stayed with you (anonymized, permission if identifiable). Show the message, say why it stays. Nothing else.</p>
+            <p class="idea-context"><strong>Why:</strong> Receipt-based trust content — the message does the persuading so the post doesn&#39;t have to.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (80 engagement): "You saw someone calm in the middle of chaos."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">13</div>
+          <div class="idea-body">
+            <h4 class="idea-title">What My Father Would Say About AI</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">My father translated English word by word with a Chinese dictionary. I ask AI to draft mine.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Medium-length bridge between the dad legacy and how you work now: the dictionary at 2am then, the tools now, and the thing that hasn&#39;t changed — showing up for the people you serve. Explore slot.</p>
+            <p class="idea-context"><strong>Why:</strong> Connects the page&#39;s most loved story to your present-day work — and fixes the AI topic that flops when told tool-first.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">14</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The First Student Who Ever Paid Me</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">I still remember the first student whose parents paid me. I nearly gave the money back.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Short origin story: who they were (anonymized), what you charged, why it felt wrong to take it, and when charging started feeling honest. Every tutor reading has lived this.</p>
+            <p class="idea-context"><strong>Why:</strong> Origin content for the exact money-discomfort every tutor in your audience carries.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (36 engagement): "Nobody has ever told me they chose my tuition service because of my degree."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">15</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Sunday: What I&#39;m Not Doing</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">It&#39;s Sunday. I&#39;m not answering work messages today. This post was scheduled on Friday.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Ultra-short recurring format: what you&#39;re not doing this Sunday and why the boundary exists. Two or three lines. The scheduled-on-Friday admission is the wink that makes it land.</p>
+            <p class="idea-context"><strong>Why:</strong> Repeatable short format that demonstrates the family-first model weekly without writing anything long.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (37 engagement): "I thought working 7 days a week was what a committed tutor looked like."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">16</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Three Lines About Failure</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">My first workshop had two attendees. One was my wife.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Deliberate length test: the entire post is three lines — the failure, the fact, the now. Nothing else. Only if the story is true; adjust to your real first-workshop numbers.</p>
+            <p class="idea-context"><strong>Why:</strong> Explore slot testing whether ultra-short confession travels on this page the way long-form does.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (30 engagement): "They say physical workshops are dead."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">17</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Chinese Dictionary</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">My father&#39;s English was not good. His dictionary was worn soft at the corners.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Short post expanding one detail from the viral story — the dictionary itself, him translating word by word at 2am to teach you English. One object, one memory, done. Readers of the original will recognize it instantly.</p>
+            <p class="idea-context"><strong>Why:</strong> Mining the viral post&#39;s richest detail as a standalone — low cost, high recognition for the audience that shared the original.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">18</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Number I Can&#39;t Forget</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">There&#39;s one number from my years of teaching I can&#39;t forget.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Short post built around one real number from your own history — students taught, families served, years at the desk — and the single moment that made it human. Use your true number; the post dies if it&#39;s rounded for effect.</p>
+            <p class="idea-context"><strong>Why:</strong> Specific real numbers are a signature of your voice; this makes one of them the whole post.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (36 engagement): "Nobody has ever told me they chose my tuition service because of my degree."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">19</div>
+          <div class="idea-body">
+            <h4 class="idea-title">To the Parent Who Messaged at Midnight</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-trust">trust</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">To the parent who messaged me at midnight last week: this one is for you.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Open-letter format answering one real (anonymized) late-night parent worry — the fear under the question, and what you&#39;d say across the kitchen table. Warm, direct, no bullet points.</p>
+            <p class="idea-context"><strong>Why:</strong> Open letters are made for Facebook sharing — every anxious parent reading feels personally addressed.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (80 engagement): "You saw someone calm in the middle of chaos."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">20</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Why I Still Mark on Paper</h4>
+            <div class="idea-tags">
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">I run my business with AI. I still mark every worksheet by hand.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Short post on one deliberate old-fashioned habit and what it preserves — what a child&#39;s handwriting tells you that a photo of a score never will. Small habit, bigger meaning, no lecture.</p>
+            <p class="idea-context"><strong>Why:</strong> Humanizes the tech-forward brand and quietly showcases the marking service in the same breath.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (36 engagement): "Nobody has ever told me they chose my tuition service because of my degree."</p>
           </div>
         </div>
       </div>
@@ -1575,6 +2321,46 @@
 
     
   </section>
+      
+  <section class="panel" id="panel-fable-analysis" hidden>
+    <div class="account-header">
+      <h2><span class="acc-icon">🧠</span>Fable Analysis</h2>
+    </div>
+    <p class="fable-subtitle">A critical second look at the post ideas — what the data really says, in plain English. Reviewed 10 Jul 2026.</p>
+    
+    <div class="fable-section">
+      <h3>The book video was a paid ad</h3>
+      <p>The &quot;book that helped a kid score AL1&quot; TikTok did well because it was boosted with money, not because it spread on its own — the raw data marks it as an ad. So its style is not proof of what works. The mum story video (&quot;improved by 23 marks but mum asked about the missing marks&quot;) is the real winner: that one spread by itself. Copy that one.</p>
+    </div>
+    <div class="fable-section">
+      <h3>Stop starting every post with &quot;I almost...&quot;</h3>
+      <p>The first batch of ideas opened the same way again and again — I almost gave up, I almost cancelled, I almost deleted. Post a few of those close together and readers feel the formula, and the emotional effect dies. The updated ideas keep one or two per account and open the rest differently: a question, a parent&#39;s exact words, a scene, a surprising claim.</p>
+    </div>
+    <div class="fable-section">
+      <h3>Never open with &quot;Here&#39;s...&quot;</h3>
+      <p>Your worst-performing posts say things like &quot;Here&#39;s what works&quot; or &quot;Here&#39;s how I do it.&quot; It sounds like a lecture before it starts. Tell the story instead — the lesson shows itself.</p>
+    </div>
+    <div class="fable-section">
+      <h3>PAC Instagram: recycle, don&#39;t guess</h3>
+      <p>Almost nobody engages on PAC Instagram yet, so there is no winning pattern there to copy — the earlier ideas pretended there was. But your dad story exploded on Facebook, and your PAC audience clearly lives there. So most PAC Instagram ideas are now repurposing jobs: turn your proven Facebook posts into carousels and reels. Cheaper, faster, and built on real proof.</p>
+    </div>
+    <div class="fable-section">
+      <h3>LOTB Instagram: fewer comment-for-freebie posts</h3>
+      <p>Half the earlier ideas asked people to comment a keyword for a freebie. Every one of those means making the freebie and replying to every comment — and the trick dulls if people see it weekly. The updated list keeps it to a few per month. The rest are posts people want to save or share on their own.</p>
+    </div>
+    <div class="fable-section">
+      <h3>Facebook: one big story a month</h3>
+      <p>The dad post landed partly because it was rare. Ten long emotional posts in a row would drain you and flatten the effect. The updated Facebook list marks which ideas are the big monthly story and fills the space between with short, light posts.</p>
+    </div>
+    <div class="fable-section">
+      <h3>Every idea now says what it&#39;s for</h3>
+      <p>Some posts build trust (stories). Some collect leads (freebies, invitations). Some prove you&#39;re good (student results, client wins). Each idea now carries a purpose tag — trust, harvest, or proof — so you can balance the month instead of posting by feel. With PSLE in September, time the proof posts for when parents are deciding.</p>
+    </div>
+    <div class="fable-section">
+      <h3>Every idea now says how much work it is</h3>
+      <p>Some ideas you can post tonight. Others need you to dig up a real story, get a parent&#39;s permission, or check in with a past student first. Each idea is tagged quick or needs prep, so on a busy day you know exactly what to grab.</p>
+    </div>
+  </section>
     </div>
   </div>
 
@@ -1604,8 +2390,8 @@
       <h3>Followers</h3>
       <p>Current follower count for the account, pulled fresh each time the dashboard updates. Not shown for Facebook (that number isn't included in the manual export used for that account).</p>
 
-      <h3>"10 post ideas for this account"</h3>
-      <p>Generated by looking at what actually worked and didn't across that account's real posts. Each idea names a "mirror post" — one of the account's own real top performers whose structure or hook the new idea is deliberately modeled on.</p>
+      <h3>The post ideas</h3>
+      <p>Generated by looking at what actually worked and didn't across that account's real posts, then critically reviewed (see the Fable Analysis page). Each idea names a "mirror post" — a real post whose structure the new idea is modeled on — plus a purpose tag (trust = builds relationship, proof = shows results, harvest = collects leads or conversations) and an effort tag (quick = postable now, needs prep = requires a real story, permission, or material first).</p>
     </div>
   </div>
 
