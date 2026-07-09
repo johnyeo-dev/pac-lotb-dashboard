@@ -88,8 +88,26 @@
   #app.hidden { display: none; }
 
   header { padding: 22px 0 14px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+  .header-title { display: flex; align-items: center; gap: 10px; }
   header h1 { font-size: 34px; margin: 0 0 6px; }
   header p { color: var(--text-secondary); margin: 0; font-size: 18px; }
+  .info-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface-1);
+    color: var(--text-secondary);
+    font-size: 18px;
+    font-weight: 700;
+    font-family: Georgia, serif;
+    font-style: italic;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
   .refresh-pill {
     display: inline-flex;
     align-items: center;
@@ -119,14 +137,17 @@
     display: flex;
     gap: 8px;
     overflow-x: auto;
-    padding: 12px 0;
+    padding: 12px 24px 12px 0;
+    margin: 0 -18px 24px;
+    padding-left: 18px;
+    padding-right: 36px;
     background: var(--page-plane);
     border-bottom: 1px solid var(--gridline);
-    margin-bottom: 24px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
   nav.tabs::-webkit-scrollbar { display: none; }
+  nav.tabs::after { content: ""; flex: 0 0 4px; }
   .tab {
     flex: 0 0 auto;
     font-size: 19px;
@@ -150,20 +171,20 @@
   .account-header h2 { margin: 0; font-size: 28px; display: flex; align-items: center; gap: 10px; }
   .acc-icon { font-size: 28px; line-height: 1; }
 
-  .kpi-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+  .kpi-row { display: grid; gap: 10px; margin-bottom: 24px; }
   .kpi-card {
     background: var(--surface-1);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 14px 10px;
+    padding: 14px 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: 4px;
   }
-  .kpi-value { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .kpi-label { font-size: 13px; color: var(--muted); line-height: 1.2; }
+  .kpi-value { font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .kpi-label { font-size: 12px; color: var(--muted); line-height: 1.2; }
 
   .insight-box {
     background: var(--chip-bg);
@@ -178,7 +199,7 @@
 
   .section-label { font-size: 17px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 0 0 14px; font-weight: 700; }
 
-  .rank-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+  .rank-list { display: flex; flex-direction: column; gap: 18px; margin-bottom: 28px; }
   .rank-row { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; }
   .rank-badge {
     width: 30px;
@@ -208,6 +229,8 @@
   .bar-track { height: 10px; background: var(--gridline); border-radius: 5px; overflow: hidden; }
   .bar-fill { height: 100%; border-radius: 5px; }
   .rank-value { font-size: 18px; font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .metric-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .metric-chip { font-size: 13px; color: var(--muted); background: var(--chip-bg); border-radius: 6px; padding: 3px 8px; white-space: nowrap; }
 
   .fmt-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
   .fmt-row { display: grid; grid-template-columns: 1fr; gap: 6px; }
@@ -265,6 +288,67 @@
   .spotlight-meta { font-size: 15px; color: var(--muted); }
 
   .ov-footnote { font-size: 15px; color: var(--muted); margin: 0; }
+
+  /* Content ideas */
+  .ideas-block { margin-bottom: 24px; }
+  .ideas-summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 8px; }
+  .ideas-summary::-webkit-details-marker { display: none; }
+  .ideas-summary::before { content: "▶"; font-size: 13px; transition: transform 0.15s; }
+  details[open] .ideas-summary::before { transform: rotate(90deg); }
+  .ideas-list { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+  .idea-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .idea-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--acc);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .idea-title { margin: 0 0 8px; font-size: 20px; }
+  .idea-angle, .idea-context, .idea-mirror { margin: 0 0 8px; font-size: 16px; line-height: 1.5; color: var(--text-secondary); }
+  .idea-mirror { margin-bottom: 0; font-style: italic; }
+  .idea-mirror strong, .idea-angle strong, .idea-context strong { color: var(--text-primary); font-style: normal; }
+
+  /* Info modal */
+  #info-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 200;
+  }
+  #info-modal.open { display: flex; }
+  .info-sheet {
+    background: var(--surface-1);
+    border-radius: 20px 20px 0 0;
+    padding: 24px 22px 32px;
+    width: 100%;
+    max-width: 720px;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .info-sheet h2 { margin: 0 0 16px; font-size: 24px; display: flex; justify-content: space-between; align-items: center; }
+  .info-close { border: none; background: var(--chip-bg); width: 32px; height: 32px; border-radius: 50%; font-size: 16px; color: var(--text-secondary); cursor: pointer; }
+  .info-sheet h3 { font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 20px 0 8px; }
+  .info-sheet h3:first-of-type { margin-top: 0; }
+  .info-sheet p, .info-sheet li { font-size: 16px; line-height: 1.5; color: var(--text-primary); margin: 0 0 8px; }
+  .info-sheet ul { padding-left: 20px; margin: 0; }
 </style>
 </head>
 <body>
@@ -280,11 +364,14 @@
   <div id="app" class="hidden">
     <div class="wrap">
       <header>
-        <div>
-          <h1>Social Content Dashboard</h1>
-          <p>4 accounts tracked</p>
+        <div class="header-title">
+          <div>
+            <h1>Social Content Dashboard</h1>
+            <p>4 accounts tracked</p>
+          </div>
+          <button class="info-btn" id="info-open" aria-label="What do these numbers mean?">i</button>
         </div>
-        <span class="refresh-pill">Data refreshed 9 Jul 2026, 11:28 pm</span>
+        <span class="refresh-pill">Data refreshed 9 Jul 2026, 11:59 pm</span>
       </header>
       <nav class="tabs"><button class="tab" data-target="panel-overview" aria-selected="true">✨ Overview</button><button class="tab" data-target="panel-lotb-instagram" >📸 LOTB Instagram</button><button class="tab" data-target="panel-lotb-tiktok" >🎵 LOTB TikTok</button><button class="tab" data-target="panel-pac-instagram" >📸 PAC Instagram</button><button class="tab" data-target="panel-pac-facebook" >👍 PAC Facebook</button></nav>
       
@@ -296,21 +383,21 @@
         <span class="ov-name">LOTB Instagram</span>
         <span class="ov-value">14</span>
         <span class="ov-label">avg engagement</span>
-        <span class="ov-sub">30 posts tracked</span>
+        <span class="ov-sub">30 posts tracked · 1,150 followers</span>
       </button>
       <button class="ov-card" data-jump="panel-lotb-tiktok" style="--acc:#1baf7a;">
         <span class="ov-icon">🎵</span>
         <span class="ov-name">LOTB TikTok</span>
         <span class="ov-value">133</span>
         <span class="ov-label">avg engagement</span>
-        <span class="ov-sub">30 posts tracked</span>
+        <span class="ov-sub">30 posts tracked · 1,028 followers</span>
       </button>
       <button class="ov-card" data-jump="panel-pac-instagram" style="--acc:#e87ba4;">
         <span class="ov-icon">📸</span>
         <span class="ov-name">PAC Instagram</span>
         <span class="ov-value">5</span>
         <span class="ov-label">avg engagement</span>
-        <span class="ov-sub">30 posts tracked</span>
+        <span class="ov-sub">30 posts tracked · 345 followers</span>
       </button>
       <button class="ov-card" data-jump="panel-pac-facebook" style="--acc:#eb6834;">
         <span class="ov-icon">👍</span>
@@ -342,19 +429,8 @@
     </div>
 
     
-    <div class="kpi-row">
-      <div class="kpi-card">
-        <span class="kpi-value">30</span>
-        <span class="kpi-label">posts tracked</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-value">14</span>
-        <span class="kpi-label">avg engagement</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-value">165</span>
-        <span class="kpi-label">top post</span>
-      </div>
+    <div class="kpi-row" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="kpi-card"><span class="kpi-value">1,150</span><span class="kpi-label">followers</span></div><div class="kpi-card"><span class="kpi-value">30</span><span class="kpi-label">posts tracked</span></div><div class="kpi-card"><span class="kpi-value">14</span><span class="kpi-label">avg engagement</span></div><div class="kpi-card"><span class="kpi-value">165</span><span class="kpi-label">top post</span></div>
     </div>
 
     <div class="insight-box">
@@ -371,6 +447,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 8</span><span class="metric-chip">💬 157</span><span class="metric-chip">👁️ 431</span></div>
         </div>
         <span class="rank-value">165</span>
       </div>
@@ -381,6 +458,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:46.666666666666664%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 9</span><span class="metric-chip">💬 68</span><span class="metric-chip">👁️ 333</span></div>
         </div>
         <span class="rank-value">77</span>
       </div>
@@ -391,6 +469,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:43.63636363636363%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 8</span><span class="metric-chip">💬 64</span></div>
         </div>
         <span class="rank-value">72</span>
       </div>
@@ -401,6 +480,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:17.575757575757574%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 26</span><span class="metric-chip">💬 3</span><span class="metric-chip">👁️ 553</span></div>
         </div>
         <span class="rank-value">29</span>
       </div>
@@ -411,6 +491,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:7.878787878787878%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 5</span><span class="metric-chip">💬 8</span></div>
         </div>
         <span class="rank-value">13</span>
       </div></div>
@@ -420,20 +501,22 @@
       <div class="rank-row">
         <span class="rank-badge">1</span>
         <div class="rank-body">
-          <a class="rank-label" href="https://www.instagram.com/p/DZmba73SnC0/" target="_blank" rel="noopener">Spot PSLE exam question types - part 1.</a>
+          <a class="rank-label" href="https://www.instagram.com/p/DWDVFgREhFb/" target="_blank" rel="noopener">Most kids can self study, without you nagging. PSLE math revision can be systemised, so it runs itself. Here’s how I tra</a>
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">👁️ 69</span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
       <div class="rank-row">
         <span class="rank-badge">2</span>
         <div class="rank-body">
-          <a class="rank-label" href="https://www.instagram.com/p/DV4xNJgkui7/" target="_blank" rel="noopener">PSLE math not easy and the normal thing is most stopped trying. It happened in my parents workshop for PSLE math. There’</a>
+          <a class="rank-label" href="https://www.instagram.com/p/DV2ZOt3Emmy/" target="_blank" rel="noopener">PSLE math grades can go up and down. My student told me 85 marks is a bad mark. PSLE math journey is long. I shared with</a>
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">👁️ 56</span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
@@ -444,26 +527,29 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">👁️ 37</span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
       <div class="rank-row">
         <span class="rank-badge">4</span>
         <div class="rank-body">
-          <a class="rank-label" href="https://www.instagram.com/p/DV2ZOt3Emmy/" target="_blank" rel="noopener">PSLE math grades can go up and down. My student told me 85 marks is a bad mark. PSLE math journey is long. I shared with</a>
+          <a class="rank-label" href="https://www.instagram.com/p/DV4xNJgkui7/" target="_blank" rel="noopener">PSLE math not easy and the normal thing is most stopped trying. It happened in my parents workshop for PSLE math. There’</a>
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">👁️ 36</span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
       <div class="rank-row">
         <span class="rank-badge">5</span>
         <div class="rank-body">
-          <a class="rank-label" href="https://www.instagram.com/p/DWDVFgREhFb/" target="_blank" rel="noopener">Most kids can self study, without you nagging. PSLE math revision can be systemised, so it runs itself. Here’s how I tra</a>
+          <a class="rank-label" href="https://www.instagram.com/p/DZmba73SnC0/" target="_blank" rel="noopener">Spot PSLE exam question types - part 1.</a>
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">👁️ 55</span></div>
         </div>
         <span class="rank-value">0</span>
       </div></div>
@@ -500,6 +586,104 @@
       </div></div>
 
     <h3 class="section-label">Hashtags (winners ↑ / losers ↓)</h3><div class="chips-row"><span class="chip">#pslemaths <span class="chip-sub">2↑ / 0↓</span></span><span class="chip">#psle2026 <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#psleprep <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#sgparents <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#primaryschool <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#tool <span class="chip-sub">1↑ / 0↓</span></span></div>
+
+    
+    <details class="ideas-block">
+      <summary class="section-label ideas-summary">10 post ideas for this account</summary>
+      <div class="ideas-list">
+        
+        <div class="idea-card">
+          <div class="idea-num">1</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The 7-Mark Question Every P6 Skips</h4>
+            <p class="idea-angle"><strong>Angle:</strong> Open with a real wrong-answer moment from an actual student paper, name the specific mistake, end with &quot;Comment [KEYWORD] for the fix sheet.&quot;</p>
+            <p class="idea-context"><strong>Why:</strong> Direct repeat of the #1 post&#39;s exact mechanic (165 engagement): specific hook + concrete giveaway CTA.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (165 engagement): "Comment “TOPIC” and I’ll send you the full list + my analysis of what’s likely coming in 2026"</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">2</div>
+          <div class="idea-body">
+            <h4 class="idea-title">My Daughter Cried Over Fractions Last Week</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A personal parenting moment (John&#39;s own kid, not a student) showing real vulnerability, then the specific fix that worked.</p>
+            <p class="idea-context"><strong>Why:</strong> Matches the &#39;relatable moment&#39; pattern that beat generic advice posts on this account.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (72 engagement): "Your child stared at the question and gave up."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">3</div>
+          <div class="idea-body">
+            <h4 class="idea-title">P6 Angle Questions: The One Line Nobody Draws</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A single specific heuristic taught as a visual carousel, step by step.</p>
+            <p class="idea-context"><strong>Why:</strong> Sidecar (carousel) format already outperforms single Video/Image on this account (avg 22 vs 10).</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (13 engagement): "Most parents fold the paper when they see a folding angle question."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">4</div>
+          <div class="idea-body">
+            <h4 class="idea-title">[Giveaway] Free P6 Speed Drill Pack</h4>
+            <p class="idea-angle"><strong>Angle:</strong> Direct giveaway with a hard deadline (&quot;first 20 comments only&quot;) to create urgency.</p>
+            <p class="idea-context"><strong>Why:</strong> The fraction-cards giveaway hit 77 engagement, 2nd highest on this account.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (77 engagement): "P5 FRACTION CARDS GIVEAWAY - yours for FREE!"</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">5</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Why AL1 Kids Still Fail This One Question Type</h4>
+            <p class="idea-angle"><strong>Angle:</strong> Counter-intuitive hook (high scorers still failing something specific) plus a comment-to-unlock CTA.</p>
+            <p class="idea-context"><strong>Why:</strong> Same curiosity-gap + concrete-CTA mechanism as the #1 post, applied to a new claim.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (165 engagement): "Comment “TOPIC” and I’ll send you the full list..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">6</div>
+          <div class="idea-body">
+            <h4 class="idea-title">What I Saw Marking 50 PSLE Scripts This Week</h4>
+            <p class="idea-angle"><strong>Angle:</strong> Behind-the-scenes authority post using real numbers/patterns from actual marking, ending in one actionable fix.</p>
+            <p class="idea-context"><strong>Why:</strong> Untested angle on this account — testing whether &#39;authority + specificity&#39; converts like giveaways do.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (77 engagement): "P5 FRACTION CARDS GIVEAWAY - yours for FREE!"</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">7</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Sunday Night Panic Every PSLE Parent Knows</h4>
+            <p class="idea-angle"><strong>Angle:</strong> An emotional, relatable scene (Sunday-night homework meltdown) leading into a study-system tip.</p>
+            <p class="idea-context"><strong>Why:</strong> Matches the &#39;relatable moment beats broad advice&#39; insight for this account.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (72 engagement): "Your child stared at the question and gave up."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">8</div>
+          <div class="idea-body">
+            <h4 class="idea-title">3 Topics That Will Definitely Be in 2026&#39;s Paper</h4>
+            <p class="idea-angle"><strong>Angle:</strong> Prediction/insider-info hook, same structure as the #1 post, applied to a fresh topic set.</p>
+            <p class="idea-context"><strong>Why:</strong> Direct repeat of the winning &#39;predict the paper + comment for list&#39; mechanic.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (165 engagement): "Comment “TOPIC” and I’ll send you the full list..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">9</div>
+          <div class="idea-body">
+            <h4 class="idea-title">My Worst Marking Mistake as a Tutor</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A vulnerable confession from John himself, not a student — untested here but proven on PAC and LOTB TikTok.</p>
+            <p class="idea-context"><strong>Why:</strong> Cross-pollinates the &#39;personal vulnerability&#39; pattern that already works on other accounts.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (80 engagement): "You saw someone calm in the middle of chaos."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">10</div>
+          <div class="idea-body">
+            <h4 class="idea-title">P5 Ratio Cheat Sheet — Comment RATIO</h4>
+            <p class="idea-angle"><strong>Angle:</strong> Same giveaway + CTA mechanic as the top posts, new topic (ratio), to test repeatability.</p>
+            <p class="idea-context"><strong>Why:</strong> Direct repeat test of the two proven formats (comment-to-unlock, giveaway) with a fresh topic.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (77 engagement): "P5 FRACTION CARDS GIVEAWAY - yours for FREE!"</p>
+          </div>
+        </div>
+      </div>
+    </details>
   </section>
 
   <section class="panel" id="panel-lotb-tiktok" hidden>
@@ -512,19 +696,8 @@
     </div>
 
     
-    <div class="kpi-row">
-      <div class="kpi-card">
-        <span class="kpi-value">30</span>
-        <span class="kpi-label">posts tracked</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-value">133</span>
-        <span class="kpi-label">avg engagement</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-value">2,681</span>
-        <span class="kpi-label">top post</span>
-      </div>
+    <div class="kpi-row" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="kpi-card"><span class="kpi-value">1,028</span><span class="kpi-label">followers</span></div><div class="kpi-card"><span class="kpi-value">30</span><span class="kpi-label">posts tracked</span></div><div class="kpi-card"><span class="kpi-value">133</span><span class="kpi-label">avg engagement</span></div><div class="kpi-card"><span class="kpi-value">2,683</span><span class="kpi-label">top post</span></div>
     </div>
 
     <div class="insight-box">
@@ -541,26 +714,29 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 1,859</span><span class="metric-chip">💬 319</span><span class="metric-chip">🔁 338</span><span class="metric-chip">🔖 167</span><span class="metric-chip">👁️ 62,900</span></div>
         </div>
-        <span class="rank-value">2,681</span>
+        <span class="rank-value">2,683</span>
       </div>
       <div class="rank-row">
         <span class="rank-badge">2</span>
         <div class="rank-body">
           <a class="rank-label" href="https://www.tiktok.com/@coach.johnyeo/video/7497185808428977415" target="_blank" rel="noopener">How this one book helps an average kid who disliked math scored AL1 in PSLE maths. Dad&#39;s only regret is not using it ear</a>
           <div class="bar-track">
-            <div class="bar-fill" style="width:16.4863856769862%; background:var(--acc);"></div>
+            <div class="bar-fill" style="width:16.436824450242266%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 333</span><span class="metric-chip">💬 28</span><span class="metric-chip">🔁 31</span><span class="metric-chip">🔖 49</span><span class="metric-chip">👁️ 32,600</span></div>
         </div>
-        <span class="rank-value">442</span>
+        <span class="rank-value">441</span>
       </div>
       <div class="rank-row">
         <span class="rank-badge">3</span>
         <div class="rank-body">
           <a class="rank-label" href="https://www.tiktok.com/@coach.johnyeo/video/7644108782812794133" target="_blank" rel="noopener">Want AL1/2 for PSLE math? Here are three things you must do to get AL1/2 for PSLE math. The third point is the most impo</a>
           <div class="bar-track">
-            <div class="bar-fill" style="width:4.848936963819471%; background:var(--acc);"></div>
+            <div class="bar-fill" style="width:4.845322400298174%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 49</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 52</span><span class="metric-chip">🔖 29</span><span class="metric-chip">👁️ 3,112</span></div>
         </div>
         <span class="rank-value">130</span>
       </div>
@@ -571,6 +747,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 22</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 19</span><span class="metric-chip">🔖 12</span><span class="metric-chip">👁️ 2,223</span></div>
         </div>
         <span class="rank-value">53</span>
       </div>
@@ -581,6 +758,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 14</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 22</span><span class="metric-chip">🔖 16</span><span class="metric-chip">👁️ 931</span></div>
         </div>
         <span class="rank-value">52</span>
       </div></div>
@@ -594,6 +772,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:33.33333333333333%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 3</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 0</span><span class="metric-chip">👁️ 321</span></div>
         </div>
         <span class="rank-value">3</span>
       </div>
@@ -604,6 +783,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:77.77777777777779%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 7</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 0</span><span class="metric-chip">👁️ 485</span></div>
         </div>
         <span class="rank-value">7</span>
       </div>
@@ -614,6 +794,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:88.88888888888889%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 6</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 2</span><span class="metric-chip">👁️ 502</span></div>
         </div>
         <span class="rank-value">8</span>
       </div>
@@ -624,6 +805,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 3</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 1</span><span class="metric-chip">🔖 5</span><span class="metric-chip">👁️ 315</span></div>
         </div>
         <span class="rank-value">9</span>
       </div>
@@ -634,6 +816,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 8</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 1</span><span class="metric-chip">👁️ 282</span></div>
         </div>
         <span class="rank-value">9</span>
       </div></div>
@@ -649,6 +832,104 @@
       </div></div>
 
     <h3 class="section-label">Hashtags (winners ↑ / losers ↓)</h3><div class="chips-row"><span class="chip">#pslemath <span class="chip-sub">4↑ / 5↓</span></span><span class="chip">#mathtutor <span class="chip-sub">4↑ / 4↓</span></span><span class="chip">#pslemathtuition <span class="chip-sub">3↑ / 5↓</span></span><span class="chip">#primarymaths <span class="chip-sub">3↑ / 3↓</span></span><span class="chip">#singaporemaths <span class="chip-sub">3↑ / 1↓</span></span><span class="chip">#singaporemath <span class="chip-sub">2↑ / 0↓</span></span></div>
+
+    
+    <details class="ideas-block">
+      <summary class="section-label ideas-summary">10 post ideas for this account</summary>
+      <div class="ideas-list">
+        
+        <div class="idea-card">
+          <div class="idea-num">1</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Mark That Made a Mum Cry</h4>
+            <p class="idea-angle"><strong>Angle:</strong> Narrate one specific student&#39;s exact score journey with a real emotional parent reaction.</p>
+            <p class="idea-context"><strong>Why:</strong> Direct repeat of the #1 video&#39;s exact structure — the single biggest winner on the whole dashboard.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,681 engagement): "My P6 student improved by 23 marks but his Mum still asked him where is the 7 marks short to hit 90."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">2</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Book I Almost Didn&#39;t Recommend</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A hesitation-then-payoff story about a resource, told as a full narrative arc.</p>
+            <p class="idea-context"><strong>Why:</strong> Mirrors the #2 video&#39;s book-origin-story format (442 engagement).</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (442 engagement): "How this one book helps an average kid who disliked math scored AL1 in PSLE maths."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">3</div>
+          <div class="idea-body">
+            <h4 class="idea-title">I Almost Gave Up on This Student</h4>
+            <p class="idea-angle"><strong>Angle:</strong> First-person confession + turnaround story, high emotional stakes, one continuous narrative, no listicle structure.</p>
+            <p class="idea-context"><strong>Why:</strong> Tests whether the coach&#39;s own doubt carries the same story-beats-tips advantage as a parent&#39;s reaction did.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,681 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">4</div>
+          <div class="idea-body">
+            <h4 class="idea-title">What My Own Kid Said About My Job</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A personal, non-teaching moment — John&#39;s own child commenting on his work — pure story, zero tips framing.</p>
+            <p class="idea-context"><strong>Why:</strong> Tests whether personal-life stories (not just student stories) carry the same advantage.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,681 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">5</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Parent Who Didn&#39;t Believe Me — Until This</h4>
+            <p class="idea-angle"><strong>Angle:</strong> Conflict-resolution arc: skepticism, then proof, then payoff, narrated start to finish.</p>
+            <p class="idea-context"><strong>Why:</strong> Same story mechanics as the top 2 videos, applied to a new specific conflict.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (442 engagement): "How this one book helps an average kid who disliked math scored AL1..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">6</div>
+          <div class="idea-body">
+            <h4 class="idea-title">23 Marks in 6 Weeks — Here&#39;s Exactly What Happened</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A different specific student&#39;s number-driven improvement story, narrated week by week.</p>
+            <p class="idea-context"><strong>Why:</strong> Repeats the exact proven format (specific number + emotional twist) with a fresh case.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,681 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">7</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Question I Got Wrong in Front of My Students</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A vulnerable, self-deprecating personal story from the coach himself.</p>
+            <p class="idea-context"><strong>Why:</strong> Untested, but aligns with the account-wide insight that personal narrative beats instruction.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (442 engagement): "How this one book helps an average kid who disliked math scored AL1..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">8</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Why I Started Tutoring After Being a Social Worker</h4>
+            <p class="idea-angle"><strong>Angle:</strong> An origin story — a deeply personal career-pivot narrative tied to his own bio.</p>
+            <p class="idea-context"><strong>Why:</strong> Untested origin-story angle with high potential given how strongly personal narrative wins here.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,681 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">9</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Text I Got at 11pm From a Worried Mum</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A real-time, screenshot-style narration — high specificity, low advice framing.</p>
+            <p class="idea-context"><strong>Why:</strong> Same specific-plus-emotional DNA as the top post, wrapped in a new format.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2,681 engagement): "My P6 student improved by 23 marks but his Mum still asked..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">10</div>
+          <div class="idea-body">
+            <h4 class="idea-title">One Book, One Kid, One Year Later</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A follow-up/update story to the #2 video&#39;s book story — a sequel to a proven premise.</p>
+            <p class="idea-context"><strong>Why:</strong> Direct sequel to a validated top performer, capitalizing on an already-proven hook.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (442 engagement): "How this one book helps an average kid who disliked math scored AL1..."</p>
+          </div>
+        </div>
+      </div>
+    </details>
   </section>
 
   <section class="panel" id="panel-pac-instagram" hidden>
@@ -661,19 +942,8 @@
     </div>
 
     
-    <div class="kpi-row">
-      <div class="kpi-card">
-        <span class="kpi-value">30</span>
-        <span class="kpi-label">posts tracked</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-value">5</span>
-        <span class="kpi-label">avg engagement</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-value">29</span>
-        <span class="kpi-label">top post</span>
-      </div>
+    <div class="kpi-row" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="kpi-card"><span class="kpi-value">345</span><span class="kpi-label">followers</span></div><div class="kpi-card"><span class="kpi-value">30</span><span class="kpi-label">posts tracked</span></div><div class="kpi-card"><span class="kpi-value">5</span><span class="kpi-label">avg engagement</span></div><div class="kpi-card"><span class="kpi-value">29</span><span class="kpi-label">top post</span></div>
     </div>
 
     <div class="insight-box">
@@ -690,6 +960,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 26</span><span class="metric-chip">💬 3</span><span class="metric-chip">👁️ 553</span></div>
         </div>
         <span class="rank-value">29</span>
       </div>
@@ -700,6 +971,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:75.86206896551724%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 19</span><span class="metric-chip">💬 3</span></div>
         </div>
         <span class="rank-value">22</span>
       </div>
@@ -710,6 +982,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:68.96551724137932%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 4</span><span class="metric-chip">💬 16</span></div>
         </div>
         <span class="rank-value">20</span>
       </div>
@@ -720,6 +993,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:41.37931034482759%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 11</span><span class="metric-chip">💬 1</span></div>
         </div>
         <span class="rank-value">12</span>
       </div>
@@ -730,6 +1004,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:31.03448275862069%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 9</span><span class="metric-chip">💬 0</span></div>
         </div>
         <span class="rank-value">9</span>
       </div></div>
@@ -739,20 +1014,22 @@
       <div class="rank-row">
         <span class="rank-badge">1</span>
         <div class="rank-body">
-          <a class="rank-label" href="https://www.instagram.com/p/DYg3YTYEtnZ/" target="_blank" rel="noopener">Some weeks your inbox feels like a mirror you didn’t ask to look into.</a>
+          <a class="rank-label" href="https://www.instagram.com/p/DYhPxsXErmm/" target="_blank" rel="noopener">“I’m busy.” “Too long to read.” “Can’t be bothered.”</a>
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
       <div class="rank-row">
         <span class="rank-badge">2</span>
         <div class="rank-body">
-          <a class="rank-label" href="https://www.instagram.com/p/DYhPxsXErmm/" target="_blank" rel="noopener">“I’m busy.” “Too long to read.” “Can’t be bothered.”</a>
+          <a class="rank-label" href="https://www.instagram.com/p/DYg3YTYEtnZ/" target="_blank" rel="noopener">Some weeks your inbox feels like a mirror you didn’t ask to look into.</a>
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
@@ -763,26 +1040,29 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 1</span><span class="metric-chip">💬 0</span></div>
         </div>
         <span class="rank-value">1</span>
       </div>
       <div class="rank-row">
         <span class="rank-badge">4</span>
         <div class="rank-body">
-          <a class="rank-label" href="https://www.instagram.com/p/DYUXvP3kkiH/" target="_blank" rel="noopener">I built an AI content system that saved me hours every week.</a>
+          <a class="rank-label" href="https://www.instagram.com/p/DYT3rFxDgIB/" target="_blank" rel="noopener">This is what 1.5 years of working with AI taught me - save this for the next time you feel like the tool is running ahea</a>
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 1</span><span class="metric-chip">💬 0</span></div>
         </div>
         <span class="rank-value">1</span>
       </div>
       <div class="rank-row">
         <span class="rank-badge">5</span>
         <div class="rank-body">
-          <a class="rank-label" href="https://www.instagram.com/p/DYT3rFxDgIB/" target="_blank" rel="noopener">This is what 1.5 years of working with AI taught me - save this for the next time you feel like the tool is running ahea</a>
+          <a class="rank-label" href="https://www.instagram.com/p/DYUXvP3kkiH/" target="_blank" rel="noopener">I built an AI content system that saved me hours every week.</a>
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 1</span><span class="metric-chip">💬 0</span></div>
         </div>
         <span class="rank-value">1</span>
       </div></div>
@@ -819,6 +1099,104 @@
       </div></div>
 
     <h3 class="section-label">Hashtags (winners ↑ / losers ↓)</h3><div class="chips-row"><span class="chip">#TutorConnect <span class="chip-sub">2↑ / 0↓</span></span><span class="chip">#CommunityOverCompetition <span class="chip-sub">2↑ / 0↓</span></span><span class="chip">#PSLEReadiness <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#PSLE2026 <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#PSLEReady <span class="chip-sub">1↑ / 0↓</span></span><span class="chip">#CollaborationOverCompetition <span class="chip-sub">1↑ / 0↓</span></span></div>
+
+    
+    <details class="ideas-block">
+      <summary class="section-label ideas-summary">10 post ideas for this account</summary>
+      <div class="ideas-list">
+        
+        <div class="idea-card">
+          <div class="idea-num">1</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Day I Almost Shut PAC Down</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A raw confession about a near-failure moment in building the business, ending on why he kept going.</p>
+            <p class="idea-context"><strong>Why:</strong> Matches the vulnerable first-person pattern that outperformed on this account.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (22 engagement): "I’m an introvert who’s not very eloquent. Running a community event felt like a double whammy."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">2</div>
+          <div class="idea-body">
+            <h4 class="idea-title">What My Kids Think I Do All Day</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A light, personal family-life story that bridges into a business first-principles point.</p>
+            <p class="idea-context"><strong>Why:</strong> Mirrors the misdirection-hook structure that outperformed on this account.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (12 engagement): "She was my first girlfriend."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">3</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Tutor Community Event That Almost Didn&#39;t Happen</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A behind-the-scenes vulnerable recap of organizing something hard, naming the specific fear.</p>
+            <p class="idea-context"><strong>Why:</strong> Direct repeat of the #1 post&#39;s structure on this account (29 engagement).</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (29 engagement): "Four subjects. Four educators. One Sunday afternoon — and so much heart."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">4</div>
+          <div class="idea-body">
+            <h4 class="idea-title">I Turned Down a High-Ticket Coaching Deal — Here&#39;s Why</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A contrarian personal-values story explaining a real decision and the belief behind it.</p>
+            <p class="idea-context"><strong>Why:</strong> Extends an existing post&#39;s premise into a fuller story.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (9 engagement): "My friends who coach high-ticket clients think I’m crazy for choosing to serve tutors."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">5</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Group Class That Almost Flopped</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A specific numbers-driven story (signups vs. expectations) with an honest reflection.</p>
+            <p class="idea-context"><strong>Why:</strong> Matches the &#39;stopped waiting, not more ready&#39; pattern that performed well on this account.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (20 engagement): "The tutors who filled their group classes weren’t more ready. They just stopped waiting."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">6</div>
+          <div class="idea-body">
+            <h4 class="idea-title">AI Didn&#39;t Save Me Time — Until I Made This One Change</h4>
+            <p class="idea-angle"><strong>Angle:</strong> Reframe the AI topic with a personal failure-then-fix story instead of a tool showcase.</p>
+            <p class="idea-context"><strong>Why:</strong> Direct test of the insight flagging that AI posts need a stronger personal hook — the current AI posts are the account&#39;s weakest performers.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (1 engagement): "I built an AI content system that saved me hours every week."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">7</div>
+          <div class="idea-body">
+            <h4 class="idea-title">What a Client Said That Made Me Rethink Everything</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A specific verbatim quote from a real coaching conversation as the hook, then unpacking it.</p>
+            <p class="idea-context"><strong>Why:</strong> A new &#39;verbatim moment&#39; angle testing another vulnerable, specific hook style.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (22 engagement): "I’m an introvert who’s not very eloquent..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">8</div>
+          <div class="idea-body">
+            <h4 class="idea-title">I Cried After a Coaching Call Last Week</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A raw emotional confession tied to a specific client win or struggle.</p>
+            <p class="idea-context"><strong>Why:</strong> Highest-risk, highest-alignment attempt at the &#39;vulnerable wins&#39; pattern.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (22 engagement): "I’m an introvert who’s not very eloquent..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">9</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Slide Deck I Almost Deleted</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A small, oddly personal moment (content he almost didn&#39;t publish) used as a metaphor for self-doubt.</p>
+            <p class="idea-context"><strong>Why:</strong> Same theme as a flopped post, rebuilt as a concrete story instead of an abstract quote — fixing what made it fail.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (0 engagement): "Some weeks your inbox feels like a mirror you didn’t ask to look into."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">10</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Why I Stopped Chasing Bigger Launches</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A contrarian business-philosophy post grounded in one specific real decision, not a general statement.</p>
+            <p class="idea-context"><strong>Why:</strong> Tests whether &#39;peace over profit&#39; themes work better anchored to a concrete story.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (20 engagement): "The tutors who filled their group classes weren’t more ready..."</p>
+          </div>
+        </div>
+      </div>
+    </details>
   </section>
 
   <section class="panel" id="panel-pac-facebook" hidden>
@@ -831,19 +1209,8 @@
     </div>
 
     
-    <div class="kpi-row">
-      <div class="kpi-card">
-        <span class="kpi-value">30</span>
-        <span class="kpi-label">posts tracked</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-value">504</span>
-        <span class="kpi-label">avg engagement</span>
-      </div>
-      <div class="kpi-card">
-        <span class="kpi-value">14,677</span>
-        <span class="kpi-label">top post</span>
-      </div>
+    <div class="kpi-row" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="kpi-card"><span class="kpi-value">30</span><span class="kpi-label">posts tracked</span></div><div class="kpi-card"><span class="kpi-value">504</span><span class="kpi-label">avg engagement</span></div><div class="kpi-card"><span class="kpi-value">14,677</span><span class="kpi-label">top post</span></div>
     </div>
 
     <div class="insight-box">
@@ -860,6 +1227,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 14,066</span><span class="metric-chip">💬 498</span><span class="metric-chip">🔁 1,119</span><span class="metric-chip">🔖 703</span><span class="metric-chip">👁️ 815,992</span></div>
         </div>
         <span class="rank-value">14,677</span>
       </div>
@@ -870,6 +1238,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 53</span><span class="metric-chip">💬 18</span><span class="metric-chip">🔁 5</span><span class="metric-chip">🔖 6</span><span class="metric-chip">👁️ 10,285</span></div>
         </div>
         <span class="rank-value">80</span>
       </div>
@@ -880,6 +1249,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 34</span><span class="metric-chip">💬 2</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 2</span><span class="metric-chip">👁️ 8,879</span></div>
         </div>
         <span class="rank-value">37</span>
       </div>
@@ -890,6 +1260,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 25</span><span class="metric-chip">💬 5</span><span class="metric-chip">🔁 2</span><span class="metric-chip">🔖 4</span><span class="metric-chip">👁️ 8,409</span></div>
         </div>
         <span class="rank-value">36</span>
       </div>
@@ -900,6 +1271,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 16</span><span class="metric-chip">💬 13</span><span class="metric-chip">🔁 1</span><span class="metric-chip">🔖 0</span><span class="metric-chip">👁️ 1,933</span></div>
         </div>
         <span class="rank-value">30</span>
       </div></div>
@@ -913,6 +1285,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 0</span><span class="metric-chip">👁️ 4,086</span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
@@ -923,6 +1296,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:66.66666666666666%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 1</span><span class="metric-chip">🔖 1</span><span class="metric-chip">👁️ 1,026</span></div>
         </div>
         <span class="rank-value">2</span>
       </div>
@@ -933,6 +1307,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 2</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 1</span><span class="metric-chip">👁️ 772</span></div>
         </div>
         <span class="rank-value">3</span>
       </div>
@@ -943,6 +1318,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 1</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 1</span><span class="metric-chip">🔖 1</span><span class="metric-chip">👁️ 1,031</span></div>
         </div>
         <span class="rank-value">3</span>
       </div>
@@ -953,6 +1329,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#c3c2b7;"></div>
           </div>
+          <div class="metric-row"><span class="metric-chip">❤️ 2</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 1</span><span class="metric-chip">🔖 0</span><span class="metric-chip">👁️ 262</span></div>
         </div>
         <span class="rank-value">3</span>
       </div></div>
@@ -982,7 +1359,136 @@
       </div></div>
 
     
+
+    
+    <details class="ideas-block">
+      <summary class="section-label ideas-summary">10 post ideas for this account</summary>
+      <div class="ideas-list">
+        
+        <div class="idea-card">
+          <div class="idea-num">1</div>
+          <div class="idea-body">
+            <h4 class="idea-title">What My Daughters Taught Me About Running a Business</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A long-form, specific parenting-meets-business story in the same voice and structure as the viral dad post — full narrative arc, not a snippet.</p>
+            <p class="idea-context"><strong>Why:</strong> Direct structural repeat of the #1 post — 180x every other post on this account (14,677 engagement).</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up. And I thought he was jobless."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">2</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Year I Almost Quit Being a Stay-at-Home Dad</h4>
+            <p class="idea-angle"><strong>Angle:</strong> An extended vulnerable narrative about doubt, specific moments, and resolution — full length, not condensed.</p>
+            <p class="idea-context"><strong>Why:</strong> Same long-form vulnerability format as the top post.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">3</div>
+          <div class="idea-body">
+            <h4 class="idea-title">I Thought Calm Was a Personality Trait. I Was Wrong.</h4>
+            <p class="idea-angle"><strong>Angle:</strong> Expand the 2nd-best post into a full long-form story instead of a short line.</p>
+            <p class="idea-context"><strong>Why:</strong> That short post already validated the theme (80 engagement) — extending it to full length should mirror the top post&#39;s format advantage.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (80 engagement): "You saw someone calm in the middle of chaos."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">4</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Tutor Burnout Nobody Talks About</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A long personal account of the &#39;working 7 days a week&#39; period, with specific dates/numbers and what changed.</p>
+            <p class="idea-context"><strong>Why:</strong> Extends the 3rd-best post into full narrative length.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (37 engagement): "I thought working 7 days a week was what a committed tutor looked like."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">5</div>
+          <div class="idea-body">
+            <h4 class="idea-title">My Engineering Degree Never Got Me a Single Client</h4>
+            <p class="idea-angle"><strong>Angle:</strong> The full story behind the credentials-don&#39;t-matter post — origin story with specific rejected pitches, then what actually worked.</p>
+            <p class="idea-context"><strong>Why:</strong> Extends the 4th-best post to full length.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (36 engagement): "Nobody has ever told me they chose my tuition service because of my degree."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">6</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Workshop I Almost Cancelled</h4>
+            <p class="idea-angle"><strong>Angle:</strong> The long narrative behind &#39;physical workshops are dead&#39; — specific numbers, doubts, and the turnout that proved it wrong.</p>
+            <p class="idea-context"><strong>Why:</strong> Extends the 5th-best post to full length.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (30 engagement): "They say physical workshops are dead."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">7</div>
+          <div class="idea-body">
+            <h4 class="idea-title">What I Told My Daughter the Night Before Her First Exam</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A new long-form personal parenting story in the exact voice and structure of the viral post.</p>
+            <p class="idea-context"><strong>Why:</strong> A fresh, equally personal premise using the #1 post&#39;s proven DNA.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">8</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Real Reason I Don&#39;t Do Discounts</h4>
+            <p class="idea-angle"><strong>Angle:</strong> Take the flopped discount-request Reel and rebuild it as a long personal story about one specific client, instead of generic tutor-advice framing.</p>
+            <p class="idea-context"><strong>Why:</strong> Directly fixes the failure pattern — short generic tips replaced with a long specific story.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (2 engagement): "Tutors: what to say to counter when parents ask you for discounts."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">9</div>
+          <div class="idea-body">
+            <h4 class="idea-title">I Was Wrong About My Slowest-Growing Student</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A full narrative confession about misjudging a student, the moment of realizing it, and what he changed.</p>
+            <p class="idea-context"><strong>Why:</strong> A new premise built entirely on the proven long-specific-vulnerable formula.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">10</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Reel I Almost Didn&#39;t Post — Then This Happened</h4>
+            <p class="idea-angle"><strong>Angle:</strong> A meta-narrative about content creation itself: a specific reel, a specific fear, a specific result.</p>
+            <p class="idea-context"><strong>Why:</strong> The long-form-personal formula applied to a &#39;behind the content&#39; story, not yet tried on this account.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up..."</p>
+          </div>
+        </div>
+      </div>
+    </details>
   </section>
+    </div>
+  </div>
+
+  <div id="info-modal">
+    <div class="info-sheet">
+      <h2>What do these numbers mean? <button class="info-close" id="info-close">✕</button></h2>
+
+      <h3>Engagement score</h3>
+      <p>The main number on every ranked post. For Instagram it's likes + comments. For TikTok it's likes + comments + shares + saves. For Facebook it's Meta's own "Interactions" total (reactions + comments + shares + saves). It's used to rank posts because it's the metric all three platforms can roughly compare on.</p>
+
+      <h3>Rank badges (1-5)</h3>
+      <p>Posts ordered by engagement score, highest first in "Top 5," lowest first in "Bottom 5." The bar length under each post is that post's engagement relative to the #1 post in its own list.</p>
+
+      <h3>The small icons under each post</h3>
+      <ul>
+        <li>❤️ Likes / reactions</li>
+        <li>💬 Comments</li>
+        <li>🔁 Shares / reposts</li>
+        <li>🔖 Saves / bookmarks</li>
+        <li>👁️ Views (video plays, or reach for Facebook)</li>
+      </ul>
+      <p><strong>Instagram posts only show likes, comments, and views</strong> — Instagram's own platform does not publicly expose save or share counts to anyone except the account owner inside the Instagram app itself, so the scraping tool behind this dashboard can't pull them. TikTok and Facebook both expose all five metrics.</p>
+
+      <h3>Hashtag arrows (↑ / ↓)</h3>
+      <p>How many times each hashtag appeared in that account's Top 5 posts (↑) versus Bottom 5 posts (↓). A tag with a high ↑ and 0 ↓ tends to show up on winners only — though the insights above each account usually explain that the hook matters far more than the hashtags do.</p>
+
+      <h3>Followers</h3>
+      <p>Current follower count for the account, pulled fresh each time the dashboard updates. Not shown for Facebook (that number isn't included in the manual export used for that account).</p>
+
+      <h3>"10 post ideas for this account"</h3>
+      <p>Generated by looking at what actually worked and didn't across that account's real posts. Each idea names a "mirror post" — one of the account's own real top performers whose structure or hook the new idea is deliberately modeled on.</p>
     </div>
   </div>
 
@@ -1034,6 +1540,11 @@
       document.querySelectorAll(".ov-card").forEach(function (card) {
         card.addEventListener("click", function () { goToPanel(card.dataset.jump); });
       });
+
+      var infoModal = document.getElementById("info-modal");
+      document.getElementById("info-open").addEventListener("click", function () { infoModal.classList.add("open"); });
+      document.getElementById("info-close").addEventListener("click", function () { infoModal.classList.remove("open"); });
+      infoModal.addEventListener("click", function (e) { if (e.target === infoModal) infoModal.classList.remove("open"); });
     })();
   </script>
 </body>
