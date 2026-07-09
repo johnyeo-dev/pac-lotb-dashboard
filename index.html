@@ -135,24 +135,17 @@
     top: 0;
     z-index: 10;
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
-    overflow-x: auto;
-    padding: 12px 24px 12px 0;
-    margin: 0 -18px 24px;
-    padding-left: 18px;
-    padding-right: 36px;
+    padding: 12px 0;
     background: var(--page-plane);
     border-bottom: 1px solid var(--gridline);
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
   }
-  nav.tabs::-webkit-scrollbar { display: none; }
-  nav.tabs::after { content: ""; flex: 0 0 4px; }
   .tab {
     flex: 0 0 auto;
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 600;
-    padding: 12px 18px;
+    padding: 10px 16px;
     border-radius: 999px;
     border: 1px solid var(--border);
     background: var(--surface-1);
