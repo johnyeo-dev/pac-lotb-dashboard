@@ -1,0 +1,54 @@
+{
+  "streams": [
+    {
+      "id": "daily-value-bomb",
+      "label": "Daily Value Bomb (PAC)",
+      "schedule": "9:03am daily",
+      "destination": "\"Bot value bomb\" Telegram group",
+      "expectedHours": 30,
+      "lastRun": null,
+      "lastOutput": null,
+      "status": "unknown"
+    },
+    {
+      "id": "pac-proof-of-work-daily",
+      "label": "PAC Proof-of-Work Stories",
+      "schedule": "8:45am daily",
+      "destination": "\"Bot FB/IG stories\" Telegram group",
+      "expectedHours": 30,
+      "lastRun": null,
+      "lastOutput": null,
+      "status": "unknown"
+    },
+    {
+      "id": "pac-content-auto",
+      "label": "PAC Weekday Auto Content",
+      "schedule": "Mon / Wed / Fri (Zapier)",
+      "destination": "\"Bot PAC auto content\" Telegram group",
+      "expectedHours": null,
+      "lastRun": null,
+      "lastOutput": "Runs via a Zapier Skill outside this repo — not yet wired to report status here.",
+      "status": "external"
+    },
+    {
+      "id": "lotb-content-auto",
+      "label": "LOTB Weekday Auto Content",
+      "schedule": "Tue / Thu (Zapier)",
+      "destination": "\"Bot LOB auto content\" Telegram group",
+      "expectedHours": null,
+      "lastRun": null,
+      "lastOutput": "Runs via a Zapier Skill outside this repo — not yet wired to report status here.",
+      "status": "external"
+    },
+    {
+      "id": "social-dashboard-weekly",
+      "label": "Social Dashboard Refresh",
+      "schedule": "Monday 7am",
+      "destination": "This dashboard (self)",
+      "expectedHours": 192,
+      "lastRun": null,
+      "lastOutput": null,
+      "status": "unknown"
+    }
+  ]
+}

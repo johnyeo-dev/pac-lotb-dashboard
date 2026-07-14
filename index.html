@@ -418,6 +418,34 @@
   .idea-mirror { margin-bottom: 0; font-style: italic; }
   .idea-mirror strong, .idea-angle strong, .idea-context strong { color: var(--text-primary); font-style: normal; }
 
+  /* Content pipeline tab */
+  .pipeline-loading { color: var(--muted); font-size: 16px; }
+  .pipeline-list { display: flex; flex-direction: column; gap: 14px; }
+  .pipeline-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--pipe-color, var(--muted));
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .pipeline-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+  .pipeline-title { font-size: 19px; font-weight: 700; margin: 0; }
+  .pipeline-badge {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    background: var(--pipe-color, var(--muted));
+    color: #04211f;
+  }
+  .pipeline-meta { font-size: 14px; color: var(--text-secondary); margin: 0 0 8px; }
+  .pipeline-meta strong { color: var(--text-primary); }
+  .pipeline-output { font-size: 15px; color: var(--text-secondary); margin: 0; line-height: 1.45; }
+  .pipeline-lastrun { font-size: 13px; color: var(--muted); margin: 6px 0 0; }
+
   /* Info modal */
   #info-modal {
     position: fixed;
@@ -474,7 +502,7 @@
           <span id="nav-toggle-label">Overview</span>
           <span class="nav-toggle-chevron">⌄</span>
         </button>
-        <div class="nav-menu" id="nav-menu" role="listbox" hidden><button class="nav-item" data-target="panel-overview" data-icon="✨" data-label="Overview" role="option" aria-selected="true">✨ Overview</button><button class="nav-item" data-target="panel-lotb-instagram" data-icon="📸" data-label="LOTB Instagram" role="option" >📸 LOTB Instagram</button><button class="nav-item" data-target="panel-lotb-tiktok" data-icon="🎵" data-label="LOTB TikTok" role="option" >🎵 LOTB TikTok</button><button class="nav-item" data-target="panel-pac-instagram" data-icon="📸" data-label="PAC Instagram" role="option" >📸 PAC Instagram</button><button class="nav-item" data-target="panel-pac-facebook" data-icon="👍" data-label="PAC Facebook" role="option" >👍 PAC Facebook</button><button class="nav-item" data-target="panel-fable-analysis" data-icon="🧠" data-label="Fable Analysis" role="option" >🧠 Fable Analysis</button></div>
+        <div class="nav-menu" id="nav-menu" role="listbox" hidden><button class="nav-item" data-target="panel-overview" data-icon="✨" data-label="Overview" role="option" aria-selected="true">✨ Overview</button><button class="nav-item" data-target="panel-lotb-instagram" data-icon="📸" data-label="LOTB Instagram" role="option" >📸 LOTB Instagram</button><button class="nav-item" data-target="panel-lotb-tiktok" data-icon="🎵" data-label="LOTB TikTok" role="option" >🎵 LOTB TikTok</button><button class="nav-item" data-target="panel-pac-instagram" data-icon="📸" data-label="PAC Instagram" role="option" >📸 PAC Instagram</button><button class="nav-item" data-target="panel-pac-facebook" data-icon="👍" data-label="PAC Facebook" role="option" >👍 PAC Facebook</button><button class="nav-item" data-target="panel-fable-analysis" data-icon="🧠" data-label="Fable Analysis" role="option" >🧠 Fable Analysis</button><button class="nav-item" data-target="panel-pipeline" data-icon="📡" data-label="Content Pipeline" role="option" >📡 Content Pipeline</button></div>
       </div>
       
   <section class="panel" id="panel-overview">
@@ -2600,6 +2628,16 @@
       <p>Some ideas you can post tonight. Others need you to dig up a real story, get a parent&#39;s permission, or check in with a past student first. Each idea is tagged quick or needs prep, so on a busy day you know exactly what to grab.</p>
     </div>
   </section>
+      
+  <section class="panel" id="panel-pipeline" hidden>
+    <div class="account-header">
+      <h2><span class="acc-icon">📡</span>Content Pipeline</h2>
+    </div>
+    <p class="fable-subtitle">Where every automated post actually lands, and whether it fired on schedule. Times shown in your local timezone.</p>
+    <div id="pipeline-list" class="pipeline-list">
+      <p class="pipeline-loading">Loading pipeline status…</p>
+    </div>
+  </section>
     </div>
   </div>
 
@@ -2713,6 +2751,52 @@
       document.querySelectorAll(".ov-card").forEach(function (card) {
         card.addEventListener("click", function () { goToPanel(card.dataset.jump); });
       });
+
+      function timeAgo(iso) {
+        if (!iso) return "never recorded";
+        var diffMs = Date.now() - new Date(iso).getTime();
+        var mins = Math.round(diffMs / 60000);
+        if (mins < 60) return mins + "m ago";
+        var hours = Math.round(mins / 60);
+        if (hours < 48) return hours + "h ago";
+        return Math.round(hours / 24) + "d ago";
+      }
+
+      function pipelineStatusInfo(stream) {
+        if (stream.status === "external") return { color: "#9fb0cc", label: "External" };
+        if (stream.status === "error") return { color: "#e05a5a", label: "Error" };
+        if (!stream.lastRun) return { color: "#9fb0cc", label: "No data yet" };
+        if (stream.expectedHours) {
+          var hoursSince = (Date.now() - new Date(stream.lastRun).getTime()) / 3600000;
+          if (hoursSince > stream.expectedHours) return { color: "#e0a13a", label: "Stale" };
+        }
+        return { color: "#0ABFBC", label: "On track" };
+      }
+
+      function renderPipeline(data) {
+        var list = document.getElementById("pipeline-list");
+        list.innerHTML = data.streams
+          .map(function (s) {
+            var info = pipelineStatusInfo(s);
+            return (
+              '<div class="pipeline-card" style="--pipe-color:' + info.color + ';">' +
+              '<div class="pipeline-card-head"><h3 class="pipeline-title">' + s.label + '</h3>' +
+              '<span class="pipeline-badge">' + info.label + '</span></div>' +
+              '<p class="pipeline-meta"><strong>Schedule:</strong> ' + s.schedule + ' &middot; <strong>Lands in:</strong> ' + s.destination + '</p>' +
+              (s.lastOutput ? '<p class="pipeline-output">' + s.lastOutput + '</p>' : '') +
+              '<p class="pipeline-lastrun">Last run: ' + timeAgo(s.lastRun) + '</p>' +
+              '</div>'
+            );
+          })
+          .join("");
+      }
+
+      fetch("./pipeline-status.json")
+        .then(function (r) { return r.json(); })
+        .then(renderPipeline)
+        .catch(function () {
+          document.getElementById("pipeline-list").innerHTML = '<p class="pipeline-loading">Pipeline status unavailable right now.</p>';
+        });
 
       var infoModal = document.getElementById("info-modal");
       document.getElementById("info-open").addEventListener("click", function () { infoModal.classList.add("open"); });
