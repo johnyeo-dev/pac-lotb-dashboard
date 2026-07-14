@@ -301,6 +301,32 @@
 
   .ov-footnote { font-size: 15px; color: var(--muted); margin: 0; }
 
+  /* Weekly plan box */
+  .plan-box {
+    background: var(--surface-1);
+    border: 1px solid var(--accent);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 26px;
+  }
+  .plan-box h3 { margin: 0 0 10px; font-size: 20px; color: var(--text-primary); }
+  .plan-strategy { margin: 0 0 16px; font-size: 17px; line-height: 1.5; color: var(--text-secondary); }
+  .plan-days { display: flex; flex-direction: column; gap: 12px; }
+  .plan-day { display: grid; grid-template-columns: 84px 1fr; gap: 12px; align-items: start; }
+  .plan-when {
+    font-size: 14px;
+    font-weight: 700;
+    color: #04211f;
+    background: var(--accent);
+    border-radius: 8px;
+    padding: 6px 8px;
+    text-align: center;
+  }
+  .plan-what { display: flex; flex-direction: column; gap: 3px; }
+  .plan-what strong { font-size: 18px; color: var(--text-primary); }
+  .plan-what span { font-size: 15px; line-height: 1.45; color: var(--text-secondary); }
+  .plan-note { margin: 16px 0 0; font-size: 15px; line-height: 1.5; color: var(--muted); font-style: italic; }
+
   /* Content ideas */
   .ideas-block { margin-bottom: 26px; }
   .ideas-summary {
@@ -361,6 +387,7 @@
     padding: 4px 10px;
     border-radius: 999px;
   }
+  .idea-tag-planned { background: var(--accent); color: #04211f; }
   .idea-tag-trust { background: rgba(10,191,188,0.18); color: #7fe6e4; }
   .idea-tag-proof { background: rgba(74,154,240,0.18); color: #9cc5f7; }
   .idea-tag-harvest { background: rgba(240,180,60,0.18); color: #f2ce8a; }
@@ -509,6 +536,8 @@
     </div>
 
     
+
+    
     <details class="ideas-block">
       <summary class="ideas-summary">
         <span class="ideas-summary-icon">💡</span>
@@ -525,6 +554,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The 7-Mark Question Every P6 Skips</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-harvest">harvest</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -539,6 +569,7 @@
           <div class="idea-body">
             <h4 class="idea-title">When Your Own Kid Hits the Wall</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -553,6 +584,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The One Line Nobody Draws</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -567,6 +599,7 @@
           <div class="idea-body">
             <h4 class="idea-title">P6 Rate Drill Pack Giveaway</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-harvest">harvest</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -581,6 +614,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Why AL1 Kids Still Fail This Question</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -595,6 +629,7 @@
           <div class="idea-body">
             <h4 class="idea-title">What Marking Fifty Scripts Taught Me</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -609,6 +644,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Sunday Night, 9pm</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -623,6 +659,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Three Topics That Never Skip a Year</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-harvest">harvest</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -637,6 +674,7 @@
           <div class="idea-body">
             <h4 class="idea-title">My Worst Marking Mistake</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -651,6 +689,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Ratio Cheat Sheet, No Strings</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -665,6 +704,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Your Child Doesn&#39;t Need More Practice Papers</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -679,6 +719,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Before and After: One Working</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -693,6 +734,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Two-Minute Check</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -707,6 +749,7 @@
           <div class="idea-body">
             <h4 class="idea-title">What AL1 Families Do Differently</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -721,6 +764,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Exam-Week Dinner Table Rules</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -735,6 +779,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Costliest Careless Mistake</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -749,6 +794,7 @@
           <div class="idea-body">
             <h4 class="idea-title">A Parent Asked Me This at Pickup</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -763,6 +809,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Revision Timetable Myth</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -777,6 +824,7 @@
           <div class="idea-body">
             <h4 class="idea-title">What Matters This Term</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-harvest">harvest</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -791,6 +839,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Show Me One Question</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-harvest">harvest</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -973,6 +1022,8 @@
     </div>
 
     
+
+    
     <details class="ideas-block">
       <summary class="ideas-summary">
         <span class="ideas-summary-icon">💡</span>
@@ -989,6 +1040,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Mark That Made a Mum Cry</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1003,6 +1055,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Book on My Marking Desk</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1017,6 +1070,7 @@
           <div class="idea-body">
             <h4 class="idea-title">I Almost Gave Up on This Student</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1031,6 +1085,7 @@
           <div class="idea-body">
             <h4 class="idea-title">What My Daughter Asked Me</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1045,6 +1100,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Mum Who Didn&#39;t Believe Me</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1059,6 +1115,7 @@
           <div class="idea-body">
             <h4 class="idea-title">23 Marks, Week by Week</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1073,6 +1130,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Question I Got Wrong</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1087,6 +1145,7 @@
           <div class="idea-body">
             <h4 class="idea-title">From Social Worker to Math Coach</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1101,6 +1160,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The 11pm Text</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1115,6 +1175,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Student Who Changed How I Teach</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1129,6 +1190,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Marking, Live</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1143,6 +1205,7 @@
           <div class="idea-body">
             <h4 class="idea-title">What a 90-Mark Paper Looks Like</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1157,6 +1220,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Sentence I Ban in My Class</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1171,6 +1235,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Three Kids, Same Question, Three Mistakes</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1185,6 +1250,7 @@
           <div class="idea-body">
             <h4 class="idea-title">My Daughter Grades My Teaching</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1199,6 +1265,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Parent Meeting That Changed My Rules</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1213,6 +1280,7 @@
           <div class="idea-body">
             <h4 class="idea-title">PSLE Countdown Check-In</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-harvest">harvest</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1227,6 +1295,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Quietest Kid in Class</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1241,6 +1310,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Why I Show Parents the Ugly Working</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1255,6 +1325,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Ask Me Anything, PSLE Math Edition</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-harvest">harvest</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1416,6 +1487,8 @@
     </div>
 
     
+
+    
     <details class="ideas-block">
       <summary class="ideas-summary">
         <span class="ideas-summary-icon">💡</span>
@@ -1432,6 +1505,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Dad Post, As a Carousel</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1446,6 +1520,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Seven Days a Week (IG Version)</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1460,6 +1535,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Degree That Never Got Me a Client (IG Version)</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1474,6 +1550,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Calm Is Not a Personality Trait (IG Version)</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1488,6 +1565,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Tutor Connect, In Photos</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1502,6 +1580,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Two Weeks Before Tutor Connect</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1516,6 +1595,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Three Months of AI, Zero Hours Saved</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1530,6 +1610,7 @@
           <div class="idea-body">
             <h4 class="idea-title">What a Client Said on Our Call</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1544,6 +1625,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Only Three People Signed Up</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1558,6 +1640,7 @@
           <div class="idea-body">
             <h4 class="idea-title">What My Daughters Think I Do</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1572,6 +1655,7 @@
           <div class="idea-body">
             <h4 class="idea-title">A Client Win, Told Properly</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1586,6 +1670,7 @@
           <div class="idea-body">
             <h4 class="idea-title">My Week as a Coach, Honestly</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1600,6 +1685,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Tutor I Turned Away</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1614,6 +1700,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Before PAC, After PAC</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1628,6 +1715,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Question Every Tutor Asks Me First</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-harvest">harvest</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1642,6 +1730,7 @@
           <div class="idea-body">
             <h4 class="idea-title">One Idea in Ten Seconds</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1656,6 +1745,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Why I Coach Tutors, Not Students</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -1670,6 +1760,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Spreadsheet That Scared Me</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1684,6 +1775,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Deal I Said No To</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1698,6 +1790,7 @@
           <div class="idea-body">
             <h4 class="idea-title">DM Me One Word: STUCK</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-harvest">harvest</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1880,11 +1973,49 @@
     </div>
 
     
+    <div class="plan-box">
+      <h3>This week&#39;s plan — 15 to 19 July</h3>
+      <p class="plan-strategy">The mix that moves PAC: trust posts (personal story) earn the reach — story posts beat tips posts by 20-50x on your accounts, and the dad post did 14,677 engagement / 816K reach, roughly 180x your average. Proof posts (client receipts) convert the audience the stories attract. Harvest (the direct ask) comes only after a run of both. This week is all quick posts — each one just needs your true details.</p>
+      <div class="plan-days">
+        
+        <div class="plan-day">
+          <span class="plan-when">Wed 15</span>
+          <div class="plan-what">
+            <strong>The Post I Almost Didn&#39;t Publish</strong>
+            <span>Trust · references the post 816K people saw — built-in distribution nothing else in the bank can match.</span>
+          </div>
+        </div>
+        <div class="plan-day">
+          <span class="plan-when">Fri 17</span>
+          <div class="plan-what">
+            <strong>The Discount Conversation</strong>
+            <span>Proof · one real pricing conversation in full. The tips version scored 2 engagement — this is the story rebuild.</span>
+          </div>
+        </div>
+        <div class="plan-day">
+          <span class="plan-when">Sat 18</span>
+          <div class="plan-what">
+            <strong>The Chinese Dictionary</strong>
+            <span>Trust · one object from the viral story. Instant recognition, keeps the page warm cheaply.</span>
+          </div>
+        </div>
+        <div class="plan-day">
+          <span class="plan-when">Sun 19</span>
+          <div class="plan-what">
+            <strong>Sunday: What I&#39;m Not Doing</strong>
+            <span>Trust · 2-3 lines, scheduled Friday. If it lands, it becomes a weekly fixture at zero cost.</span>
+          </div>
+        </div>
+      </div>
+      <p class="plan-note">July epic: &quot;What My Daughters Taught Me About Business&quot; — slot it for late next week if no epic has run this month. One epic per month, never two. Do less of: generic tips posts, and anything made primarily for PAC Instagram (near-zero engagement — repurpose proven FB material there instead of creating for it).</p>
+    </div>
+
+    
     <details class="ideas-block">
       <summary class="ideas-summary">
         <span class="ideas-summary-icon">💡</span>
         <span class="ideas-summary-text">
-          <span class="ideas-summary-title">20 post ideas</span>
+          <span class="ideas-summary-title">24 post ideas</span>
           <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
         </span>
         <span class="ideas-summary-chevron">›</span>
@@ -1896,6 +2027,7 @@
           <div class="idea-body">
             <h4 class="idea-title">What My Daughters Taught Me About Business</h4>
             <div class="idea-tags">
+              <span class="idea-tag idea-tag-planned">📅 July epic</span>
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1910,6 +2042,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Year Stay-at-Home Fatherhood Stopped Making Sense</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1924,6 +2057,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Calm Is Not a Personality Trait</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1938,6 +2072,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Seven Days a Week</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1952,11 +2087,12 @@
           <div class="idea-body">
             <h4 class="idea-title">The Degree That Never Got Me a Client</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
             <p class="idea-hook">My engineering degree has never gotten me a single client. Not one.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Medium-length, not an epic. Why you collected the qualifications, the moment you noticed parents never asked, the questions they asked instead — the real ones. Lands on what tutors should lead with.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Medium-length, not an epic. Why you collected the qualifications, the moment you noticed parents never asked, the questions they asked instead — the real ones. Land on the after-state: what parents actually buy (outcomes for their kid), so tutors stop leading with credentials.</p>
             <p class="idea-context"><strong>Why:</strong> Extends a post that already worked here, at a sustainable length between epics.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (36 engagement): "Nobody has ever told me they chose my tuition service because of my degree."</p>
           </div>
@@ -1966,6 +2102,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Workshop Everyone Said Was Dead</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1980,6 +2117,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Night Before Her First Big Exam</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -1994,12 +2132,13 @@
           <div class="idea-body">
             <h4 class="idea-title">The Discount Conversation</h4>
             <div class="idea-tags">
+              <span class="idea-tag idea-tag-planned">📅 Fri 17 Jul</span>
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
             <p class="idea-hook">A parent once asked me for a discount. My answer surprised her.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Short-to-medium. One real conversation told in full: her exact words, your pause, what you said, what she signed up for anyway. The advice becomes visible through the story without being stated as tips.</p>
-            <p class="idea-context"><strong>Why:</strong> Rebuilds the topic that flopped as generic advice into the story form this page&#39;s winners use.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Short-to-medium. One real conversation told in full: her exact words, your pause, what you said, what she signed up for anyway. The reader watches a pricing win happen instead of being handed pricing tips — end on the outcome (she enrolled at full price), never on a rule.</p>
+            <p class="idea-context"><strong>Why:</strong> The tips version of this exact topic scored 2 engagement. This is the story rebuild — the outcome test for the whole proof format.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (2 engagement): "Tutors: what to say to counter when parents ask you for discounts."</p>
           </div>
         </div>
@@ -2008,6 +2147,7 @@
           <div class="idea-body">
             <h4 class="idea-title">My Slowest Student</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -2022,6 +2162,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Post I Almost Didn&#39;t Publish</h4>
             <div class="idea-tags">
+              <span class="idea-tag idea-tag-planned">📅 Wed 15 Jul</span>
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -2036,6 +2177,7 @@
           <div class="idea-body">
             <h4 class="idea-title">One Photo, One Story</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -2050,11 +2192,12 @@
           <div class="idea-body">
             <h4 class="idea-title">A Message I Keep</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
             <p class="idea-hook">There&#39;s one message in my phone I&#39;ve never deleted.</p>
-            <p class="idea-angle"><strong>Angle:</strong> Short post around one real message from a parent, student, or tutor that stayed with you (anonymized, permission if identifiable). Show the message, say why it stays. Nothing else.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Short post around one real message from a parent, student, or tutor that stayed with you (anonymized, permission if identifiable). Show the message, say why it stays. Nothing else — the receipt does the selling; you never claim anything.</p>
             <p class="idea-context"><strong>Why:</strong> Receipt-based trust content — the message does the persuading so the post doesn&#39;t have to.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (80 engagement): "You saw someone calm in the middle of chaos."</p>
           </div>
@@ -2064,6 +2207,7 @@
           <div class="idea-body">
             <h4 class="idea-title">What My Father Would Say About AI</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -2078,6 +2222,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The First Student Who Ever Paid Me</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -2092,6 +2237,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Sunday: What I&#39;m Not Doing</h4>
             <div class="idea-tags">
+              <span class="idea-tag idea-tag-planned">📅 Sun 19 Jul</span>
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -2106,6 +2252,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Three Lines About Failure</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -2120,6 +2267,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Chinese Dictionary</h4>
             <div class="idea-tags">
+              <span class="idea-tag idea-tag-planned">📅 Sat 18 Jul</span>
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -2134,6 +2282,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Number I Can&#39;t Forget</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -2148,6 +2297,7 @@
           <div class="idea-body">
             <h4 class="idea-title">To the Parent Who Messaged at Midnight</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -2162,6 +2312,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Why I Still Mark on Paper</h4>
             <div class="idea-tags">
+              
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -2169,6 +2320,66 @@
             <p class="idea-angle"><strong>Angle:</strong> Short post on one deliberate old-fashioned habit and what it preserves — what a child&#39;s handwriting tells you that a photo of a score never will. Small habit, bigger meaning, no lecture.</p>
             <p class="idea-context"><strong>Why:</strong> Humanizes the tech-forward brand and quietly showcases the marking service in the same breath.</p>
             <p class="idea-mirror"><strong>Mirror post</strong> (36 engagement): "Nobody has ever told me they chose my tuition service because of my degree."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">21</div>
+          <div class="idea-body">
+            <h4 class="idea-title">What Happened on This Week&#39;s Call</h4>
+            <div class="idea-tags">
+              
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">On Tuesday&#39;s coaching call, a tutor said something I haven&#39;t stopped thinking about.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Documentary-style proof: one real moment from the week&#39;s PAC call — the exact question a client asked, the shift mid-conversation, and where they landed. Anonymize, keep their words verbatim. Show the after-state (what they walked away able to do), never the framework that got them there.</p>
+            <p class="idea-context"><strong>Why:</strong> The proof-of-work story format Marc pushed, in FB post form: skeptical tutors don&#39;t believe claims, they believe transcripts. Repeatable weekly if it lands.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (36 engagement): "Nobody has ever told me they chose my tuition service because of my degree."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">22</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Before / After: One Tutor&#39;s Offer</h4>
+            <div class="idea-tags">
+              
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">Six weeks ago her offer was &quot;$70/hr, any level, any subject.&quot; Here&#39;s what it says now.</p>
+            <p class="idea-angle"><strong>Angle:</strong> Side-by-side receipt: the old offer line vs the rewritten one, plus one number that changed (enquiries, price, hours). Anonymized, permission first. Zero teaching — the before/after does all the persuading. The reader concludes &quot;I want that&quot; on their own.</p>
+            <p class="idea-context"><strong>Why:</strong> Pure outcome-selling: shows what a tutor&#39;s business looks like after, with a receipt, instead of describing what PAC includes. Converts the audience the trust posts attract.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (36 engagement): "Nobody has ever told me they chose my tuition service because of my degree."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">23</div>
+          <div class="idea-body">
+            <h4 class="idea-title">The Tutor Who Stopped Trading Hours</h4>
+            <div class="idea-tags">
+              
+              <span class="idea-tag idea-tag-proof">proof</span>
+              <span class="idea-tag idea-tag-effort">needs prep</span>
+            </div>
+            <p class="idea-hook">She was fully booked, exhausted, and earning less than she did two years ago.</p>
+            <p class="idea-angle"><strong>Angle:</strong> One client&#39;s arc in miniature: the before (hours maxed, income capped), the turning decision, and the specific after — a group programme, a first-month number, a reclaimed weekday. Real numbers or don&#39;t run it. The mechanism (coaching calls, frameworks) stays offstage.</p>
+            <p class="idea-context"><strong>Why:</strong> The &#39;Sarah&#39; template: readers don&#39;t care how, they care that someone like them got the result. Strongest proof format for skeptical tutors — needs a real consenting client.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (14,677 engagement): "My father was home every single day when I was growing up..."</p>
+          </div>
+        </div>
+        <div class="idea-card">
+          <div class="idea-num">24</div>
+          <div class="idea-body">
+            <h4 class="idea-title">Doors Open (Hold Until Earned)</h4>
+            <div class="idea-tags">
+              
+              <span class="idea-tag idea-tag-harvest">harvest</span>
+              <span class="idea-tag idea-tag-effort">quick</span>
+            </div>
+            <p class="idea-hook">For the tutors who&#39;ve been reading along these past weeks — this is the post where I finally ask.</p>
+            <p class="idea-angle"><strong>Angle:</strong> The one direct ask in the bank: a plain invitation to the next 3C workshop or Group cohort — what it is, who it&#39;s for, one client outcome as the reason to believe, one link. No countdown-timer energy. HOLD until at least 3-4 weeks of trust + proof posts have run; the ask only converts a warmed page.</p>
+            <p class="idea-context"><strong>Why:</strong> The bank deliberately held zero harvest posts while the page rebuilds reach. This is the pre-written harvest so the ask is ready the moment the run of trust and proof has earned it — not improvised in a hurry.</p>
+            <p class="idea-mirror"><strong>Mirror post</strong> (165 engagement): "Comment “TOPIC” and I’ll send you the full list + my analysis of what’s likely coming in 2026"</p>
           </div>
         </div>
       </div>
@@ -2326,8 +2537,20 @@
     <div class="account-header">
       <h2><span class="acc-icon">🧠</span>Fable Analysis</h2>
     </div>
-    <p class="fable-subtitle">A critical second look at the post ideas — what the data really says, in plain English. Reviewed 10 Jul 2026.</p>
+    <p class="fable-subtitle">A critical second look at the post ideas — what the data really says, in plain English. Reviewed 10 Jul 2026, updated 15 Jul 2026 with the PAC 2026 content strategy.</p>
     
+    <div class="fable-section">
+      <h3>PAC 2026: the answer is proof and personal story, not tips</h3>
+      <p>Your own numbers settle the strategy question. Deep personal storytelling is your dominant lever by roughly 180x — the dad tribute did 14,677 engagement and 816K reach, and across all four accounts story posts beat generic-tips posts by 20-50x. Tips content is your weakest format and you&#39;ve been producing a lot of it. So the PAC mix is: trust posts (your journey, failures, family) to fill the top of the funnel, proof posts (client receipts, before/afters, real call moments) to convert the audience the stories attract, and harvest posts (the direct ask) sparingly — only after a run of the first two has warmed the page. The PAC Facebook idea bank now carries this shape: mostly trust, a strong proof bench, and exactly one harvest post, marked &#39;hold until earned.&#39;</p>
+    </div>
+    <div class="fable-section">
+      <h3>Sell the outcome, not the process</h3>
+      <p>The principle behind every proof post (this is what drove the proof-of-work story format): your audience doesn&#39;t buy what you do, they buy what they become after working with you. &#39;Join PAC and get weekly calls, frameworks, accountability&#39; is selling the mechanism — nobody wakes up wanting coaching calls. &#39;She went from trading hours at $60/hr to a group programme that did $8k in its first month&#39; is selling the after-state, and the reader concludes &#39;I want that&#39; on their own. Quick test for any draft: if the post describes what PAC includes, it&#39;s selling process — rewrite it until it shows what a tutor&#39;s life or bank account looks like after. That&#39;s why proof posts are built as receipts (a real conversation, a before/after, one true number), never as claims.</p>
+    </div>
+    <div class="fable-section">
+      <h3>Skeptical tutors believe screenshots, not claims</h3>
+      <p>PAC&#39;s audience is tutors who are skeptical of coaching. They don&#39;t believe promises — they believe specifics: a verbatim client sentence, a before/after offer rewrite, a first-month revenue number. Every proof idea in the bank now requires real, consented material (real numbers or don&#39;t run it). The daily proof-of-work story set exists precisely to generate this material — if those stories are actually posted, the proof lane of this plan is already covered.</p>
+    </div>
     <div class="fable-section">
       <h3>Your highest-converting framework: the verdict</h3>
       <p>&quot;Highest engagement&quot; and &quot;highest converting&quot; are two different things — and your data actually splits them. Storytelling wins one; a completely different format wins the other. The honest answer: story to build the audience, comment-gate to harvest it. They&#39;re a pair, not rivals — the mistake would be doing only one. That&#39;s exactly why every idea on this dashboard carries a tag: TRUST ideas are the storytelling engine, HARVEST ideas are the converters.</p>
