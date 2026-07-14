@@ -477,6 +477,7 @@
   .pipeline-schedule { font-size: 13px; color: var(--muted); margin: 0 0 8px; }
   .pipeline-rule { font-size: 15px; color: var(--text-secondary); margin: 0 0 8px; line-height: 1.45; }
   .pipeline-dest { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+  .pipeline-dest-link { color: var(--pipe-color, var(--accent)); text-decoration: underline; }
   .pipeline-output { font-size: 14px; color: var(--text-primary); background: var(--chip-bg); border-radius: 8px; padding: 8px 10px; margin: 8px 0 0; line-height: 1.4; }
   .pipeline-lastrun { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
   .pipeline-ondemand-row { display: flex; flex-direction: column; gap: 12px; }
@@ -2833,7 +2834,7 @@
           '<span class="pipeline-badge" style="--pipe-color:' + info.color + ';">' + info.label + '</span></div>' +
           '<p class="pipeline-schedule">' + item.schedule + '</p>' +
           (item.rule ? '<p class="pipeline-rule">' + item.rule + '</p>' : '') +
-          '<p class="pipeline-dest">&rarr; ' + item.destination + '</p>' +
+          '<p class="pipeline-dest">&rarr; ' + (item.destinationUrl ? '<a class="pipeline-dest-link" href="' + item.destinationUrl + '" target="_blank" rel="noopener">' + item.destination + '</a>' : item.destination) + '</p>' +
           (item.trackable
             ? (item.lastOutput ? '<p class="pipeline-output">' + item.lastOutput + '</p>' : '') +
               '<p class="pipeline-lastrun">Last run: ' + timeAgo(item.lastRun) + '</p>'
