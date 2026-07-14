@@ -420,7 +420,30 @@
 
   /* Content pipeline tab */
   .pipeline-loading { color: var(--muted); font-size: 16px; }
-  .pipeline-list { display: flex; flex-direction: column; gap: 14px; }
+  .pipeline-banner {
+    background: rgba(10,191,188,0.14);
+    border: 1px solid rgba(10,191,188,0.4);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .pipeline-stage { margin-bottom: 30px; }
+  .pipeline-stage-label {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gridline);
+  }
+  .pipeline-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  @media (min-width: 640px) { .pipeline-grid { grid-template-columns: 1fr 1fr; } }
   .pipeline-card {
     background: var(--surface-1);
     border: 1px solid var(--border);
@@ -428,8 +451,17 @@
     border-radius: 12px;
     padding: 16px 18px;
   }
+  .pipeline-card.pipeline-embedded { border-style: dashed; }
   .pipeline-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
-  .pipeline-title { font-size: 19px; font-weight: 700; margin: 0; }
+  .pipeline-title { font-size: 18px; font-weight: 700; margin: 0; }
+  .pipeline-audience {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--pipe-color, var(--muted));
+    margin: 0 0 4px;
+  }
   .pipeline-badge {
     font-size: 12px;
     font-weight: 700;
@@ -440,11 +472,25 @@
     white-space: nowrap;
     background: var(--pipe-color, var(--muted));
     color: #04211f;
+    flex-shrink: 0;
   }
-  .pipeline-meta { font-size: 14px; color: var(--text-secondary); margin: 0 0 8px; }
-  .pipeline-meta strong { color: var(--text-primary); }
-  .pipeline-output { font-size: 15px; color: var(--text-secondary); margin: 0; line-height: 1.45; }
-  .pipeline-lastrun { font-size: 13px; color: var(--muted); margin: 6px 0 0; }
+  .pipeline-schedule { font-size: 13px; color: var(--muted); margin: 0 0 8px; }
+  .pipeline-rule { font-size: 15px; color: var(--text-secondary); margin: 0 0 8px; line-height: 1.45; }
+  .pipeline-dest { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+  .pipeline-output { font-size: 14px; color: var(--text-primary); background: var(--chip-bg); border-radius: 8px; padding: 8px 10px; margin: 8px 0 0; line-height: 1.4; }
+  .pipeline-lastrun { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+  .pipeline-ondemand-row { display: flex; flex-direction: column; gap: 12px; }
+  @media (min-width: 640px) { .pipeline-ondemand-row { flex-direction: row; } }
+  .pipeline-ondemand-card {
+    flex: 1;
+    background: rgba(240,180,60,0.08);
+    border: 1px solid rgba(240,180,60,0.35);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .pipeline-ondemand-card h4 { margin: 0 0 6px; font-size: 16px; color: #f2ce8a; }
+  .pipeline-ondemand-card p { margin: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.45; }
+  .pipeline-footnote { font-size: 13px; color: var(--muted); margin: 0; }
 
   /* Info modal */
   #info-modal {
@@ -2633,7 +2679,7 @@
     <div class="account-header">
       <h2><span class="acc-icon">📡</span>Content Pipeline</h2>
     </div>
-    <p class="fable-subtitle">Where every automated post actually lands, and whether it fired on schedule. Times shown in your local timezone.</p>
+    <p class="fable-subtitle">The full content flow by funnel stage (Trust / Proof / Harvest) and audience (PAC / LOTB) — where each post lands, and whether it fired on schedule. Times shown in your local timezone.</p>
     <div id="pipeline-list" class="pipeline-list">
       <p class="pipeline-loading">Loading pipeline status…</p>
     </div>
@@ -2762,33 +2808,68 @@
         return Math.round(hours / 24) + "d ago";
       }
 
-      function pipelineStatusInfo(stream) {
-        if (stream.status === "external") return { color: "#9fb0cc", label: "External" };
-        if (stream.status === "error") return { color: "#e05a5a", label: "Error" };
-        if (!stream.lastRun) return { color: "#9fb0cc", label: "No data yet" };
-        if (stream.expectedHours) {
-          var hoursSince = (Date.now() - new Date(stream.lastRun).getTime()) / 3600000;
-          if (hoursSince > stream.expectedHours) return { color: "#e0a13a", label: "Stale" };
+      var AUDIENCE_COLOR = { PAC: "#0ABFBC", LOTB: "#e8916a" };
+
+      function pipelineStatusInfo(item) {
+        if (item.status === "embedded") return { color: "#9fb0cc", label: "Embedded" };
+        if (item.status === "external") return { color: "#9fb0cc", label: "External" };
+        if (item.status === "error") return { color: "#e05a5a", label: "Error" };
+        if (!item.lastRun) return { color: "#9fb0cc", label: "No data yet" };
+        if (item.expectedHours) {
+          var hoursSince = (Date.now() - new Date(item.lastRun).getTime()) / 3600000;
+          if (hoursSince > item.expectedHours) return { color: "#e0a13a", label: "Stale" };
         }
         return { color: "#0ABFBC", label: "On track" };
       }
 
+      function pipelineCard(item) {
+        var audienceColor = AUDIENCE_COLOR[item.audience] || "#9fb0cc";
+        var info = pipelineStatusInfo(item);
+        var embedded = item.status === "embedded";
+        return (
+          '<div class="pipeline-card' + (embedded ? ' pipeline-embedded' : '') + '" style="--pipe-color:' + audienceColor + ';">' +
+          (item.audience ? '<p class="pipeline-audience">' + item.audience + '</p>' : '') +
+          '<div class="pipeline-card-head"><h3 class="pipeline-title">' + item.label + '</h3>' +
+          '<span class="pipeline-badge" style="--pipe-color:' + info.color + ';">' + info.label + '</span></div>' +
+          '<p class="pipeline-schedule">' + item.schedule + '</p>' +
+          (item.rule ? '<p class="pipeline-rule">' + item.rule + '</p>' : '') +
+          '<p class="pipeline-dest">&rarr; ' + item.destination + '</p>' +
+          (item.trackable
+            ? (item.lastOutput ? '<p class="pipeline-output">' + item.lastOutput + '</p>' : '') +
+              '<p class="pipeline-lastrun">Last run: ' + timeAgo(item.lastRun) + '</p>'
+            : '') +
+          '</div>'
+        );
+      }
+
       function renderPipeline(data) {
         var list = document.getElementById("pipeline-list");
-        list.innerHTML = data.streams
-          .map(function (s) {
-            var info = pipelineStatusInfo(s);
-            return (
-              '<div class="pipeline-card" style="--pipe-color:' + info.color + ';">' +
-              '<div class="pipeline-card-head"><h3 class="pipeline-title">' + s.label + '</h3>' +
-              '<span class="pipeline-badge">' + info.label + '</span></div>' +
-              '<p class="pipeline-meta"><strong>Schedule:</strong> ' + s.schedule + ' &middot; <strong>Lands in:</strong> ' + s.destination + '</p>' +
-              (s.lastOutput ? '<p class="pipeline-output">' + s.lastOutput + '</p>' : '') +
-              '<p class="pipeline-lastrun">Last run: ' + timeAgo(s.lastRun) + '</p>' +
-              '</div>'
-            );
-          })
-          .join("");
+        var html = '<div class="pipeline-banner">' + data.principle + '</div>';
+
+        (data.stages || []).forEach(function (stage) {
+          html +=
+            '<div class="pipeline-stage"><h3 class="pipeline-stage-label">' + stage.label + '</h3>' +
+            '<div class="pipeline-grid">' + stage.items.map(pipelineCard).join("") + '</div></div>';
+        });
+
+        if (data.onDemand && data.onDemand.length) {
+          html +=
+            '<div class="pipeline-stage"><h3 class="pipeline-stage-label">YOU TRIGGER (not scheduled)</h3>' +
+            '<div class="pipeline-ondemand-row">' +
+            data.onDemand.map(function (od) {
+              return '<div class="pipeline-ondemand-card"><h4>' + od.label + '</h4><p>' + od.detail + '</p></div>';
+            }).join("") +
+            '</div></div>';
+        }
+
+        if (data.meta && data.meta.length) {
+          html += data.meta.map(function (m) {
+            var info = pipelineStatusInfo(m);
+            return '<p class="pipeline-footnote">' + m.label + ' (' + m.schedule + '): ' + info.label + ' &middot; last run ' + timeAgo(m.lastRun) + (m.lastOutput ? ' — ' + m.lastOutput : '') + '</p>';
+          }).join("");
+        }
+
+        list.innerHTML = html;
       }
 
       fetch("./pipeline-status.json")

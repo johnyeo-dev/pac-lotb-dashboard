@@ -1,50 +1,141 @@
 {
-  "streams": [
+  "tagline": "Every automation below is built on real engagement data: story beats generic tips 20-50x.",
+  "principle": "TRUST → warm the audience with real story · PROOF → show the outcome · HARVEST → the one ask",
+  "stages": [
     {
-      "id": "daily-value-bomb",
-      "label": "Daily Value Bomb (PAC)",
-      "schedule": "9:03am daily",
-      "destination": "\"Bot value bomb\" Telegram group",
-      "expectedHours": 30,
-      "lastRun": null,
-      "lastOutput": null,
-      "status": "unknown"
+      "id": "trust",
+      "label": "TRUST",
+      "items": [
+        {
+          "id": "pac-content-auto",
+          "audience": "PAC",
+          "label": "pac-content-auto",
+          "schedule": "Mon / Wed / Fri (Zapier)",
+          "rule": "But/Therefore story — ONE real moment, John is protagonist, no tips-listicle.",
+          "destination": "\"Bot PAC auto content\" Telegram group",
+          "trackable": false,
+          "expectedHours": null,
+          "lastRun": null,
+          "lastOutput": "Runs via a Zapier Skill outside this repo — not yet wired to report status here.",
+          "status": "external"
+        },
+        {
+          "id": "daily-value-bomb",
+          "audience": "PAC",
+          "label": "Daily Value Bomb",
+          "schedule": "9:03am daily",
+          "rule": "COT format, how-to for filling group classes — real-moment hook + shows the after-state, not just steps.",
+          "destination": "\"Bot value bomb\" Telegram group",
+          "trackable": true,
+          "expectedHours": 30,
+          "lastRun": null,
+          "lastOutput": null,
+          "status": "unknown"
+        },
+        {
+          "id": "lotb-content-auto-trust",
+          "audience": "LOTB",
+          "label": "lotb-content-auto — carries the story half",
+          "schedule": "Tue / Thu (Zapier)",
+          "rule": "7-slide carousel, Slides 1-2 — if the lesson had a real anonymized classroom moment, it carries the claim; parent sees themselves in Slide 2 Mirror.",
+          "destination": "\"Bot LOB auto content\" Telegram group",
+          "trackable": false,
+          "expectedHours": null,
+          "lastRun": null,
+          "lastOutput": "Runs via a Zapier Skill outside this repo — not yet wired to report status here.",
+          "status": "external"
+        }
+      ]
     },
     {
-      "id": "pac-proof-of-work-daily",
-      "label": "PAC Proof-of-Work Stories",
-      "schedule": "8:45am daily",
-      "destination": "\"Bot FB/IG stories\" Telegram group",
-      "expectedHours": 30,
-      "lastRun": null,
-      "lastOutput": null,
-      "status": "unknown"
+      "id": "proof",
+      "label": "PROOF",
+      "items": [
+        {
+          "id": "pac-proof-of-work-daily",
+          "audience": "PAC",
+          "label": "pac-proof-of-work-story",
+          "schedule": "8:45am daily",
+          "rule": "5-slide documentary IG/FB story set — verbatim client quotes, before/after card, one big-number receipt (real or omitted, never invented). Client is the protagonist, not John.",
+          "destination": "\"Bot FB/IG stories\" Telegram group (review queue — John posts manually)",
+          "trackable": true,
+          "expectedHours": 30,
+          "lastRun": null,
+          "lastOutput": null,
+          "status": "unknown"
+        },
+        {
+          "id": "lotb-content-auto-proof",
+          "audience": "LOTB",
+          "label": "lotb-content-auto — carries the outcome half",
+          "schedule": "Tue / Thu (Zapier)",
+          "rule": "Same Tue/Thu carousel, Slides 3-6 + IG caption — sells the CHILD'S outcome (calm in the exam, marks recovered), never the method alone. Every number shown must be real, from the lesson.",
+          "destination": "\"Bot LOB auto content\" Telegram group + WhatsApp teasers",
+          "trackable": false,
+          "expectedHours": null,
+          "lastRun": null,
+          "lastOutput": "Runs via a Zapier Skill outside this repo — not yet wired to report status here.",
+          "status": "external"
+        }
+      ]
     },
     {
-      "id": "pac-content-auto",
-      "label": "PAC Weekday Auto Content",
-      "schedule": "Mon / Wed / Fri (Zapier)",
-      "destination": "\"Bot PAC auto content\" Telegram group",
-      "expectedHours": null,
-      "lastRun": null,
-      "lastOutput": "Runs via a Zapier Skill outside this repo — not yet wired to report status here.",
-      "status": "external"
+      "id": "harvest",
+      "label": "HARVEST",
+      "items": [
+        {
+          "id": "pac-signature",
+          "audience": "PAC",
+          "label": "PS signature (3C / Group GPT)",
+          "schedule": "Embedded, not standalone",
+          "rule": "Embedded in every pac-content-auto post — one ask maximum per post. Rotates 3C ↔ Group; content fit overrides rotation.",
+          "destination": "Embedded in pac-content-auto output",
+          "trackable": false,
+          "expectedHours": null,
+          "lastRun": null,
+          "lastOutput": null,
+          "status": "embedded"
+        },
+        {
+          "id": "lotb-solve-cta",
+          "audience": "LOTB",
+          "label": "SOLVE CTA",
+          "schedule": "Embedded, not standalone",
+          "rule": "Embedded in the carousel Slide 7 + IG caption. Qualifying bridge names grade + topic + situation. One CTA only — no follow-me, no save-this.",
+          "destination": "Embedded in lotb-content-auto output",
+          "trackable": false,
+          "expectedHours": null,
+          "lastRun": null,
+          "lastOutput": null,
+          "status": "embedded"
+        }
+      ]
+    }
+  ],
+  "onDemand": [
+    {
+      "id": "draft-fb-post",
+      "label": "draft-fb-post / cot-value-post",
+      "detail": "\"draft post about...\" — one-off drafts. Same story-first, outcomes-not-process rules as the scheduled streams."
     },
     {
-      "id": "lotb-content-auto",
-      "label": "LOTB Weekday Auto Content",
-      "schedule": "Tue / Thu (Zapier)",
-      "destination": "\"Bot LOB auto content\" Telegram group",
-      "expectedHours": null,
-      "lastRun": null,
-      "lastOutput": "Runs via a Zapier Skill outside this repo — not yet wired to report status here.",
-      "status": "external"
+      "id": "content-team-review",
+      "label": "content-team → quality-reviewer",
+      "detail": "Every FB post draft is reviewed for voice + hook strength before John sees it (max 2 rounds)."
     },
+    {
+      "id": "skool-replay",
+      "label": "Skool replay pipeline",
+      "detail": "\"post pac/lotb skool\" — pulls a Fathom call → publishes the matching Skool classroom page → sends a copy-paste Telegram message for WhatsApp."
+    }
+  ],
+  "meta": [
     {
       "id": "social-dashboard-weekly",
       "label": "Social Dashboard Refresh",
       "schedule": "Monday 7am",
       "destination": "This dashboard (self)",
+      "trackable": true,
       "expectedHours": 192,
       "lastRun": null,
       "lastOutput": null,
