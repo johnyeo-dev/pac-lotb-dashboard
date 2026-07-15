@@ -715,13 +715,14 @@
         <span class="refresh-pill">Data refreshed 9 Jul 2026, 11:59 pm</span>
       </header>
       <button class="demo-toggle" id="demo-toggle">👀 Show demo account</button>
+      <button class="demo-toggle" id="customer-preview-toggle">👤 Preview: what a new client sees</button>
       <div class="nav-dropdown" id="nav-dropdown">
         <button class="nav-toggle" id="nav-toggle" aria-haspopup="listbox" aria-expanded="false">
           <span id="nav-toggle-icon">✨</span>
           <span id="nav-toggle-label">Overview</span>
           <span class="nav-toggle-chevron">⌄</span>
         </button>
-        <div class="nav-menu" id="nav-menu" role="listbox" hidden><button class="nav-item" data-target="panel-overview" data-icon="✨" data-label="Overview" role="option" aria-selected="true">✨ Overview</button><button class="nav-item" data-target="panel-lotb-instagram" data-icon="📸" data-label="LOTB Instagram" role="option" >📸 LOTB Instagram</button><button class="nav-item" data-target="panel-lotb-tiktok" data-icon="🎵" data-label="LOTB TikTok" role="option" >🎵 LOTB TikTok</button><button class="nav-item" data-target="panel-pac-instagram" data-icon="📸" data-label="PAC Instagram" role="option" >📸 PAC Instagram</button><button class="nav-item" data-target="panel-pac-facebook" data-icon="👍" data-label="PAC Facebook" role="option" >👍 PAC Facebook</button><button class="nav-item" data-target="panel-outcomes" data-icon="🎯" data-label="The 10 Outcomes" role="option" >🎯 The 10 Outcomes</button><button class="nav-item" data-target="panel-cot-content" data-icon="📝" data-label="COT Content" role="option" >📝 COT Content</button><button class="nav-item" data-target="panel-fable-analysis" data-icon="🧠" data-label="Fable Analysis" role="option" >🧠 Fable Analysis</button><button class="nav-item" data-target="panel-pipeline" data-icon="📡" data-label="Content Pipeline" role="option" >📡 Content Pipeline</button></div>
+        <div class="nav-menu" id="nav-menu" role="listbox" hidden><button class="nav-item" data-target="panel-overview" data-icon="✨" data-label="Overview" role="option" aria-selected="true">✨ Overview</button><button class="nav-item" data-target="panel-lotb-instagram" data-icon="📸" data-label="LOTB Instagram" role="option" >📸 LOTB Instagram</button><button class="nav-item" data-target="panel-lotb-tiktok" data-icon="🎵" data-label="LOTB TikTok" role="option" >🎵 LOTB TikTok</button><button class="nav-item" data-target="panel-pac-instagram" data-icon="📸" data-label="PAC Instagram" role="option" >📸 PAC Instagram</button><button class="nav-item" data-target="panel-pac-facebook" data-icon="👍" data-label="PAC Facebook" role="option" >👍 PAC Facebook</button><button class="nav-item" data-target="panel-outcomes" data-icon="🎯" data-label="The 10 Outcomes" role="option" >🎯 The 10 Outcomes</button><button class="nav-item" data-target="panel-cot-content" data-icon="📝" data-label="COT Content" role="option" >📝 COT Content</button><button class="nav-item" data-target="panel-fable-analysis" data-icon="🧠" data-label="Fable Analysis" role="option" >🧠 Fable Analysis</button><button class="nav-item" data-target="panel-pipeline" data-icon="📡" data-label="Content Pipeline" role="option" >📡 Content Pipeline</button><button class="nav-item" data-target="panel-onboarding" data-icon="🚀" data-label="Onboarding" role="option" >🚀 Onboarding</button></div>
       </div>
       
   <section class="panel" id="panel-overview">
@@ -3566,6 +3567,29 @@
           document.getElementById("panel-demo").hidden = true;
           goToPanel("panel-overview");
           demoToggle.textContent = "👀 Show demo account";
+        }
+        window.scrollTo({ top: 0, behavior: "instant" });
+      });
+
+      // Admin-only: lets John see exactly what a role="customer" account sees
+      // after signing in, without needing a second Google account. Reuses the
+      // same customer-view CSS class the real gate applies via applyRole().
+      var customerPreviewToggle = document.getElementById("customer-preview-toggle");
+      var customerPreviewOn = false;
+      customerPreviewToggle.addEventListener("click", function () {
+        customerPreviewOn = !customerPreviewOn;
+        if (customerPreviewOn) {
+          document.body.classList.add("customer-view");
+          document.querySelectorAll(".panel").forEach(function (p) { p.hidden = true; });
+          document.getElementById("panel-onboarding").hidden = false;
+          document.getElementById("panel-demo").hidden = false;
+          customerPreviewToggle.textContent = "← Back to my dashboard";
+        } else {
+          document.body.classList.remove("customer-view");
+          document.getElementById("panel-onboarding").hidden = true;
+          document.getElementById("panel-demo").hidden = true;
+          goToPanel("panel-overview");
+          customerPreviewToggle.textContent = "👤 Preview: what a new client sees";
         }
         window.scrollTo({ top: 0, behavior: "instant" });
       });
