@@ -52,29 +52,34 @@
     max-width: 380px;
     text-align: center;
   }
-  .gate-card h1 { font-size: 30px; margin: 0 0 20px; }
-  .gate-card input {
-    width: 100%;
-    font-size: 24px;
-    padding: 16px 14px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--page-plane);
-    color: var(--text-primary);
-    margin-bottom: 16px;
-    text-align: center;
-  }
+  .gate-card h1 { font-size: 30px; margin: 0 0 8px; }
+  .gate-sub { color: var(--text-secondary); font-size: 16px; margin: 0 0 22px; }
   .gate-card button {
     width: 100%;
-    font-size: 22px;
+    font-size: 19px;
     font-weight: 600;
-    padding: 16px 14px;
+    padding: 15px 14px;
     border-radius: 8px;
     border: none;
     background: var(--accent);
     color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
   }
-  .gate-error { color: #d03b3b; font-size: 18px; margin: 0 0 10px; display: none; }
+  .gate-card button svg { background: #fff; border-radius: 50%; padding: 2px; flex-shrink: 0; }
+  .gate-card button.gate-secondary {
+    margin-top: 12px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-size: 15px;
+    padding: 12px 14px;
+  }
+  .gate-card button[hidden] { display: none; }
+  .gate-error { color: #ff7b7b; font-size: 16px; line-height: 1.4; margin: 0 0 14px; display: none; }
   .gate-error.show { display: block; }
 
   #app.hidden { display: none; }
@@ -607,10 +612,14 @@
 <body>
   <div id="gate">
     <div class="gate-card">
-      <h1>Enter passcode</h1>
-      <p class="gate-error" id="gate-error">Wrong passcode, try again.</p>
-      <input id="gate-input" type="password" inputmode="text" autocomplete="off" placeholder="Passcode" />
-      <button id="gate-submit">Unlock</button>
+      <h1>PAC Dashboard</h1>
+      <p class="gate-sub">Private dashboard — sign in to continue.</p>
+      <p class="gate-error" id="gate-error"></p>
+      <button id="gate-google">
+        <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Sign in with Google
+      </button>
+      <button id="gate-signout" class="gate-secondary" hidden>Sign out &amp; try another account</button>
     </div>
   </div>
 
@@ -2931,36 +2940,79 @@
     </div>
   </div>
 
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
   <script>
     (function () {
-      var PASS = "juju";
       var gate = document.getElementById("gate");
       var app = document.getElementById("app");
-      var input = document.getElementById("gate-input");
-      var submit = document.getElementById("gate-submit");
+      var googleBtn = document.getElementById("gate-google");
+      var signoutBtn = document.getElementById("gate-signout");
       var error = document.getElementById("gate-error");
+
+      firebase.initializeApp({"apiKey":"AIzaSyDNpqATiaoW2qvRySwMi4RA4bQByHItf4Y","authDomain":"pac-dashboard-86308.firebaseapp.com","projectId":"pac-dashboard-86308","storageBucket":"pac-dashboard-86308.firebasestorage.app","messagingSenderId":"295737835761","appId":"1:295737835761:web:cb827e7ff1816520066950"});
+      var auth = firebase.auth();
+      var db = firebase.firestore();
 
       function unlock() {
         gate.classList.add("hidden");
         app.classList.remove("hidden");
-        sessionStorage.setItem("dashboard-unlocked", "1");
       }
 
-      function tryUnlock() {
-        if (input.value === PASS) {
-          unlock();
-        } else {
-          error.classList.add("show");
+      function showError(msg) {
+        error.textContent = msg;
+        error.classList.add("show");
+      }
+
+      function clearError() {
+        error.textContent = "";
+        error.classList.remove("show");
+      }
+
+      auth.onAuthStateChanged(function (user) {
+        if (!user) {
+          gate.classList.remove("hidden");
+          app.classList.add("hidden");
+          googleBtn.hidden = false;
+          signoutBtn.hidden = true;
+          return;
         }
-      }
+        // Verify the signed-in Google account against the Firestore allowlist.
+        // Rules only permit reading your own /allowlist/{email} doc.
+        db.collection("allowlist").doc(user.email).get().then(function (doc) {
+          if (doc.exists && doc.data().allowed === true) {
+            clearError();
+            unlock();
+          } else {
+            showError("This Google account (" + user.email + ") doesn't have access. Contact John if you think it should.");
+            googleBtn.hidden = true;
+            signoutBtn.hidden = false;
+          }
+        }).catch(function () {
+          showError("Couldn't verify access — check your connection and try again.");
+          googleBtn.hidden = true;
+          signoutBtn.hidden = false;
+        });
+      });
 
-      if (sessionStorage.getItem("dashboard-unlocked") === "1") {
-        unlock();
-      }
+      googleBtn.addEventListener("click", function () {
+        clearError();
+        auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function (e) {
+          if (e && (e.code === "auth/popup-blocked" || e.code === "auth/popup-closed-by-user")) {
+            auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+          } else {
+            showError(e && e.message ? e.message : "Sign-in failed — try again.");
+          }
+        });
+      });
 
-      submit.addEventListener("click", tryUnlock);
-      input.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") tryUnlock();
+      signoutBtn.addEventListener("click", function () {
+        auth.signOut().then(function () {
+          clearError();
+          googleBtn.hidden = false;
+          signoutBtn.hidden = true;
+        });
       });
 
       var navDropdown = document.getElementById("nav-dropdown");
