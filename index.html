@@ -626,6 +626,33 @@
   .pipeline-ondemand-card p { margin: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.45; }
   .pipeline-footnote { font-size: 13px; color: var(--muted); margin: 0; }
 
+  /* Claude skills list */
+  .skills-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 10px; }
+  .skill-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .skill-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .skill-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent);
+    background: rgba(10,191,188,0.12);
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
+  .skill-category {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .skill-description { margin: 0 0 8px; font-size: 15px; line-height: 1.5; color: var(--text-secondary); }
+  .skill-trigger { margin: 0; font-size: 13px; line-height: 1.4; color: var(--muted); }
+
   /* Info modal */
   #info-modal {
     position: fixed;
@@ -2985,6 +3012,60 @@
     <p class="fable-subtitle">The full content flow by funnel stage (Trust / Proof / Harvest) and audience (PAC / LOTB) — where each post lands, and whether it fired on schedule. Times shown in your local timezone.</p>
     <div id="pipeline-list" class="pipeline-list">
       <p class="pipeline-loading">Loading pipeline status…</p>
+    </div>
+
+    <h3 class="section-label">Claude Skills</h3>
+    <p class="fable-subtitle">The reusable skills wired into this workspace&#39;s .claude/skills/ folder — what each one does, and what triggers it.</p>
+    <div class="skills-list">
+      
+      <div class="skill-card">
+        <div class="skill-card-head">
+          <code class="skill-name">pac-outcome-check</code>
+          <span class="skill-category">PAC</span>
+        </div>
+        <p class="skill-description">Tests a drafted PAC Facebook/IG post against the 10 Outcomes rule — flags coach-speak abstract lines, checks for a real specific receipt, returns a PASS/FAIL verdict.</p>
+        <p class="skill-trigger"><strong>Trigger:</strong> &quot;check this against outcomes&quot;, &quot;outcome check&quot;, or before any proof post ships</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-head">
+          <code class="skill-name">pac-proof-of-work-story</code>
+          <span class="skill-category">PAC</span>
+        </div>
+        <p class="skill-description">Turns a recent PAC coaching call into a 5-slide documentary-style proof-of-work IG/FB story set, sent to the Telegram review queue for John to post.</p>
+        <p class="skill-trigger"><strong>Trigger:</strong> &quot;proof of work post&quot;, &quot;pac proof of work&quot;, daily cron</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-head">
+          <code class="skill-name">lotb-worksheet-marker</code>
+          <span class="skill-category">LOTB</span>
+        </div>
+        <p class="skill-description">Marks a student&#39;s PSLE math worksheet PDF against the living LOTB rubric — checks the final answer, the heuristic used, and required working/labelling steps.</p>
+        <p class="skill-trigger"><strong>Trigger:</strong> &quot;mark this worksheet&quot;, &quot;check this worksheet&quot;, or a worksheet PDF upload in the marking group</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-head">
+          <code class="skill-name">lotb-worksheet-rubric-update</code>
+          <span class="skill-category">LOTB</span>
+        </div>
+        <p class="skill-description">Weekly, cron-only. Scans new PRC Fathom lessons and updates the living marking rubric with any new required steps or standards John taught.</p>
+        <p class="skill-trigger"><strong>Trigger:</strong> &quot;lotb-rubric-weekly-update&quot; cron only, not manually invoked</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-head">
+          <code class="skill-name">post-math-lesson-pipeline</code>
+          <span class="skill-category">LOTB</span>
+        </div>
+        <p class="skill-description">Pulls the latest Fathom lesson transcript, extracts revision points, builds an infographic, and sends student-ready revision notes to the class Telegram group.</p>
+        <p class="skill-trigger"><strong>Trigger:</strong> &quot;do notes&quot;, &quot;post math lesson pipeline&quot;, after a lesson</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-head">
+          <code class="skill-name">twohour-loop-builder</code>
+          <span class="skill-category">System</span>
+        </div>
+        <p class="skill-description">Guides turning any repeated piece of work into a self-improving worker + QA loop with a written rubric, so quality compounds instead of resetting each time.</p>
+        <p class="skill-trigger"><strong>Trigger:</strong> &quot;build a loop&quot;, &quot;stop re-fixing this&quot;, or wanting a repeatable worker+checker setup</p>
+      </div>
     </div>
   </section>
       
