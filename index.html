@@ -16,10 +16,11 @@
        measure 8.8:1 and 5.5:1 against chip-bg respectively. */
     --text-secondary: #d5dceb;
     --muted: #9fb0cc;
-    --gridline: rgba(255,255,255,0.16);
-    --border: rgba(255,255,255,0.20);
+    --gridline: rgba(255,255,255,0.10);
+    --border: rgba(255,255,255,0.10);
     --chip-bg: #002D6A;
     --accent: #0ABFBC;
+    --radius: 12px;
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; }
@@ -30,12 +31,15 @@
     padding-bottom: 40px;
   }
   .wrap { max-width: 900px; margin: 0 auto; padding: 0 18px; }
+  .icn { flex-shrink: 0; vertical-align: -3px; }
 
-  /* Passcode gate */
+  /* Sign-in gate */
   #gate {
     position: fixed;
     inset: 0;
-    background: var(--page-plane);
+    background:
+      radial-gradient(ellipse 70% 45% at 50% -5%, rgba(10,191,188,0.14), transparent),
+      var(--page-plane);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,30 +50,43 @@
   .gate-card {
     background: var(--surface-1);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 32px 24px;
+    border-radius: 16px;
+    padding: 36px 28px;
     width: 100%;
     max-width: 380px;
     text-align: center;
   }
-  .gate-card h1 { font-size: 30px; margin: 0 0 8px; }
-  .gate-sub { color: var(--text-secondary); font-size: 16px; margin: 0 0 22px; }
+  .gate-mark {
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 16px;
+    border-radius: 14px;
+    background: rgba(10,191,188,0.12);
+    border: 1px solid rgba(10,191,188,0.35);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gate-card h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .gate-sub { color: var(--muted); font-size: 16px; margin: 0 0 24px; }
   .gate-card button {
     width: 100%;
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 600;
-    padding: 15px 14px;
-    border-radius: 8px;
+    font-family: inherit;
+    padding: 14px;
+    border-radius: 10px;
     border: none;
-    background: var(--accent);
-    color: #fff;
+    background: #ffffff;
+    color: #1f2430;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
   }
-  .gate-card button svg { background: #fff; border-radius: 50%; padding: 2px; flex-shrink: 0; }
+  .gate-card button svg { flex-shrink: 0; }
   .gate-card button.gate-secondary {
     margin-top: 12px;
     background: transparent;
@@ -84,10 +101,11 @@
 
   #app.hidden { display: none; }
 
-  header { padding: 22px 0 14px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
-  .header-title { display: flex; align-items: center; gap: 10px; }
-  header h1 { font-size: 34px; margin: 0 0 6px; }
-  header p { color: var(--text-secondary); margin: 0; font-size: 18px; }
+  header { padding: 26px 0 16px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  header h1 { font-size: 30px; margin: 0 0 4px; letter-spacing: -0.01em; }
+  .site-tagline { color: var(--text-secondary); font-size: 17px; margin: 0 0 6px; }
+  .header-meta { color: var(--muted); font-size: 14px; margin: 0; }
+  .header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; padding-top: 4px; }
   .info-btn {
     width: 38px;
     height: 38px;
@@ -105,87 +123,83 @@
     flex-shrink: 0;
     cursor: pointer;
   }
-  .refresh-pill {
+
+  .btn-ghost {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 7px;
     font-size: 15px;
     font-weight: 600;
-    color: var(--text-secondary);
-    background: var(--chip-bg);
-    border: 1px solid var(--border);
+    font-family: inherit;
+    padding: 9px 14px;
     border-radius: 999px;
-    padding: 8px 14px;
-    white-space: nowrap;
-  }
-  .refresh-pill::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #0ca30c;
-    display: inline-block;
-  }
-
-  .nav-dropdown {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    padding: 12px 0;
-    background: var(--page-plane);
-    border-bottom: 1px solid var(--gridline);
-    margin-bottom: 24px;
-  }
-  .nav-toggle {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 20px;
-    font-weight: 700;
-    font-family: inherit;
-    padding: 15px 18px;
-    border-radius: 14px;
     border: 1px solid var(--border);
-    background: var(--surface-1);
-    color: var(--text-primary);
-    cursor: pointer;
-  }
-  .nav-toggle-chevron { margin-left: auto; font-size: 18px; transition: transform 0.15s; flex-shrink: 0; }
-  .nav-dropdown.open .nav-toggle { border-color: var(--accent); }
-  .nav-dropdown.open .nav-toggle-chevron { transform: rotate(180deg); }
-  .nav-menu {
-    margin-top: 8px;
-    background: var(--surface-1);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    overflow: hidden;
-  }
-  .nav-menu[hidden] { display: none; }
-  .nav-item {
-    width: 100%;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 19px;
-    font-weight: 600;
-    font-family: inherit;
-    padding: 15px 18px;
-    border: none;
-    border-bottom: 1px solid var(--gridline);
     background: transparent;
     color: var(--text-secondary);
     cursor: pointer;
+    white-space: nowrap;
   }
-  .nav-item:last-child { border-bottom: none; }
-  .nav-item[aria-selected="true"] { background: var(--accent); color: #fff; font-weight: 700; }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--text-primary); }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: inherit;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    background: var(--accent);
+    color: #04211f;
+    text-decoration: none;
+    cursor: pointer;
+    margin-top: 4px;
+  }
+
+  .admin-toolbar { display: flex; gap: 8px; margin: 0 0 12px; }
+
+  .tabbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    gap: 6px;
+    padding: 12px 0;
+    margin-bottom: 24px;
+    background: var(--page-plane);
+    border-bottom: 1px solid var(--gridline);
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tabbar::-webkit-scrollbar { display: none; }
+  .tabbar[hidden] { display: none; }
+  .nav-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .nav-item:hover { border-color: var(--border); color: var(--text-primary); }
+  .nav-item[aria-selected="true"] { background: var(--accent); color: #04211f; font-weight: 700; }
 
   .panel { padding-bottom: 10px; }
 
-  .account-header { margin-bottom: 18px; }
-  .account-header h2 { margin: 0; font-size: 28px; display: flex; align-items: center; gap: 10px; }
-  .acc-icon { font-size: 28px; line-height: 1; }
+  .account-header { margin-bottom: 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .account-header h2 { margin: 0; font-size: 28px; letter-spacing: -0.01em; display: flex; align-items: center; gap: 10px; }
+  .acc-icon { display: inline-flex; align-items: center; color: var(--accent); }
 
   .kpi-row { display: grid; gap: 10px; margin-bottom: 24px; }
   .kpi-card {
@@ -246,7 +260,8 @@
   .bar-fill { height: 100%; border-radius: 5px; }
   .rank-value { font-size: 18px; font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
   .metric-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-  .metric-chip { font-size: 13px; color: var(--muted); background: var(--chip-bg); border-radius: 6px; padding: 3px 8px; white-space: nowrap; }
+  .metric-chip { font-size: 13px; color: var(--muted); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; white-space: nowrap; }
+  .metric-chip strong { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
 
   .fmt-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
   .fmt-row { display: grid; grid-template-columns: 1fr; gap: 6px; }
@@ -260,7 +275,8 @@
     align-items: center;
     gap: 6px;
     font-size: 16px;
-    background: var(--chip-bg);
+    border: 1px solid var(--border);
+    background: var(--surface-1);
     color: var(--text-secondary);
     padding: 8px 14px;
     border-radius: 8px;
@@ -273,7 +289,6 @@
     text-align: left;
     background: var(--surface-1);
     border: 1px solid var(--border);
-    border-left: 4px solid var(--acc);
     border-radius: 12px;
     padding: 16px 14px;
     display: flex;
@@ -295,7 +310,6 @@
     align-items: flex-start;
     background: var(--surface-1);
     border: 1px solid var(--border);
-    border-left: 4px solid var(--acc);
     border-radius: 12px;
     padding: 18px;
     margin-bottom: 20px;
@@ -340,12 +354,13 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    background: var(--acc);
-    color: #fff;
-    border-radius: 14px;
+    background: var(--surface-1);
+    border: 1px solid var(--acc);
+    color: var(--text-primary);
+    border-radius: 12px;
     padding: 16px 18px;
-    box-shadow: 0 2px 0 rgba(0,0,0,0.08);
   }
+  .ideas-summary-icon { color: var(--acc); display: inline-flex; }
   .ideas-summary::-webkit-details-marker { display: none; }
   .ideas-summary-icon { font-size: 26px; flex-shrink: 0; }
   .ideas-summary-text { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
@@ -443,7 +458,6 @@
   .plain-explainer {
     background: var(--surface-1);
     border: 1px solid var(--border);
-    border-left: 4px solid var(--accent);
     border-radius: 12px;
     padding: 18px 20px;
     margin-bottom: 30px;
@@ -494,42 +508,63 @@
   .outcomes-footer { font-size: 15px; line-height: 1.55; color: var(--muted); font-style: italic; margin: 0; }
 
   /* COT Content page */
-  .cot-applying { border-left-color: #e0a13a; background: rgba(240,180,60,0.08); }
+  .cot-applying { border-color: rgba(240,180,60,0.4); background: rgba(240,180,60,0.08); }
 
-  /* Site tagline + demo buyer view */
-  .site-tagline { color: var(--accent) !important; font-size: 17px !important; font-weight: 600; margin: 0 0 4px !important; }
-  .demo-toggle {
-    width: 100%;
-    font-size: 17px;
+  /* Demo buyer view */
+  .sample-chip {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
     font-weight: 700;
-    font-family: inherit;
-    padding: 13px 18px;
-    margin: 2px 0 10px;
-    border-radius: 12px;
-    border: 1px dashed var(--accent);
-    background: rgba(10,191,188,0.10);
-    color: var(--accent);
-    cursor: pointer;
-  }
-  .demo-banner {
-    background: #e0a13a;
-    color: #2b1d02;
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
-    text-align: center;
-    border-radius: 10px;
-    padding: 10px 14px;
-    margin-bottom: 18px;
+    color: #f2ce8a;
+    background: rgba(240,180,60,0.12);
+    border: 1px solid rgba(240,180,60,0.4);
+    border-radius: 999px;
+    padding: 5px 12px;
+    white-space: nowrap;
   }
   .demo-thisweek { border-width: 2px; }
   #panel-demo { --acc: #0ABFBC; }
 
-  /* Customer-role view: only Onboarding + Demo Account panels, no nav to real data */
-  .customer-view #nav-dropdown,
+  /* Onboarding steps */
+  .steps { display: flex; flex-direction: column; gap: 14px; margin: 20px 0 26px; }
+  .step-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .step-num {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #04211f;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .step-title { margin: 4px 0 6px; font-size: 20px; }
+  .step-text { margin: 0 0 10px; font-size: 16px; line-height: 1.55; color: var(--text-secondary); }
+  .step-text:last-child { margin-bottom: 0; }
+
+  /* Customer-role view: only Onboarding + Demo panels reachable.
+     customer-view = shared chrome hiding (real customers AND John's preview);
+     role-customer = real customers only (also hides the admin toolbar —
+     John's preview keeps it visible as his way back out). */
+  .customer-view #tabbar,
   .customer-view #demo-toggle,
+  .customer-view .header-meta,
   .customer-view .info-btn { display: none !important; }
+  .role-customer .admin-toolbar { display: none !important; }
   .customer-view .panel:not(#panel-onboarding):not(#panel-demo) { display: none !important; }
 
   /* Fable analysis page */
@@ -537,7 +572,6 @@
   .fable-section {
     background: var(--surface-1);
     border: 1px solid var(--border);
-    border-left: 4px solid var(--accent);
     border-radius: 12px;
     padding: 18px;
     margin-bottom: 14px;
@@ -690,6 +724,7 @@
 <body>
   <div id="gate">
     <div class="gate-card">
+      <div class="gate-mark"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 19.5v-4"/><path d="M9.5 19.5v-8"/><path d="M14.5 19.5V7.5"/><path d="M19.5 19.5v-15"/></svg></div>
       <h1>PAC Dashboard</h1>
       <p class="gate-sub">Private dashboard — sign in to continue.</p>
       <p class="gate-error" id="gate-error"></p>
@@ -704,53 +739,49 @@
   <div id="app" class="hidden">
     <div class="wrap">
       <header>
-        <div class="header-title">
-          <div>
-            <h1>Social Content Dashboard</h1>
-            <p class="site-tagline">Know what fills your next class before you post it.</p>
-            <p>4 accounts tracked</p>
-          </div>
-          <button class="info-btn" id="info-open" aria-label="What do these numbers mean?">i</button>
+        <div class="header-brand">
+          <h1>PAC Dashboard</h1>
+          <p class="site-tagline">Know what fills your next class before you post it.</p>
+          <p class="header-meta">4 accounts tracked · Data refreshed 9 Jul 2026, 11:59 pm</p>
         </div>
-        <span class="refresh-pill">Data refreshed 9 Jul 2026, 11:59 pm</span>
+        <div class="header-actions">
+          <button class="info-btn" id="info-open" aria-label="What do these numbers mean?">i</button>
+          <button class="btn-ghost" id="header-signout">Sign out</button>
+        </div>
       </header>
-      <button class="demo-toggle" id="demo-toggle">👀 Show demo account</button>
-      <button class="demo-toggle" id="customer-preview-toggle">👤 Preview: what a new client sees</button>
-      <div class="nav-dropdown" id="nav-dropdown">
-        <button class="nav-toggle" id="nav-toggle" aria-haspopup="listbox" aria-expanded="false">
-          <span id="nav-toggle-icon">✨</span>
-          <span id="nav-toggle-label">Overview</span>
-          <span class="nav-toggle-chevron">⌄</span>
-        </button>
-        <div class="nav-menu" id="nav-menu" role="listbox" hidden><button class="nav-item" data-target="panel-overview" data-icon="✨" data-label="Overview" role="option" aria-selected="true">✨ Overview</button><button class="nav-item" data-target="panel-lotb-instagram" data-icon="📸" data-label="LOTB Instagram" role="option" >📸 LOTB Instagram</button><button class="nav-item" data-target="panel-lotb-tiktok" data-icon="🎵" data-label="LOTB TikTok" role="option" >🎵 LOTB TikTok</button><button class="nav-item" data-target="panel-pac-instagram" data-icon="📸" data-label="PAC Instagram" role="option" >📸 PAC Instagram</button><button class="nav-item" data-target="panel-pac-facebook" data-icon="👍" data-label="PAC Facebook" role="option" >👍 PAC Facebook</button><button class="nav-item" data-target="panel-outcomes" data-icon="🎯" data-label="The 10 Outcomes" role="option" >🎯 The 10 Outcomes</button><button class="nav-item" data-target="panel-cot-content" data-icon="📝" data-label="COT Content" role="option" >📝 COT Content</button><button class="nav-item" data-target="panel-fable-analysis" data-icon="🧠" data-label="Fable Analysis" role="option" >🧠 Fable Analysis</button><button class="nav-item" data-target="panel-pipeline" data-icon="📡" data-label="Content Pipeline" role="option" >📡 Content Pipeline</button><button class="nav-item" data-target="panel-onboarding" data-icon="🚀" data-label="Onboarding" role="option" >🚀 Onboarding</button></div>
+      <div class="admin-toolbar" id="admin-toolbar">
+        <button class="btn-ghost" id="demo-toggle"><svg class="icn" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Demo account</span></button>
+        <button class="btn-ghost" id="customer-preview-toggle"><svg class="icn" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.2-3.6 4.1-5.5 7.5-5.5s6.3 1.9 7.5 5.5"/></svg><span>Client preview</span></button>
       </div>
+      <nav class="tabbar" id="tabbar" role="tablist"><button class="nav-item" data-target="panel-overview" role="tab" aria-selected="true"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg><span>Overview</span></button><button class="nav-item" data-target="panel-lotb-instagram" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.5" fill="currentColor"/></svg><span>LOTB Instagram</span></button><button class="nav-item" data-target="panel-lotb-tiktok" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18.5V5.5l10-2v12.5"/><circle cx="6.5" cy="18.5" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span>LOTB TikTok</span></button><button class="nav-item" data-target="panel-pac-instagram" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.5" fill="currentColor"/></svg><span>PAC Instagram</span></button><button class="nav-item" data-target="panel-pac-facebook" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10.5v9.5"/><path d="M7 11l4-7c1.2 0 2.2 1 2.2 2.2V9.5h5.1c1.2 0 2.1 1.1 1.9 2.3l-1.1 6.4A2.3 2.3 0 0 1 16.8 20H7"/></svg><span>PAC Facebook</span></button><button class="nav-item" data-target="panel-outcomes" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg><span>The 10 Outcomes</span></button><button class="nav-item" data-target="panel-cot-content" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h9.5L19.5 8v12.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1z"/><path d="M15 3.5V8h4.5"/><path d="M8.5 12.5h7M8.5 16h7"/></svg><span>COT Content</span></button><button class="nav-item" data-target="panel-fable-analysis" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.5 6.5 0 0 1 4 11.6c-.8.6-1.3 1.3-1.4 2.2l-.1.7h-5l-.1-.7c-.1-.9-.6-1.6-1.4-2.2A6.5 6.5 0 0 1 12 3z"/><path d="M9.8 20.5h4.4"/></svg><span>Fable Analysis</span></button><button class="nav-item" data-target="panel-pipeline" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 19.5v-4"/><path d="M9.5 19.5v-8"/><path d="M14.5 19.5V7.5"/><path d="M19.5 19.5v-15"/></svg><span>Content Pipeline</span></button><button class="nav-item" data-target="panel-onboarding" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 21V4"/><path d="M5.5 4.8c4.8-2.6 8.2 2.4 13-0.2v9c-4.8 2.6-8.2-2.4-13 .2"/></svg><span>Onboarding</span></button></nav>
+      <nav class="tabbar customer-tabbar" id="customer-tabbar" role="tablist" hidden><button class="nav-item" data-target="panel-onboarding" role="tab" aria-selected="true"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 21V4"/><path d="M5.5 4.8c4.8-2.6 8.2 2.4 13-0.2v9c-4.8 2.6-8.2-2.4-13 .2"/></svg><span>Get started</span></button><button class="nav-item" data-target="panel-demo" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Example dashboard</span></button></nav>
       
   <section class="panel" id="panel-overview">
     <h3 class="section-label">All accounts</h3>
     <div class="ov-grid">
       <button class="ov-card" data-jump="panel-lotb-instagram" style="--acc:#4a9af0;">
-        <span class="ov-icon">📸</span>
+        <span class="ov-icon" style="color:#4a9af0;"><svg class="icn" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.5" fill="currentColor"/></svg></span>
         <span class="ov-name">LOTB Instagram</span>
         <span class="ov-value">14</span>
         <span class="ov-label">avg engagement</span>
         <span class="ov-sub">30 posts tracked · 1,150 followers</span>
       </button>
       <button class="ov-card" data-jump="panel-lotb-tiktok" style="--acc:#2dd4b0;">
-        <span class="ov-icon">🎵</span>
+        <span class="ov-icon" style="color:#2dd4b0;"><svg class="icn" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18.5V5.5l10-2v12.5"/><circle cx="6.5" cy="18.5" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></span>
         <span class="ov-name">LOTB TikTok</span>
         <span class="ov-value">133</span>
         <span class="ov-label">avg engagement</span>
         <span class="ov-sub">30 posts tracked · 1,028 followers</span>
       </button>
       <button class="ov-card" data-jump="panel-pac-instagram" style="--acc:#0ABFBC;">
-        <span class="ov-icon">📸</span>
+        <span class="ov-icon" style="color:#0ABFBC;"><svg class="icn" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.5" fill="currentColor"/></svg></span>
         <span class="ov-name">PAC Instagram</span>
         <span class="ov-value">5</span>
         <span class="ov-label">avg engagement</span>
         <span class="ov-sub">30 posts tracked · 345 followers</span>
       </button>
       <button class="ov-card" data-jump="panel-pac-facebook" style="--acc:#0ABFBC;">
-        <span class="ov-icon">👍</span>
+        <span class="ov-icon" style="color:#0ABFBC;"><svg class="icn" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10.5v9.5"/><path d="M7 11l4-7c1.2 0 2.2 1 2.2 2.2V9.5h5.1c1.2 0 2.1 1.1 1.9 2.3l-1.1 6.4A2.3 2.3 0 0 1 16.8 20H7"/></svg></span>
         <span class="ov-name">PAC Facebook</span>
         <span class="ov-value">504</span>
         <span class="ov-label">avg engagement</span>
@@ -759,7 +790,7 @@
 
     <h3 class="section-label">Best post across everything</h3>
     <div class="spotlight" style="--acc:#0ABFBC;">
-      <span class="spotlight-icon">👍</span>
+      <span class="spotlight-icon" style="color:#0ABFBC;"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10.5v9.5"/><path d="M7 11l4-7c1.2 0 2.2 1 2.2 2.2V9.5h5.1c1.2 0 2.1 1.1 1.9 2.3l-1.1 6.4A2.3 2.3 0 0 1 16.8 20H7"/></svg></span>
       <div class="spotlight-body">
         <a class="spotlight-caption" href="https://www.facebook.com/johnyeojr/posts/pfbid09wTKhse5t9Wp3PMZCg5SN2DSrYgnSM4sMoNVFW2hqpGgUr8ueqfvKZJQ2WYNAxi9l" target="_blank" rel="noopener">My father was home every single day when I was growing up. And I thought he was jobless.</a>
         <span class="spotlight-meta">PAC Facebook · 14,677 engagement</span>
@@ -775,7 +806,7 @@
       @media (prefers-color-scheme: dark) { #panel-lotb-instagram { --acc: #4a9af0; } }
     </style>
     <div class="account-header">
-      <h2><span class="acc-icon">📸</span>LOTB Instagram</h2>
+      <h2><span class="acc-icon" style="color:#4a9af0;"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.5" fill="currentColor"/></svg></span>LOTB Instagram</h2>
     </div>
 
     
@@ -788,7 +819,7 @@
     
     <details class="ideas-block">
       <summary class="ideas-summary">
-        <span class="ideas-summary-icon">💡</span>
+        <span class="ideas-summary-icon"><svg class="icn" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.5 6.5 0 0 1 4 11.6c-.8.6-1.3 1.3-1.4 2.2l-.1.7h-5l-.1-.7c-.1-.9-.6-1.6-1.4-2.2A6.5 6.5 0 0 1 12 3z"/><path d="M9.8 20.5h4.4"/></svg></span>
         <span class="ideas-summary-text">
           <span class="ideas-summary-title">20 post ideas</span>
           <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
@@ -1114,7 +1145,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 8</span><span class="metric-chip">💬 157</span><span class="metric-chip">👁️ 431</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>8</strong></span><span class="metric-chip">Comments <strong>157</strong></span><span class="metric-chip">Views <strong>431</strong></span></div>
         </div>
         <span class="rank-value">165</span>
       </div>
@@ -1125,7 +1156,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:46.666666666666664%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 9</span><span class="metric-chip">💬 68</span><span class="metric-chip">👁️ 333</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>9</strong></span><span class="metric-chip">Comments <strong>68</strong></span><span class="metric-chip">Views <strong>333</strong></span></div>
         </div>
         <span class="rank-value">77</span>
       </div>
@@ -1136,7 +1167,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:43.63636363636363%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 8</span><span class="metric-chip">💬 64</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>8</strong></span><span class="metric-chip">Comments <strong>64</strong></span></div>
         </div>
         <span class="rank-value">72</span>
       </div>
@@ -1147,7 +1178,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:17.575757575757574%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 26</span><span class="metric-chip">💬 3</span><span class="metric-chip">👁️ 553</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>26</strong></span><span class="metric-chip">Comments <strong>3</strong></span><span class="metric-chip">Views <strong>553</strong></span></div>
         </div>
         <span class="rank-value">29</span>
       </div>
@@ -1158,7 +1189,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:7.878787878787878%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 5</span><span class="metric-chip">💬 8</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>5</strong></span><span class="metric-chip">Comments <strong>8</strong></span></div>
         </div>
         <span class="rank-value">13</span>
       </div></div>
@@ -1172,7 +1203,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">👁️ 69</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>0</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Views <strong>69</strong></span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
@@ -1183,7 +1214,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">👁️ 56</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>0</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Views <strong>56</strong></span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
@@ -1194,7 +1225,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">👁️ 37</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>0</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Views <strong>37</strong></span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
@@ -1205,7 +1236,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">👁️ 36</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>0</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Views <strong>36</strong></span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
@@ -1216,7 +1247,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">👁️ 55</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>0</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Views <strong>55</strong></span></div>
         </div>
         <span class="rank-value">0</span>
       </div></div>
@@ -1261,7 +1292,7 @@
       @media (prefers-color-scheme: dark) { #panel-lotb-tiktok { --acc: #2dd4b0; } }
     </style>
     <div class="account-header">
-      <h2><span class="acc-icon">🎵</span>LOTB TikTok</h2>
+      <h2><span class="acc-icon" style="color:#2dd4b0;"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18.5V5.5l10-2v12.5"/><circle cx="6.5" cy="18.5" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></span>LOTB TikTok</h2>
     </div>
 
     
@@ -1274,7 +1305,7 @@
     
     <details class="ideas-block">
       <summary class="ideas-summary">
-        <span class="ideas-summary-icon">💡</span>
+        <span class="ideas-summary-icon"><svg class="icn" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.5 6.5 0 0 1 4 11.6c-.8.6-1.3 1.3-1.4 2.2l-.1.7h-5l-.1-.7c-.1-.9-.6-1.6-1.4-2.2A6.5 6.5 0 0 1 12 3z"/><path d="M9.8 20.5h4.4"/></svg></span>
         <span class="ideas-summary-text">
           <span class="ideas-summary-title">20 post ideas</span>
           <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
@@ -1600,7 +1631,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 1,859</span><span class="metric-chip">💬 319</span><span class="metric-chip">🔁 338</span><span class="metric-chip">🔖 167</span><span class="metric-chip">👁️ 62,900</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>1,859</strong></span><span class="metric-chip">Comments <strong>319</strong></span><span class="metric-chip">Shares <strong>338</strong></span><span class="metric-chip">Saves <strong>167</strong></span><span class="metric-chip">Views <strong>62,900</strong></span></div>
         </div>
         <span class="rank-value">2,683</span>
       </div>
@@ -1611,7 +1642,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:16.436824450242266%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 333</span><span class="metric-chip">💬 28</span><span class="metric-chip">🔁 31</span><span class="metric-chip">🔖 49</span><span class="metric-chip">👁️ 32,600</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>333</strong></span><span class="metric-chip">Comments <strong>28</strong></span><span class="metric-chip">Shares <strong>31</strong></span><span class="metric-chip">Saves <strong>49</strong></span><span class="metric-chip">Views <strong>32,600</strong></span></div>
         </div>
         <span class="rank-value">441</span>
       </div>
@@ -1622,7 +1653,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:4.845322400298174%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 49</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 52</span><span class="metric-chip">🔖 29</span><span class="metric-chip">👁️ 3,112</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>49</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>52</strong></span><span class="metric-chip">Saves <strong>29</strong></span><span class="metric-chip">Views <strong>3,112</strong></span></div>
         </div>
         <span class="rank-value">130</span>
       </div>
@@ -1633,7 +1664,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 22</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 19</span><span class="metric-chip">🔖 12</span><span class="metric-chip">👁️ 2,223</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>22</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>19</strong></span><span class="metric-chip">Saves <strong>12</strong></span><span class="metric-chip">Views <strong>2,223</strong></span></div>
         </div>
         <span class="rank-value">53</span>
       </div>
@@ -1644,7 +1675,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 14</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 22</span><span class="metric-chip">🔖 16</span><span class="metric-chip">👁️ 931</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>14</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>22</strong></span><span class="metric-chip">Saves <strong>16</strong></span><span class="metric-chip">Views <strong>931</strong></span></div>
         </div>
         <span class="rank-value">52</span>
       </div></div>
@@ -1658,7 +1689,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:33.33333333333333%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 3</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 0</span><span class="metric-chip">👁️ 321</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>3</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>0</strong></span><span class="metric-chip">Saves <strong>0</strong></span><span class="metric-chip">Views <strong>321</strong></span></div>
         </div>
         <span class="rank-value">3</span>
       </div>
@@ -1669,7 +1700,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:77.77777777777779%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 7</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 0</span><span class="metric-chip">👁️ 485</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>7</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>0</strong></span><span class="metric-chip">Saves <strong>0</strong></span><span class="metric-chip">Views <strong>485</strong></span></div>
         </div>
         <span class="rank-value">7</span>
       </div>
@@ -1680,7 +1711,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:88.88888888888889%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 6</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 2</span><span class="metric-chip">👁️ 502</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>6</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>0</strong></span><span class="metric-chip">Saves <strong>2</strong></span><span class="metric-chip">Views <strong>502</strong></span></div>
         </div>
         <span class="rank-value">8</span>
       </div>
@@ -1691,7 +1722,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 3</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 1</span><span class="metric-chip">🔖 5</span><span class="metric-chip">👁️ 315</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>3</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>1</strong></span><span class="metric-chip">Saves <strong>5</strong></span><span class="metric-chip">Views <strong>315</strong></span></div>
         </div>
         <span class="rank-value">9</span>
       </div>
@@ -1702,7 +1733,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 8</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 1</span><span class="metric-chip">👁️ 282</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>8</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>0</strong></span><span class="metric-chip">Saves <strong>1</strong></span><span class="metric-chip">Views <strong>282</strong></span></div>
         </div>
         <span class="rank-value">9</span>
       </div></div>
@@ -1726,7 +1757,7 @@
       @media (prefers-color-scheme: dark) { #panel-pac-instagram { --acc: #0ABFBC; } }
     </style>
     <div class="account-header">
-      <h2><span class="acc-icon">📸</span>PAC Instagram</h2>
+      <h2><span class="acc-icon" style="color:#0ABFBC;"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.5" fill="currentColor"/></svg></span>PAC Instagram</h2>
     </div>
 
     
@@ -1739,7 +1770,7 @@
     
     <details class="ideas-block">
       <summary class="ideas-summary">
-        <span class="ideas-summary-icon">💡</span>
+        <span class="ideas-summary-icon"><svg class="icn" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.5 6.5 0 0 1 4 11.6c-.8.6-1.3 1.3-1.4 2.2l-.1.7h-5l-.1-.7c-.1-.9-.6-1.6-1.4-2.2A6.5 6.5 0 0 1 12 3z"/><path d="M9.8 20.5h4.4"/></svg></span>
         <span class="ideas-summary-text">
           <span class="ideas-summary-title">20 post ideas</span>
           <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
@@ -2065,7 +2096,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 26</span><span class="metric-chip">💬 3</span><span class="metric-chip">👁️ 553</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>26</strong></span><span class="metric-chip">Comments <strong>3</strong></span><span class="metric-chip">Views <strong>553</strong></span></div>
         </div>
         <span class="rank-value">29</span>
       </div>
@@ -2076,7 +2107,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:75.86206896551724%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 19</span><span class="metric-chip">💬 3</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>19</strong></span><span class="metric-chip">Comments <strong>3</strong></span></div>
         </div>
         <span class="rank-value">22</span>
       </div>
@@ -2087,7 +2118,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:68.96551724137932%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 4</span><span class="metric-chip">💬 16</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>4</strong></span><span class="metric-chip">Comments <strong>16</strong></span></div>
         </div>
         <span class="rank-value">20</span>
       </div>
@@ -2098,7 +2129,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:41.37931034482759%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 11</span><span class="metric-chip">💬 1</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>11</strong></span><span class="metric-chip">Comments <strong>1</strong></span></div>
         </div>
         <span class="rank-value">12</span>
       </div>
@@ -2109,7 +2140,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:31.03448275862069%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 9</span><span class="metric-chip">💬 0</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>9</strong></span><span class="metric-chip">Comments <strong>0</strong></span></div>
         </div>
         <span class="rank-value">9</span>
       </div></div>
@@ -2123,7 +2154,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>0</strong></span><span class="metric-chip">Comments <strong>0</strong></span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
@@ -2134,7 +2165,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>0</strong></span><span class="metric-chip">Comments <strong>0</strong></span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
@@ -2145,7 +2176,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 1</span><span class="metric-chip">💬 0</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>1</strong></span><span class="metric-chip">Comments <strong>0</strong></span></div>
         </div>
         <span class="rank-value">1</span>
       </div>
@@ -2156,7 +2187,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 1</span><span class="metric-chip">💬 0</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>1</strong></span><span class="metric-chip">Comments <strong>0</strong></span></div>
         </div>
         <span class="rank-value">1</span>
       </div>
@@ -2167,7 +2198,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 1</span><span class="metric-chip">💬 0</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>1</strong></span><span class="metric-chip">Comments <strong>0</strong></span></div>
         </div>
         <span class="rank-value">1</span>
       </div></div>
@@ -2212,7 +2243,7 @@
       @media (prefers-color-scheme: dark) { #panel-pac-facebook { --acc: #0ABFBC; } }
     </style>
     <div class="account-header">
-      <h2><span class="acc-icon">👍</span>PAC Facebook</h2>
+      <h2><span class="acc-icon" style="color:#0ABFBC;"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 10.5v9.5"/><path d="M7 11l4-7c1.2 0 2.2 1 2.2 2.2V9.5h5.1c1.2 0 2.1 1.1 1.9 2.3l-1.1 6.4A2.3 2.3 0 0 1 16.8 20H7"/></svg></span>PAC Facebook</h2>
     </div>
 
     
@@ -2261,7 +2292,7 @@
     
     <details class="ideas-block">
       <summary class="ideas-summary">
-        <span class="ideas-summary-icon">💡</span>
+        <span class="ideas-summary-icon"><svg class="icn" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.5 6.5 0 0 1 4 11.6c-.8.6-1.3 1.3-1.4 2.2l-.1.7h-5l-.1-.7c-.1-.9-.6-1.6-1.4-2.2A6.5 6.5 0 0 1 12 3z"/><path d="M9.8 20.5h4.4"/></svg></span>
         <span class="ideas-summary-text">
           <span class="ideas-summary-title">24 post ideas</span>
           <span class="ideas-summary-sub">Ready-to-use hooks for this account</span>
@@ -2275,7 +2306,7 @@
           <div class="idea-body">
             <h4 class="idea-title">What My Daughters Taught Me About Business</h4>
             <div class="idea-tags">
-              <span class="idea-tag idea-tag-planned">📅 July epic</span>
+              <span class="idea-tag idea-tag-planned">July epic</span>
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">needs prep</span>
             </div>
@@ -2380,7 +2411,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Discount Conversation</h4>
             <div class="idea-tags">
-              <span class="idea-tag idea-tag-planned">📅 Fri 17 Jul</span>
+              <span class="idea-tag idea-tag-planned">Fri 17 Jul</span>
               <span class="idea-tag idea-tag-proof">proof</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -2410,7 +2441,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Post I Almost Didn&#39;t Publish</h4>
             <div class="idea-tags">
-              <span class="idea-tag idea-tag-planned">📅 Wed 15 Jul</span>
+              <span class="idea-tag idea-tag-planned">Wed 15 Jul</span>
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -2485,7 +2516,7 @@
           <div class="idea-body">
             <h4 class="idea-title">Sunday: What I&#39;m Not Doing</h4>
             <div class="idea-tags">
-              <span class="idea-tag idea-tag-planned">📅 Sun 19 Jul</span>
+              <span class="idea-tag idea-tag-planned">Sun 19 Jul</span>
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -2515,7 +2546,7 @@
           <div class="idea-body">
             <h4 class="idea-title">The Chinese Dictionary</h4>
             <div class="idea-tags">
-              <span class="idea-tag idea-tag-planned">📅 Sat 18 Jul</span>
+              <span class="idea-tag idea-tag-planned">Sat 18 Jul</span>
               <span class="idea-tag idea-tag-trust">trust</span>
               <span class="idea-tag idea-tag-effort">quick</span>
             </div>
@@ -2647,7 +2678,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 14,066</span><span class="metric-chip">💬 498</span><span class="metric-chip">🔁 1,119</span><span class="metric-chip">🔖 703</span><span class="metric-chip">👁️ 815,992</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>14,066</strong></span><span class="metric-chip">Comments <strong>498</strong></span><span class="metric-chip">Shares <strong>1,119</strong></span><span class="metric-chip">Saves <strong>703</strong></span><span class="metric-chip">Views <strong>815,992</strong></span></div>
         </div>
         <span class="rank-value">14,677</span>
       </div>
@@ -2658,7 +2689,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 53</span><span class="metric-chip">💬 18</span><span class="metric-chip">🔁 5</span><span class="metric-chip">🔖 6</span><span class="metric-chip">👁️ 10,285</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>53</strong></span><span class="metric-chip">Comments <strong>18</strong></span><span class="metric-chip">Shares <strong>5</strong></span><span class="metric-chip">Saves <strong>6</strong></span><span class="metric-chip">Views <strong>10,285</strong></span></div>
         </div>
         <span class="rank-value">80</span>
       </div>
@@ -2669,7 +2700,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 34</span><span class="metric-chip">💬 2</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 2</span><span class="metric-chip">👁️ 8,879</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>34</strong></span><span class="metric-chip">Comments <strong>2</strong></span><span class="metric-chip">Shares <strong>0</strong></span><span class="metric-chip">Saves <strong>2</strong></span><span class="metric-chip">Views <strong>8,879</strong></span></div>
         </div>
         <span class="rank-value">37</span>
       </div>
@@ -2680,7 +2711,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 25</span><span class="metric-chip">💬 5</span><span class="metric-chip">🔁 2</span><span class="metric-chip">🔖 4</span><span class="metric-chip">👁️ 8,409</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>25</strong></span><span class="metric-chip">Comments <strong>5</strong></span><span class="metric-chip">Shares <strong>2</strong></span><span class="metric-chip">Saves <strong>4</strong></span><span class="metric-chip">Views <strong>8,409</strong></span></div>
         </div>
         <span class="rank-value">36</span>
       </div>
@@ -2691,7 +2722,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:var(--acc);"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 16</span><span class="metric-chip">💬 13</span><span class="metric-chip">🔁 1</span><span class="metric-chip">🔖 0</span><span class="metric-chip">👁️ 1,933</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>16</strong></span><span class="metric-chip">Comments <strong>13</strong></span><span class="metric-chip">Shares <strong>1</strong></span><span class="metric-chip">Saves <strong>0</strong></span><span class="metric-chip">Views <strong>1,933</strong></span></div>
         </div>
         <span class="rank-value">30</span>
       </div></div>
@@ -2705,7 +2736,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:3%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 0</span><span class="metric-chip">👁️ 4,086</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>0</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>0</strong></span><span class="metric-chip">Saves <strong>0</strong></span><span class="metric-chip">Views <strong>4,086</strong></span></div>
         </div>
         <span class="rank-value">0</span>
       </div>
@@ -2716,7 +2747,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:66.66666666666666%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 0</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 1</span><span class="metric-chip">🔖 1</span><span class="metric-chip">👁️ 1,026</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>0</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>1</strong></span><span class="metric-chip">Saves <strong>1</strong></span><span class="metric-chip">Views <strong>1,026</strong></span></div>
         </div>
         <span class="rank-value">2</span>
       </div>
@@ -2727,7 +2758,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 2</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 0</span><span class="metric-chip">🔖 1</span><span class="metric-chip">👁️ 772</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>2</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>0</strong></span><span class="metric-chip">Saves <strong>1</strong></span><span class="metric-chip">Views <strong>772</strong></span></div>
         </div>
         <span class="rank-value">3</span>
       </div>
@@ -2738,7 +2769,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 1</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 1</span><span class="metric-chip">🔖 1</span><span class="metric-chip">👁️ 1,031</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>1</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>1</strong></span><span class="metric-chip">Saves <strong>1</strong></span><span class="metric-chip">Views <strong>1,031</strong></span></div>
         </div>
         <span class="rank-value">3</span>
       </div>
@@ -2749,7 +2780,7 @@
           <div class="bar-track">
             <div class="bar-fill" style="width:100%; background:#5b6b85;"></div>
           </div>
-          <div class="metric-row"><span class="metric-chip">❤️ 2</span><span class="metric-chip">💬 0</span><span class="metric-chip">🔁 1</span><span class="metric-chip">🔖 0</span><span class="metric-chip">👁️ 262</span></div>
+          <div class="metric-row"><span class="metric-chip">Likes <strong>2</strong></span><span class="metric-chip">Comments <strong>0</strong></span><span class="metric-chip">Shares <strong>1</strong></span><span class="metric-chip">Saves <strong>0</strong></span><span class="metric-chip">Views <strong>262</strong></span></div>
         </div>
         <span class="rank-value">3</span>
       </div></div>
@@ -2783,7 +2814,7 @@
       
   <section class="panel" id="panel-outcomes" hidden>
     <div class="account-header">
-      <h2><span class="acc-icon">🎯</span>The 10 Outcomes</h2>
+      <h2><span class="acc-icon"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg></span>The 10 Outcomes</h2>
     </div>
     <p class="fable-subtitle">What tutors actually buy from PAC — the after-states. Every proof post sells one of these. Rule: the abstract line is what you must NOT write (it&#39;s coach-speak the moment you say it); the receipt line is the shape to write instead — swap in a real, consented client and real numbers, or don&#39;t run it. The reader should reach the abstract conclusion on their own.</p>
 
@@ -2834,80 +2865,80 @@
         <div class="outcome-num">1</div>
         <div class="outcome-body">
           <h4>Better leads, without chasing</h4>
-          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Higher-quality leads on demand."</p>
-          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> In March she answered 20 low-ball enquiries a week from a $15 boost. Last month 9 enquiries came in — 7 booked a call, 4 enrolled at her new rate. She didn&#39;t post daily to get them.</p>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">Don't write</span> "Higher-quality leads on demand."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">Write this shape</span> In March she answered 20 low-ball enquiries a week from a $15 boost. Last month 9 enquiries came in — 7 booked a call, 4 enrolled at her new rate. She didn&#39;t post daily to get them.</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="outcome-num">2</div>
         <div class="outcome-body">
           <h4>Rates go up, families stay</h4>
-          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Charge what you&#39;re worth."</p>
-          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> He raised his rate 40% in June, terrified. Of 14 families, 13 stayed — and one mum replied: &quot;Honestly, we expected this sooner.&quot;</p>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">Don't write</span> "Charge what you&#39;re worth."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">Write this shape</span> He raised his rate 40% in June, terrified. Of 14 families, 13 stayed — and one mum replied: &quot;Honestly, we expected this sooner.&quot;</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="outcome-num">3</div>
         <div class="outcome-body">
           <h4>Income uncapped from hours</h4>
-          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Stop trading time for money."</p>
-          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> Fully booked at $60/hr, she was earning less than two years ago. Her first group programme did $8k in month one — teaching the same hours she already taught.</p>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">Don't write</span> "Stop trading time for money."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">Write this shape</span> Fully booked at $60/hr, she was earning less than two years ago. Her first group programme did $8k in month one — teaching the same hours she already taught.</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="outcome-num">4</div>
         <div class="outcome-body">
           <h4>Evenings and weekends back</h4>
-          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Build a business that gives you freedom."</p>
-          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> Last term he taught Tuesday to Saturday, 9 slots a day. This term: 4 teaching days, Sundays untouchable — and revenue up, not down.</p>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">Don't write</span> "Build a business that gives you freedom."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">Write this shape</span> Last term he taught Tuesday to Saturday, 9 slots a day. This term: 4 teaching days, Sundays untouchable — and revenue up, not down.</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="outcome-num">5</div>
         <div class="outcome-body">
           <h4>The business survives you resting</h4>
-          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "A business that doesn&#39;t depend on you."</p>
-          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> She got dengue in April and cancelled nothing — the group content ran, the worksheets went out, and not one family paused payment. Two years ago that fortnight would have cost her $3,200.</p>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">Don't write</span> "A business that doesn&#39;t depend on you."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">Write this shape</span> She got dengue in April and cancelled nothing — the group content ran, the worksheets went out, and not one family paused payment. Two years ago that fortnight would have cost her $3,200.</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="outcome-num">6</div>
         <div class="outcome-body">
           <h4>A waitlist instead of a funnel</h4>
-          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Become the obvious choice in your niche."</p>
-          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> One post announcing 6 P6 slots. 19 parents replied by Thursday. The other 13 asked to be told when 2027 opens.</p>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">Don't write</span> "Become the obvious choice in your niche."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">Write this shape</span> One post announcing 6 P6 slots. 19 parents replied by Thursday. The other 13 asked to be told when 2027 opens.</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="outcome-num">7</div>
         <div class="outcome-body">
           <h4>Parents stop haggling</h4>
-          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Attract premium clients who value you."</p>
-          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> A parent asked her for a discount. She said no — and explained what the fee holds. The parent signed up anyway, at full rate, and referred her sister the same week.</p>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">Don't write</span> "Attract premium clients who value you."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">Write this shape</span> A parent asked her for a discount. She said no — and explained what the fee holds. The parent signed up anyway, at full rate, and referred her sister the same week.</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="outcome-num">8</div>
         <div class="outcome-body">
           <h4>Money arrives before the month starts</h4>
-          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Predictable recurring revenue."</p>
-          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> On the 1st of last month, $6,400 was already collected before he taught a single lesson — term programmes, paid upfront. He stopped checking whether anyone would &#39;continue next month.&#39;</p>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">Don't write</span> "Predictable recurring revenue."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">Write this shape</span> On the 1st of last month, $6,400 was already collected before he taught a single lesson — term programmes, paid upfront. He stopped checking whether anyone would &#39;continue next month.&#39;</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="outcome-num">9</div>
         <div class="outcome-body">
           <h4>Parents chase, not the tutor</h4>
-          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Position yourself as the authority."</p>
-          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> She used to send &#39;gentle reminder&#39; follow-ups after every trial. Now parents open with &quot;we&#39;ve read your posts for months — how do we start?&quot; Her last 5 sign-ups needed zero convincing.</p>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">Don't write</span> "Position yourself as the authority."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">Write this shape</span> She used to send &#39;gentle reminder&#39; follow-ups after every trial. Now parents open with &quot;we&#39;ve read your posts for months — how do we start?&quot; Her last 5 sign-ups needed zero convincing.</p>
         </div>
       </div>
       <div class="outcome-card">
         <div class="outcome-num">10</div>
         <div class="outcome-body">
           <h4>The first dollar that isn&#39;t a lesson</h4>
-          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Diversify your income streams."</p>
-          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> His revision workshop — the format everyone said was dead — sold 23 seats at $89. It was built from worksheets he already had. That Saturday earned more than his best teaching week.</p>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">Don't write</span> "Diversify your income streams."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">Write this shape</span> His revision workshop — the format everyone said was dead — sold 23 seats at $89. It was built from worksheets he already had. That Saturday earned more than his best teaching week.</p>
         </div>
       </div>
     </div>
@@ -2917,7 +2948,7 @@
       
   <section class="panel" id="panel-cot-content" hidden>
     <div class="account-header">
-      <h2><span class="acc-icon">📝</span>COT Content</h2>
+      <h2><span class="acc-icon"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h9.5L19.5 8v12.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1z"/><path d="M15 3.5V8h4.5"/><path d="M8.5 12.5h7M8.5 16h7"/></svg></span>COT Content</h2>
     </div>
     <p class="fable-subtitle">What actually drives engagement on your page — from the real like/comment numbers on your COT-format FB posts. Same format, 4x gap: the difference is in the hook&#39;s emotional stakes, not the structure.</p>
     <h3 class="section-label">What actually drives engagement on your page</h3>
@@ -2946,7 +2977,7 @@
       
   <section class="panel" id="panel-fable-analysis" hidden>
     <div class="account-header">
-      <h2><span class="acc-icon">🧠</span>Fable Analysis</h2>
+      <h2><span class="acc-icon"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.5 6.5 0 0 1 4 11.6c-.8.6-1.3 1.3-1.4 2.2l-.1.7h-5l-.1-.7c-.1-.9-.6-1.6-1.4-2.2A6.5 6.5 0 0 1 12 3z"/><path d="M9.8 20.5h4.4"/></svg></span>Fable Analysis</h2>
     </div>
     <p class="fable-subtitle">A critical second look at the post ideas — what the data really says, in plain English. Reviewed 10 Jul 2026, updated 15 Jul 2026 with the PAC 2026 content strategy.</p>
     
@@ -3014,7 +3045,7 @@
       
   <section class="panel" id="panel-pipeline" hidden>
     <div class="account-header">
-      <h2><span class="acc-icon">📡</span>Content Pipeline</h2>
+      <h2><span class="acc-icon"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 19.5v-4"/><path d="M9.5 19.5v-8"/><path d="M14.5 19.5V7.5"/><path d="M19.5 19.5v-15"/></svg></span>Content Pipeline</h2>
     </div>
     <p class="fable-subtitle">The full content flow by funnel stage (Trust / Proof / Harvest) and audience (PAC / LOTB) — where each post lands, and whether it fired on schedule. Times shown in your local timezone.</p>
     <div id="pipeline-list" class="pipeline-list">
@@ -3077,42 +3108,41 @@
   </section>
       
   <section class="panel" id="panel-onboarding" hidden>
-    <div class="demo-banner">GETTING STARTED</div>
     <div class="account-header">
-      <h2><span class="acc-icon">🚀</span>Welcome to the PAC Dashboard</h2>
+      <h2><span class="acc-icon"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 21V4"/><path d="M5.5 4.8c4.8-2.6 8.2 2.4 13-0.2v9c-4.8 2.6-8.2-2.4-13 .2"/></svg></span>Welcome to the PAC Dashboard</h2>
     </div>
     <p class="fable-subtitle">Two quick steps to get access, then a look at what you'll see.</p>
-    <div class="ideas-list" style="margin-top:16px;">
+    <div class="steps">
       
-      <div class="idea-card" style="--acc:#0ABFBC;">
-        <div class="idea-num">1</div>
-        <div class="idea-body">
-          <h4 class="idea-title">Submit your details</h4>
-          <p class="idea-angle">Fill out the sign-up form with your name, the Gmail address you&#39;ll sign in with, and your Instagram / TikTok / Facebook handles.</p>
-          <p class="idea-context"><a href="https://forms.gle/1JPQRoMUtjRMxqeQ9" target="_blank" rel="noopener" style="color:var(--accent); font-weight:700;">Open the sign-up form →</a></p>
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4 class="step-title">Submit your details</h4>
+          <p class="step-text">Fill out the sign-up form with your name, the Gmail address you&#39;ll sign in with, and your Instagram / TikTok / Facebook handles.</p>
+          <a class="btn-primary" href="https://forms.gle/1JPQRoMUtjRMxqeQ9" target="_blank" rel="noopener">Open the sign-up form <svg class="icn" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16"/><path d="M13 5l7 7-7 7"/></svg></a>
         </div>
       </div>
-      <div class="idea-card" style="--acc:#0ABFBC;">
-        <div class="idea-num">2</div>
-        <div class="idea-body">
-          <h4 class="idea-title">Wait for access confirmation</h4>
-          <p class="idea-angle">We add your Gmail to the dashboard&#39;s access list and message you once it&#39;s ready — usually the same day.</p>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4 class="step-title">Wait for access confirmation</h4>
+          <p class="step-text">We add your Gmail to the dashboard&#39;s access list and message you once it&#39;s ready — usually the same day.</p>
           
         </div>
       </div>
-      <div class="idea-card" style="--acc:#0ABFBC;">
-        <div class="idea-num">3</div>
-        <div class="idea-body">
-          <h4 class="idea-title">Sign in</h4>
-          <p class="idea-angle">Come back to this page and sign in with the same Google account you submitted. If you see “no access”, you either signed in with a different account or haven&#39;t been added yet — message John.</p>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4 class="step-title">Sign in</h4>
+          <p class="step-text">Come back to this page and sign in with the same Google account you submitted. If you see “no access”, you either signed in with a different account or haven&#39;t been added yet — message John.</p>
           
         </div>
       </div>
-      <div class="idea-card" style="--acc:#0ABFBC;">
-        <div class="idea-num">4</div>
-        <div class="idea-body">
-          <h4 class="idea-title">See what your dashboard will look like</h4>
-          <p class="idea-angle">The “Demo Account” panel below shows a real example of the kind of weekly plan, top/bottom posts, and post ideas you&#39;ll get once your own accounts are connected.</p>
+      <div class="step-row">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4 class="step-title">See what your dashboard will look like</h4>
+          <p class="step-text">Open the “Example dashboard” tab above for a real sample of the weekly plan, top and bottom posts, and post ideas you&#39;ll get once your own accounts are connected.</p>
           
         </div>
       </div>
@@ -3121,9 +3151,9 @@
   </section>
       
   <section class="panel" id="panel-demo" hidden>
-    <div class="demo-banner">DEMO ACCOUNT · sample data, not a real client</div>
     <div class="account-header">
-      <h2><span class="acc-icon">👩‍🏫</span>Mrs Lim · Primary English Tuition</h2>
+      <h2><span class="acc-icon"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.2-3.6 4.1-5.5 7.5-5.5s6.3 1.9 7.5 5.5"/></svg></span>Mrs Lim · Primary English Tuition</h2>
+      <span class="sample-chip">Sample data — not a real client</span>
     </div>
     <p class="fable-subtitle">Know what to post this week — based on what your audience already proved they love.</p>
 
@@ -3285,13 +3315,13 @@
       <h3>Rank badges (1-5)</h3>
       <p>Posts ordered by engagement score, highest first in "Top 5," lowest first in "Bottom 5." The bar length under each post is that post's engagement relative to the #1 post in its own list.</p>
 
-      <h3>The small icons under each post</h3>
+      <h3>The small labels under each post</h3>
       <ul>
-        <li>❤️ Likes / reactions</li>
-        <li>💬 Comments</li>
-        <li>🔁 Shares / reposts</li>
-        <li>🔖 Saves / bookmarks</li>
-        <li>👁️ Views (video plays, or reach for Facebook)</li>
+        <li><strong>Likes</strong> — likes / reactions</li>
+        <li><strong>Comments</strong></li>
+        <li><strong>Shares</strong> — shares / reposts</li>
+        <li><strong>Saves</strong> — saves / bookmarks</li>
+        <li><strong>Views</strong> — video plays, or reach for Facebook</li>
       </ul>
       <p><strong>Instagram posts only show likes, comments, and views</strong> — Instagram's own platform does not publicly expose save or share counts to anyone except the account owner inside the Instagram app itself, so the scraping tool behind this dashboard can't pull them. TikTok and Facebook both expose all five metrics.</p>
 
@@ -3336,9 +3366,12 @@
       // this scales to strangers.
       function applyRole(role) {
         if (role === "admin") return;
-        document.body.classList.add("customer-view");
-        document.getElementById("panel-onboarding").hidden = false;
-        document.getElementById("panel-demo").hidden = false;
+        // customer-view hides admin chrome; role-customer additionally hides the
+        // admin toolbar (which stays visible in John's "Client preview" mode so
+        // he has a way back out).
+        document.body.classList.add("customer-view", "role-customer");
+        document.getElementById("customer-tabbar").hidden = false;
+        goToPanel("panel-onboarding");
       }
 
       function showError(msg) {
@@ -3425,44 +3458,20 @@
         });
       });
 
-      var navDropdown = document.getElementById("nav-dropdown");
-      var navToggle = document.getElementById("nav-toggle");
-      var navMenu = document.getElementById("nav-menu");
-      var navToggleIcon = document.getElementById("nav-toggle-icon");
-      var navToggleLabel = document.getElementById("nav-toggle-label");
+      // Tab bar navigation. .nav-item covers both the admin tab bar and the
+      // customer two-tab bar, so one selection pass keeps every bar in sync.
       var navItems = document.querySelectorAll(".nav-item");
-
-      function closeNavMenu() {
-        navMenu.hidden = true;
-        navDropdown.classList.remove("open");
-        navToggle.setAttribute("aria-expanded", "false");
-      }
-      function openNavMenu() {
-        navMenu.hidden = false;
-        navDropdown.classList.add("open");
-        navToggle.setAttribute("aria-expanded", "true");
-      }
-
-      navToggle.addEventListener("click", function () {
-        if (navMenu.hidden) openNavMenu();
-        else closeNavMenu();
-      });
-      document.addEventListener("click", function (e) {
-        if (!navDropdown.contains(e.target)) closeNavMenu();
-      });
 
       function goToPanel(targetId) {
         navItems.forEach(function (item) {
           var selected = item.dataset.target === targetId;
           item.setAttribute("aria-selected", selected ? "true" : "false");
-          if (selected) {
-            navToggleIcon.textContent = item.dataset.icon;
-            navToggleLabel.textContent = item.dataset.label;
+          if (selected && item.scrollIntoView) {
+            item.scrollIntoView({ block: "nearest", inline: "center", behavior: "instant" });
           }
         });
         document.querySelectorAll(".panel").forEach(function (p) { p.hidden = true; });
         document.getElementById(targetId).hidden = false;
-        closeNavMenu();
         window.scrollTo({ top: 0, behavior: "instant" });
       }
 
@@ -3554,44 +3563,48 @@
           document.getElementById("pipeline-list").innerHTML = '<p class="pipeline-loading">Pipeline status unavailable right now.</p>';
         });
 
+      var demoToggleHtml = "<svg class=\"icn\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/></svg><span>Demo account</span>";
+      var previewToggleHtml = "<svg class=\"icn\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4.5 20.5c1.2-3.6 4.1-5.5 7.5-5.5s6.3 1.9 7.5 5.5\"/></svg><span>Client preview</span>";
+      var backHtml = "<span>\u2190 Back to my dashboard</span>";
+
       var demoToggle = document.getElementById("demo-toggle");
       var demoOn = false;
       demoToggle.addEventListener("click", function () {
         demoOn = !demoOn;
-        document.getElementById("nav-dropdown").style.display = demoOn ? "none" : "";
+        document.getElementById("tabbar").hidden = demoOn;
         if (demoOn) {
-          document.querySelectorAll(".panel").forEach(function (p) { p.hidden = true; });
-          document.getElementById("panel-demo").hidden = false;
-          demoToggle.textContent = "← Back to my dashboard";
+          goToPanel("panel-demo");
+          demoToggle.innerHTML = backHtml;
         } else {
-          document.getElementById("panel-demo").hidden = true;
           goToPanel("panel-overview");
-          demoToggle.textContent = "👀 Show demo account";
+          demoToggle.innerHTML = demoToggleHtml;
         }
-        window.scrollTo({ top: 0, behavior: "instant" });
       });
 
       // Admin-only: lets John see exactly what a role="customer" account sees
-      // after signing in, without needing a second Google account. Reuses the
-      // same customer-view CSS class the real gate applies via applyRole().
+      // after signing in, without needing a second Google account. Adds the same
+      // customer-view class the real gate applies via applyRole() — but NOT
+      // role-customer, so the admin toolbar (his way back out) stays visible.
       var customerPreviewToggle = document.getElementById("customer-preview-toggle");
       var customerPreviewOn = false;
       customerPreviewToggle.addEventListener("click", function () {
         customerPreviewOn = !customerPreviewOn;
+        document.getElementById("customer-tabbar").hidden = !customerPreviewOn;
         if (customerPreviewOn) {
           document.body.classList.add("customer-view");
-          document.querySelectorAll(".panel").forEach(function (p) { p.hidden = true; });
-          document.getElementById("panel-onboarding").hidden = false;
-          document.getElementById("panel-demo").hidden = false;
-          customerPreviewToggle.textContent = "← Back to my dashboard";
+          goToPanel("panel-onboarding");
+          customerPreviewToggle.innerHTML = backHtml;
         } else {
           document.body.classList.remove("customer-view");
-          document.getElementById("panel-onboarding").hidden = true;
-          document.getElementById("panel-demo").hidden = true;
           goToPanel("panel-overview");
-          customerPreviewToggle.textContent = "👤 Preview: what a new client sees";
+          customerPreviewToggle.innerHTML = previewToggleHtml;
         }
-        window.scrollTo({ top: 0, behavior: "instant" });
+      });
+
+      // Sign out from inside the dashboard (both roles). Reload gives a clean
+      // slate — onAuthStateChanged then shows the gate again.
+      document.getElementById("header-signout").addEventListener("click", function () {
+        auth.signOut().then(function () { window.location.reload(); });
       });
 
       var infoModal = document.getElementById("info-modal");
