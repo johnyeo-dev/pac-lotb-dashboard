@@ -3473,35 +3473,59 @@
         error.classList.remove("show");
       }
 
-      // Mobile browsers (esp. in-app browsers like Telegram/WhatsApp, and Safari/Chrome
-      // on iOS/Android) handle Google's signInWithPopup unreliably — the picker inside
-      // the popup often needs a second click or a manual refresh to complete. Redirect
-      // flow (leaves the page, comes back) is the reliable path on mobile; popup is
-      // still nicer on desktop where it actually works in one click.
-      var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+      // In-app browsers (Telegram/Instagram/WhatsApp/Facebook webviews, Android
+      // WebView) — Google actively refuses to complete OAuth inside these ("This
+      // browser or app may not be secure"), with no useful error surfaced back to
+      // us. No sign-in flow can work here; the only fix is opening in a real browser.
+      var isInAppBrowser = /FBAN|FBAV|Instagram|Line/|Twitter|WhatsApp|; ?wv)/i.test(navigator.userAgent);
+
+      // signInWithRedirect used to be the mobile default here, but it silently
+      // fails (no error, just dumped back at the sign-in screen — confirmed live
+      // 2026-07-16) on iOS Safari with "Prevent Cross-Site Tracking" on (the
+      // default) and similar third-party-storage-partitioning setups: the redirect
+      // round-trip depends on IndexedDB surviving the cross-domain hop to
+      // accounts.google.com and back, which gets wiped. signInWithPopup avoids that
+      // hop entirely and now works fine on a direct user-gesture click on modern
+      // mobile Safari/Chrome, so it's the default everywhere; redirect is only the
+      // fallback when a popup genuinely can't open.
       var signingIn = false;
 
       function startSignIn() {
         clearError();
+        if (isInAppBrowser) {
+          showError("Google sign-in doesn't work inside this app's built-in browser. Tap the ⋯ or share icon and choose “Open in Safari” / “Open in Chrome”, then sign in from there.");
+          return;
+        }
         signingIn = true;
         var provider = new firebase.auth.GoogleAuthProvider();
-        if (isMobile) {
-          auth.signInWithRedirect(provider);
-        } else {
-          auth.signInWithPopup(provider).catch(function (e) {
-            signingIn = false;
-            if (e && (e.code === "auth/popup-blocked" || e.code === "auth/popup-closed-by-user")) {
-              auth.signInWithRedirect(provider);
-            } else {
-              showError(e && e.message ? e.message : "Sign-in failed — try again.");
-            }
-          });
-        }
+        auth.signInWithPopup(provider).catch(function (e) {
+          signingIn = false;
+          if (e && (e.code === "auth/popup-blocked" || e.code === "auth/operation-not-supported-in-this-environment")) {
+            sessionStorage.setItem("pac_dash_redirect_attempted", "1");
+            auth.signInWithRedirect(provider);
+          } else if (e && e.code === "auth/popup-closed-by-user") {
+            // User closed the picker themselves — not an error worth showing.
+          } else {
+            showError((e && e.code ? "[" + e.code + "] " : "") + (e && e.message ? e.message : "Sign-in failed — try again."));
+          }
+        });
       }
 
-      auth.getRedirectResult().catch(function (e) {
+      auth.getRedirectResult().then(function (result) {
+        if (sessionStorage.getItem("pac_dash_redirect_attempted")) {
+          sessionStorage.removeItem("pac_dash_redirect_attempted");
+          if (!result || !result.user) {
+            // Redirect completed with no error and no user — the classic silent
+            // failure from cross-site storage being blocked. Give the one
+            // actionable fix instead of leaving the button looking broken.
+            signingIn = false;
+            showError("Sign-in didn't complete — this usually means your browser is blocking cross-site data. If you're on iPhone: Settings → Safari → turn off “Prevent Cross-Site Tracking”, then try again.");
+          }
+        }
+      }).catch(function (e) {
+        sessionStorage.removeItem("pac_dash_redirect_attempted");
         signingIn = false;
-        showError(e && e.message ? e.message : "Sign-in failed — try again.");
+        showError((e && e.code ? "[" + e.code + "] " : "") + (e && e.message ? e.message : "Sign-in failed — try again."));
       });
 
       auth.onAuthStateChanged(function (user) {
