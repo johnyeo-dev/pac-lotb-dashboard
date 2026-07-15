@@ -3479,15 +3479,17 @@
       // us. No sign-in flow can work here; the only fix is opening in a real browser.
       var isInAppBrowser = /FBAN|FBAV|Instagram|Line/|Twitter|WhatsApp|; ?wv)/i.test(navigator.userAgent);
 
-      // signInWithRedirect used to be the mobile default here, but it silently
-      // fails (no error, just dumped back at the sign-in screen — confirmed live
-      // 2026-07-16) on iOS Safari with "Prevent Cross-Site Tracking" on (the
-      // default) and similar third-party-storage-partitioning setups: the redirect
-      // round-trip depends on IndexedDB surviving the cross-domain hop to
-      // accounts.google.com and back, which gets wiped. signInWithPopup avoids that
-      // hop entirely and now works fine on a direct user-gesture click on modern
-      // mobile Safari/Chrome, so it's the default everywhere; redirect is only the
-      // fallback when a popup genuinely can't open.
+      // Popup-first (tried 2026-07-16) broke sign-in worse than redirect: on real
+      // mobile browsers a popup frequently opens as a backgrounded tab whose
+      // postMessage back to the opener never fires, so the promise just hangs
+      // forever — signingIn stayed true and the button went permanently dead
+      // (confirmed live same day). Back to redirect-on-mobile, popup-on-desktop
+      // (the original design) — redirect's own failure mode (iOS "Prevent
+      // Cross-Site Tracking" silently wiping the session) is handled below via
+      // getRedirectResult() instead of avoided by switching flows. A timeout also
+      // guarantees signingIn resets even if a popup does hang, so the button can
+      // never get stuck like this again.
+      var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
       var signingIn = false;
 
       function startSignIn() {
@@ -3498,10 +3500,21 @@
         }
         signingIn = true;
         var provider = new firebase.auth.GoogleAuthProvider();
-        auth.signInWithPopup(provider).catch(function (e) {
-          signingIn = false;
+        var stuckTimer = setTimeout(function () { signingIn = false; }, 15000);
+        function afterAttempt() { clearTimeout(stuckTimer); signingIn = false; }
+        if (isMobile) {
+          sessionStorage.setItem("pac_dash_redirect_attempted", "1");
+          auth.signInWithRedirect(provider).catch(function (e) {
+            afterAttempt();
+            showError((e && e.code ? "[" + e.code + "] " : "") + (e && e.message ? e.message : "Sign-in failed — try again."));
+          });
+          return;
+        }
+        auth.signInWithPopup(provider).then(afterAttempt).catch(function (e) {
+          afterAttempt();
           if (e && (e.code === "auth/popup-blocked" || e.code === "auth/operation-not-supported-in-this-environment")) {
             sessionStorage.setItem("pac_dash_redirect_attempted", "1");
+            signingIn = true;
             auth.signInWithRedirect(provider);
           } else if (e && e.code === "auth/popup-closed-by-user") {
             // User closed the picker themselves — not an error worth showing.
