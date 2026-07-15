@@ -484,6 +484,36 @@
   /* COT Content page */
   .cot-applying { border-left-color: #e0a13a; background: rgba(240,180,60,0.08); }
 
+  /* Site tagline + demo buyer view */
+  .site-tagline { color: var(--accent) !important; font-size: 17px !important; font-weight: 600; margin: 0 0 4px !important; }
+  .demo-toggle {
+    width: 100%;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: inherit;
+    padding: 13px 18px;
+    margin: 2px 0 10px;
+    border-radius: 12px;
+    border: 1px dashed var(--accent);
+    background: rgba(10,191,188,0.10);
+    color: var(--accent);
+    cursor: pointer;
+  }
+  .demo-banner {
+    background: #e0a13a;
+    color: #2b1d02;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+  }
+  .demo-thisweek { border-width: 2px; }
+  #panel-demo { --acc: #0ABFBC; }
+
   /* Fable analysis page */
   .fable-subtitle { font-size: 18px; color: var(--text-secondary); line-height: 1.5; margin: 0 0 24px; }
   .fable-section {
@@ -632,12 +662,14 @@
         <div class="header-title">
           <div>
             <h1>Social Content Dashboard</h1>
+            <p class="site-tagline">Your weekly content strategist — the report just happens to live at a link.</p>
             <p>4 accounts tracked</p>
           </div>
           <button class="info-btn" id="info-open" aria-label="What do these numbers mean?">i</button>
         </div>
         <span class="refresh-pill">Data refreshed 9 Jul 2026, 11:59 pm</span>
       </header>
+      <button class="demo-toggle" id="demo-toggle">👀 Show demo account</button>
       <div class="nav-dropdown" id="nav-dropdown">
         <button class="nav-toggle" id="nav-toggle" aria-haspopup="listbox" aria-expanded="false">
           <span id="nav-toggle-icon">✨</span>
@@ -2938,6 +2970,159 @@
       <p class="pipeline-loading">Loading pipeline status…</p>
     </div>
   </section>
+      
+  <section class="panel" id="panel-demo" hidden>
+    <div class="demo-banner">DEMO ACCOUNT · sample data, not a real client</div>
+    <div class="account-header">
+      <h2><span class="acc-icon">👩‍🏫</span>Mrs Lim · Primary English Tuition</h2>
+    </div>
+    <p class="fable-subtitle">Know what to post this week — based on what your audience already proved they love.</p>
+
+    <div class="plan-box demo-thisweek">
+      <h3>This week from your strategist</h3>
+      <div class="plan-days">
+        
+        <div class="plan-day">
+          <span class="plan-when">POST THIS</span>
+          <div class="plan-what"><span>Your &quot;reading aloud at dinner&quot; story from last Tuesday&#39;s class. Parents responded 4x better to real classroom moments than tips this month — the draft is ready in your ideas below (#1).</span></div>
+        </div>
+        <div class="plan-day">
+          <span class="plan-when">WHAT WON</span>
+          <div class="plan-what"><span>Last week&#39;s winner: &quot;She read the whole page without stopping once&quot; — 58 likes, 11 comments. A real student moment with the child&#39;s outcome front and centre. This is your proven pattern.</span></div>
+        </div>
+        <div class="plan-day">
+          <span class="plan-when">ONE FIX</span>
+          <div class="plan-what"><span>Thursday&#39;s post opened with &quot;5 comprehension tips&quot; — tips-first hooks are your weakest pattern (they average 7 likes). Lead with the moment; let the tips follow inside the post.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-row" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="kpi-card"><span class="kpi-value">1,208</span><span class="kpi-label">followers</span></div><div class="kpi-card"><span class="kpi-value">31</span><span class="kpi-label">avg engagement</span></div><div class="kpi-card"><span class="kpi-value">412</span><span class="kpi-label">top post</span></div><div class="kpi-card"><span class="kpi-value">30</span><span class="kpi-label">posts tracked</span></div>
+    </div>
+
+    <div class="insight-box">
+      <h3>What's working on your page</h3>
+      <ul><li>Real student moments with the child&#39;s outcome in the first line outperform tips posts 10-20x on this page — every post above 150 engagement is a named, specific moment.</li><li>Spoken dialogue hooks (&quot;a parent asked me...&quot;) consistently pull comments from parents who recognise themselves — your comment sections are where trial enquiries start.</li><li>Posts that sell the method (SEALS, comprehension frameworks) are your weakest — parents buy the after-state (&quot;she reads on her own now&quot;), not the mechanism.</li></ul>
+    </div>
+
+    <h3 class="section-label">Your top performers</h3>
+    <div class="rank-list">
+      <div class="rank-row">
+        <span class="rank-badge">·</span>
+        <div class="rank-body">
+          <span class="rank-label">She read the whole page without stopping once. Her mum cried in the car. Here&#39;s what changed in 6 weeks...</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%; background:#0ABFBC;"></div></div>
+          <div class="metric-row"><span class="metric-chip">Real student moment · child&#39;s outcome in line one</span></div>
+        </div>
+        <span class="rank-value">412</span>
+      </div>
+      <div class="rank-row">
+        <span class="rank-badge">·</span>
+        <div class="rank-body">
+          <span class="rank-label">A parent asked me yesterday: &quot;Why does my son hate reading?&quot; I asked her one question back that changed the conversation.</span>
+          <div class="bar-track"><div class="bar-fill" style="width:69.66019417475728%; background:#0ABFBC;"></div></div>
+          <div class="metric-row"><span class="metric-chip">Spoken dialogue hook · parent sees themselves</span></div>
+        </div>
+        <span class="rank-value">287</span>
+      </div>
+      <div class="rank-row">
+        <span class="rank-badge">·</span>
+        <div class="rank-body">
+          <span class="rank-label">I almost gave up tutoring in 2023. A P4 girl who wouldn&#39;t speak in class is the reason I didn&#39;t.</span>
+          <div class="bar-track"><div class="bar-fill" style="width:48.05825242718447%; background:#0ABFBC;"></div></div>
+          <div class="metric-row"><span class="metric-chip">Vulnerability with real stakes</span></div>
+        </div>
+        <span class="rank-value">198</span>
+      </div></div>
+
+    <h3 class="section-label">Your weakest posts (and why)</h3>
+    <div class="rank-list">
+      <div class="rank-row">
+        <span class="rank-badge">·</span>
+        <div class="rank-body">
+          <span class="rank-label">5 comprehension tips every P5 parent should know 📚</span>
+          <div class="bar-track"><div class="bar-fill" style="width:3%; background:#5b6b85;"></div></div>
+          <div class="metric-row"><span class="metric-chip">Tips-first hook · no moment, no person</span></div>
+        </div>
+        <span class="rank-value">7</span>
+      </div>
+      <div class="rank-row">
+        <span class="rank-badge">·</span>
+        <div class="rank-body">
+          <span class="rank-label">Enrolment open for Term 4! Limited slots available.</span>
+          <div class="bar-track"><div class="bar-fill" style="width:3%; background:#5b6b85;"></div></div>
+          <div class="metric-row"><span class="metric-chip">Ask with no story attached</span></div>
+        </div>
+        <span class="rank-value">5</span>
+      </div>
+      <div class="rank-row">
+        <span class="rank-badge">·</span>
+        <div class="rank-body">
+          <span class="rank-label">What is the SEALS method? A thread on answering open-ended questions.</span>
+          <div class="bar-track"><div class="bar-fill" style="width:3%; background:#5b6b85;"></div></div>
+          <div class="metric-row"><span class="metric-chip">Method-first · sells the process, not the outcome</span></div>
+        </div>
+        <span class="rank-value">4</span>
+      </div></div>
+
+    <h3 class="section-label">This week's post ideas — modeled on YOUR winners</h3>
+    <div class="ideas-list" style="margin-top:0;">
+      
+      <div class="idea-card" style="--acc:#0ABFBC;">
+        <div class="idea-num">1</div>
+        <div class="idea-body">
+          <h4 class="idea-title">The dinner-table read-aloud</h4>
+          <div class="idea-tags">
+            <span class="idea-tag idea-tag-proof">proof</span>
+            <span class="idea-tag idea-tag-effort">quick</span>
+          </div>
+          <p class="idea-hook">&quot;Can I read it to you?&quot; Six weeks ago this girl hid her book under the table.</p>
+          <p class="idea-angle"><strong>Angle:</strong> Tuesday&#39;s classroom moment → the before/after arc parents crave. End on what changed at home, not what you did in class.</p>
+          <p class="idea-context"><strong>Why:</strong> Mirrors your 412-engagement winner: child&#39;s outcome, first line, no method talk.</p>
+        </div>
+      </div>
+      <div class="idea-card" style="--acc:#0ABFBC;">
+        <div class="idea-num">2</div>
+        <div class="idea-body">
+          <h4 class="idea-title">The question that changes the conversation</h4>
+          <div class="idea-tags">
+            <span class="idea-tag idea-tag-trust">trust</span>
+            <span class="idea-tag idea-tag-effort">quick</span>
+          </div>
+          <p class="idea-hook">&quot;Why does my son hate reading?&quot; Wrong question. Here&#39;s the one I ask instead.</p>
+          <p class="idea-angle"><strong>Angle:</strong> Dialogue hook → reframe → one practical thing a parent can try tonight.</p>
+          <p class="idea-context"><strong>Why:</strong> Your #2 post proved dialogue hooks pull comments; the tonight-action makes it shareable in parent groups.</p>
+        </div>
+      </div>
+      <div class="idea-card" style="--acc:#0ABFBC;">
+        <div class="idea-num">3</div>
+        <div class="idea-body">
+          <h4 class="idea-title">What I tell parents at the first meeting</h4>
+          <div class="idea-tags">
+            <span class="idea-tag idea-tag-trust">trust</span>
+            <span class="idea-tag idea-tag-effort">needs prep</span>
+          </div>
+          <p class="idea-hook">Every first meeting, a parent apologises for their child. Every time, I stop them.</p>
+          <p class="idea-angle"><strong>Angle:</strong> Named identity (&quot;parents of reluctant readers&quot;) + validation of a private worry, out loud.</p>
+          <p class="idea-context"><strong>Why:</strong> &quot;I see you&quot; posts drive your comments — people comment to say &quot;this is me.&quot;</p>
+        </div>
+      </div>
+      <div class="idea-card" style="--acc:#0ABFBC;">
+        <div class="idea-num">4</div>
+        <div class="idea-body">
+          <h4 class="idea-title">Term 4 doors open — carried by a story</h4>
+          <div class="idea-tags">
+            <span class="idea-tag idea-tag-harvest">harvest</span>
+            <span class="idea-tag idea-tag-effort">quick</span>
+          </div>
+          <p class="idea-hook">The last seat in my Tuesday class belongs to a boy who wouldn&#39;t read a menu in January.</p>
+          <p class="idea-angle"><strong>Angle:</strong> One enrolment ask, wrapped in your strongest proof story. One CTA only.</p>
+          <p class="idea-context"><strong>Why:</strong> Your bare &quot;enrolment open&quot; post got 5 likes — the same ask carried by a story is how your page converts attention into trials.</p>
+        </div>
+      </div>
+    </div>
+  </section>
     </div>
   </div>
 
@@ -3175,6 +3360,23 @@
         .catch(function () {
           document.getElementById("pipeline-list").innerHTML = '<p class="pipeline-loading">Pipeline status unavailable right now.</p>';
         });
+
+      var demoToggle = document.getElementById("demo-toggle");
+      var demoOn = false;
+      demoToggle.addEventListener("click", function () {
+        demoOn = !demoOn;
+        document.getElementById("nav-dropdown").style.display = demoOn ? "none" : "";
+        if (demoOn) {
+          document.querySelectorAll(".panel").forEach(function (p) { p.hidden = true; });
+          document.getElementById("panel-demo").hidden = false;
+          demoToggle.textContent = "← Back to my dashboard";
+        } else {
+          document.getElementById("panel-demo").hidden = true;
+          goToPanel("panel-overview");
+          demoToggle.textContent = "👀 Show demo account";
+        }
+        window.scrollTo({ top: 0, behavior: "instant" });
+      });
 
       var infoModal = document.getElementById("info-modal");
       document.getElementById("info-open").addEventListener("click", function () { infoModal.classList.add("open"); });
