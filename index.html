@@ -393,6 +393,89 @@
   .idea-tag-harvest { background: rgba(240,180,60,0.18); color: #f2ce8a; }
   .idea-tag-effort { background: rgba(255,255,255,0.10); color: var(--text-secondary); }
 
+  /* The 10 Outcomes page */
+  .ladder { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
+  .ladder-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .ladder-badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--chip-bg);
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .ladder-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .ladder-head strong { font-size: 19px; color: var(--text-primary); }
+  .ladder-verdict {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .ladder-never .ladder-verdict { background: rgba(208,59,59,0.20); color: #f0a0a0; }
+  .ladder-sparingly .ladder-verdict { background: rgba(240,180,60,0.18); color: #f2ce8a; }
+  .ladder-default .ladder-verdict { background: rgba(10,191,188,0.18); color: #7fe6e4; }
+  .ladder-never { border-left: 4px solid #d03b3b; }
+  .ladder-sparingly { border-left: 4px solid #f0b43c; }
+  .ladder-default { border-left: 4px solid var(--accent); }
+  .ladder-body p { margin: 0; font-size: 16px; line-height: 1.5; color: var(--text-secondary); }
+
+  .outcomes-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 26px; }
+  .outcome-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .outcome-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #04211f;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .outcome-body h4 { margin: 0 0 10px; font-size: 20px; }
+  .outcome-flag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 3px 8px;
+    border-radius: 999px;
+    margin-right: 8px;
+    white-space: nowrap;
+  }
+  .outcome-flag-no { background: rgba(208,59,59,0.20); color: #f0a0a0; }
+  .outcome-flag-yes { background: rgba(10,191,188,0.18); color: #7fe6e4; }
+  .outcome-abstract { margin: 0 0 10px; font-size: 16px; line-height: 1.55; color: var(--muted); font-style: italic; }
+  .outcome-receipt { margin: 0; font-size: 17px; line-height: 1.55; color: var(--text-primary); }
+  .outcomes-footer { font-size: 15px; line-height: 1.55; color: var(--muted); font-style: italic; margin: 0; }
+
   /* Fable analysis page */
   .fable-subtitle { font-size: 18px; color: var(--text-secondary); line-height: 1.5; margin: 0 0 24px; }
   .fable-section {
@@ -549,7 +632,7 @@
           <span id="nav-toggle-label">Overview</span>
           <span class="nav-toggle-chevron">⌄</span>
         </button>
-        <div class="nav-menu" id="nav-menu" role="listbox" hidden><button class="nav-item" data-target="panel-overview" data-icon="✨" data-label="Overview" role="option" aria-selected="true">✨ Overview</button><button class="nav-item" data-target="panel-lotb-instagram" data-icon="📸" data-label="LOTB Instagram" role="option" >📸 LOTB Instagram</button><button class="nav-item" data-target="panel-lotb-tiktok" data-icon="🎵" data-label="LOTB TikTok" role="option" >🎵 LOTB TikTok</button><button class="nav-item" data-target="panel-pac-instagram" data-icon="📸" data-label="PAC Instagram" role="option" >📸 PAC Instagram</button><button class="nav-item" data-target="panel-pac-facebook" data-icon="👍" data-label="PAC Facebook" role="option" >👍 PAC Facebook</button><button class="nav-item" data-target="panel-fable-analysis" data-icon="🧠" data-label="Fable Analysis" role="option" >🧠 Fable Analysis</button><button class="nav-item" data-target="panel-pipeline" data-icon="📡" data-label="Content Pipeline" role="option" >📡 Content Pipeline</button></div>
+        <div class="nav-menu" id="nav-menu" role="listbox" hidden><button class="nav-item" data-target="panel-overview" data-icon="✨" data-label="Overview" role="option" aria-selected="true">✨ Overview</button><button class="nav-item" data-target="panel-lotb-instagram" data-icon="📸" data-label="LOTB Instagram" role="option" >📸 LOTB Instagram</button><button class="nav-item" data-target="panel-lotb-tiktok" data-icon="🎵" data-label="LOTB TikTok" role="option" >🎵 LOTB TikTok</button><button class="nav-item" data-target="panel-pac-instagram" data-icon="📸" data-label="PAC Instagram" role="option" >📸 PAC Instagram</button><button class="nav-item" data-target="panel-pac-facebook" data-icon="👍" data-label="PAC Facebook" role="option" >👍 PAC Facebook</button><button class="nav-item" data-target="panel-outcomes" data-icon="🎯" data-label="The 10 Outcomes" role="option" >🎯 The 10 Outcomes</button><button class="nav-item" data-target="panel-fable-analysis" data-icon="🧠" data-label="Fable Analysis" role="option" >🧠 Fable Analysis</button><button class="nav-item" data-target="panel-pipeline" data-icon="📡" data-label="Content Pipeline" role="option" >📡 Content Pipeline</button></div>
       </div>
       
   <section class="panel" id="panel-overview">
@@ -2606,6 +2689,135 @@
       </div></div>
 
     
+  </section>
+      
+  <section class="panel" id="panel-outcomes" hidden>
+    <div class="account-header">
+      <h2><span class="acc-icon">🎯</span>The 10 Outcomes</h2>
+    </div>
+    <p class="fable-subtitle">What tutors actually buy from PAC — the after-states. Every proof post sells one of these. Rule: the abstract line is what you must NOT write (it&#39;s coach-speak the moment you say it); the receipt line is the shape to write instead — swap in a real, consented client and real numbers, or don&#39;t run it. The reader should reach the abstract conclusion on their own.</p>
+
+    <h3 class="section-label">The ladder</h3>
+    <div class="ladder">
+      
+      <div class="ladder-row ladder-never">
+        <span class="ladder-badge">1</span>
+        <div class="ladder-body">
+          <div class="ladder-head">
+            <strong>Process</strong>
+            <span class="ladder-verdict">never</span>
+          </div>
+          <p>&quot;Join PAC and get weekly coaching calls, frameworks, templates, accountability.&quot; Nobody wakes up wanting coaching calls.</p>
+        </div>
+      </div>
+      <div class="ladder-row ladder-sparingly">
+        <span class="ladder-badge">2</span>
+        <div class="ladder-body">
+          <div class="ladder-head">
+            <strong>Abstract outcome</strong>
+            <span class="ladder-verdict">sparingly</span>
+          </div>
+          <p>&quot;A repeatable system for higher-quality leads on demand.&quot; Better — but it&#39;s a claim, and skeptical tutors don&#39;t believe claims. Use only as the one-line summary in a harvest post, after receipts have done the work.</p>
+        </div>
+      </div>
+      <div class="ladder-row ladder-default">
+        <span class="ladder-badge">3</span>
+        <div class="ladder-body">
+          <div class="ladder-head">
+            <strong>Witnessed outcome</strong>
+            <span class="ladder-verdict">default</span>
+          </div>
+          <p>A specific tutor, real numbers, a before and an after the reader watches happen. They conclude &quot;I want that&quot; on their own — the moment they say the abstraction in their head, it&#39;s belief instead of marketing.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-label">The ten outcomes</h3>
+    <div class="outcomes-list">
+      
+      <div class="outcome-card">
+        <div class="outcome-num">1</div>
+        <div class="outcome-body">
+          <h4>Better leads, without chasing</h4>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Higher-quality leads on demand."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> In March she answered 20 low-ball enquiries a week from a $15 boost. Last month 9 enquiries came in — 7 booked a call, 4 enrolled at her new rate. She didn&#39;t post daily to get them.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">2</div>
+        <div class="outcome-body">
+          <h4>Rates go up, families stay</h4>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Charge what you&#39;re worth."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> He raised his rate 40% in June, terrified. Of 14 families, 13 stayed — and one mum replied: &quot;Honestly, we expected this sooner.&quot;</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">3</div>
+        <div class="outcome-body">
+          <h4>Income uncapped from hours</h4>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Stop trading time for money."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> Fully booked at $60/hr, she was earning less than two years ago. Her first group programme did $8k in month one — teaching the same hours she already taught.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">4</div>
+        <div class="outcome-body">
+          <h4>Evenings and weekends back</h4>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Build a business that gives you freedom."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> Last term he taught Tuesday to Saturday, 9 slots a day. This term: 4 teaching days, Sundays untouchable — and revenue up, not down.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">5</div>
+        <div class="outcome-body">
+          <h4>The business survives you resting</h4>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "A business that doesn&#39;t depend on you."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> She got dengue in April and cancelled nothing — the group content ran, the worksheets went out, and not one family paused payment. Two years ago that fortnight would have cost her $3,200.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">6</div>
+        <div class="outcome-body">
+          <h4>A waitlist instead of a funnel</h4>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Become the obvious choice in your niche."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> One post announcing 6 P6 slots. 19 parents replied by Thursday. The other 13 asked to be told when 2027 opens.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">7</div>
+        <div class="outcome-body">
+          <h4>Parents stop haggling</h4>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Attract premium clients who value you."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> A parent asked her for a discount. She said no — and explained what the fee holds. The parent signed up anyway, at full rate, and referred her sister the same week.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">8</div>
+        <div class="outcome-body">
+          <h4>Money arrives before the month starts</h4>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Predictable recurring revenue."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> On the 1st of last month, $6,400 was already collected before he taught a single lesson — term programmes, paid upfront. He stopped checking whether anyone would &#39;continue next month.&#39;</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">9</div>
+        <div class="outcome-body">
+          <h4>Parents chase, not the tutor</h4>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Position yourself as the authority."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> She used to send &#39;gentle reminder&#39; follow-ups after every trial. Now parents open with &quot;we&#39;ve read your posts for months — how do we start?&quot; Her last 5 sign-ups needed zero convincing.</p>
+        </div>
+      </div>
+      <div class="outcome-card">
+        <div class="outcome-num">10</div>
+        <div class="outcome-body">
+          <h4>The first dollar that isn&#39;t a lesson</h4>
+          <p class="outcome-abstract"><span class="outcome-flag outcome-flag-no">⚠️ Don't write</span> "Diversify your income streams."</p>
+          <p class="outcome-receipt"><span class="outcome-flag outcome-flag-yes">✅ Write this shape</span> His revision workshop — the format everyone said was dead — sold 23 seats at $89. It was built from worksheets he already had. That Saturday earned more than his best teaching week.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="outcomes-footer">How to use this page: every proof post in the idea bank should point at exactly one of these ten. Before drafting, pick the outcome; before posting, run the test — if the draft describes what PAC includes, it&#39;s selling process; if it shows one of these after-states with a receipt, it&#39;s selling the outcome. Numbers above are illustrative placeholders — replace with a real client&#39;s real numbers, with permission, every time.</p>
   </section>
       
   <section class="panel" id="panel-fable-analysis" hidden>
