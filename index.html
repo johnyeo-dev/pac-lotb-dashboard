@@ -526,6 +526,12 @@
   .demo-thisweek { border-width: 2px; }
   #panel-demo { --acc: #0ABFBC; }
 
+  /* Customer-role view: only Onboarding + Demo Account panels, no nav to real data */
+  .customer-view #nav-dropdown,
+  .customer-view #demo-toggle,
+  .customer-view .info-btn { display: none !important; }
+  .customer-view .panel:not(#panel-onboarding):not(#panel-demo) { display: none !important; }
+
   /* Fable analysis page */
   .fable-subtitle { font-size: 18px; color: var(--text-secondary); line-height: 1.5; margin: 0 0 24px; }
   .fable-section {
@@ -3069,6 +3075,50 @@
     </div>
   </section>
       
+  <section class="panel" id="panel-onboarding" hidden>
+    <div class="demo-banner">GETTING STARTED</div>
+    <div class="account-header">
+      <h2><span class="acc-icon">🚀</span>Welcome to the PAC Dashboard</h2>
+    </div>
+    <p class="fable-subtitle">Two quick steps to get access, then a look at what you'll see.</p>
+    <div class="ideas-list" style="margin-top:16px;">
+      
+      <div class="idea-card" style="--acc:#0ABFBC;">
+        <div class="idea-num">1</div>
+        <div class="idea-body">
+          <h4 class="idea-title">Submit your details</h4>
+          <p class="idea-angle">Fill out the sign-up form with your name, the Gmail address you&#39;ll sign in with, and your Instagram / TikTok / Facebook handles.</p>
+          <p class="idea-context"><a href="https://forms.gle/REPLACE_ME" target="_blank" rel="noopener" style="color:var(--accent); font-weight:700;">Open the sign-up form →</a></p>
+        </div>
+      </div>
+      <div class="idea-card" style="--acc:#0ABFBC;">
+        <div class="idea-num">2</div>
+        <div class="idea-body">
+          <h4 class="idea-title">Wait for access confirmation</h4>
+          <p class="idea-angle">We add your Gmail to the dashboard&#39;s access list and message you once it&#39;s ready — usually the same day.</p>
+          
+        </div>
+      </div>
+      <div class="idea-card" style="--acc:#0ABFBC;">
+        <div class="idea-num">3</div>
+        <div class="idea-body">
+          <h4 class="idea-title">Sign in</h4>
+          <p class="idea-angle">Come back to this page and sign in with the same Google account you submitted. If you see “no access”, you either signed in with a different account or haven&#39;t been added yet — message John.</p>
+          
+        </div>
+      </div>
+      <div class="idea-card" style="--acc:#0ABFBC;">
+        <div class="idea-num">4</div>
+        <div class="idea-body">
+          <h4 class="idea-title">See what your dashboard will look like</h4>
+          <p class="idea-angle">The “Demo Account” panel below shows a real example of the kind of weekly plan, top/bottom posts, and post ideas you&#39;ll get once your own accounts are connected.</p>
+          
+        </div>
+      </div>
+    </div>
+    <p class="outcomes-footer">Questions at any point? Just message John directly.</p>
+  </section>
+      
   <section class="panel" id="panel-demo" hidden>
     <div class="demo-banner">DEMO ACCOUNT · sample data, not a real client</div>
     <div class="account-header">
@@ -3275,6 +3325,21 @@
         app.classList.remove("hidden");
       }
 
+      // Customer-role accounts (new PAC clients before their own accounts are
+      // connected) only see the Onboarding + Demo Account panels — real client
+      // data (nav dropdown, all account panels, pipeline, etc.) stays hidden.
+      // Note: this page is statically generated, so the real data still exists
+      // in the HTML source even when hidden by CSS/JS — same accepted caveat as
+      // the rest of this gate (see system-state.md "Auth gate"). Fine for a
+      // beta with trusted early clients; would need a server-side split before
+      // this scales to strangers.
+      function applyRole(role) {
+        if (role === "admin") return;
+        document.body.classList.add("customer-view");
+        document.getElementById("panel-onboarding").hidden = false;
+        document.getElementById("panel-demo").hidden = false;
+      }
+
       function showError(msg) {
         error.textContent = msg;
         error.classList.add("show");
@@ -3326,9 +3391,13 @@
         }
         // Verify the signed-in Google account against the Firestore allowlist.
         // Rules only permit reading your own /allowlist/{email} doc.
+        // Doc shape: { allowed: true, role: "admin" | "customer" }. Missing role
+        // defaults to "admin" so the original allowlist entries (added before role
+        // existed) keep full access without a Firestore edit.
         db.collection("allowlist").doc(user.email).get().then(function (doc) {
           if (doc.exists && doc.data().allowed === true) {
             clearError();
+            applyRole(doc.data().role || "admin");
             unlock();
           } else {
             showError("This Google account (" + user.email + ") doesn't have access. Contact John if you think it should.");
