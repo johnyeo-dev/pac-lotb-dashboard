@@ -256,6 +256,11 @@
   }
   .nav-item:hover { border-color: var(--border); color: var(--text-primary); }
   .nav-item[aria-selected="true"] { background: var(--accent); color: #04211f; font-weight: 700; }
+  .nav-item[aria-selected="true"] .icn { color: #04211f; }
+  /* Menu rows need their own hover treatment: a border here (matching the pill
+     style above) reads as a card/box and gets mistaken for the selected row —
+     confirmed confusing live 2026-07-16. Rows use a plain background tint
+     instead, so "hovered" and "selected" (solid teal fill) can never look alike. */
   .nav-menu .nav-item {
     display: flex;
     width: 100%;
@@ -263,7 +268,14 @@
     border-radius: 8px;
     padding: 11px 12px;
     white-space: normal;
+    border-color: transparent;
   }
+  .nav-menu .nav-item:hover {
+    border-color: transparent;
+    background: rgba(255,255,255,0.06);
+  }
+  .nav-menu .nav-item .icn { color: var(--muted); flex-shrink: 0; }
+  .nav-menu .nav-item[aria-selected="true"] .icn { color: #04211f; }
 
   .panel { padding-bottom: 10px; }
 
