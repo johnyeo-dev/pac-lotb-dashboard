@@ -3477,7 +3477,7 @@
       // WebView) — Google actively refuses to complete OAuth inside these ("This
       // browser or app may not be secure"), with no useful error surfaced back to
       // us. No sign-in flow can work here; the only fix is opening in a real browser.
-      var isInAppBrowser = /FBAN|FBAV|Instagram|Line/|Twitter|WhatsApp|; ?wv)/i.test(navigator.userAgent);
+      var isInAppBrowser = /FBAN|FBAV|Instagram|Line\/|Twitter|WhatsApp|; ?wv\)/i.test(navigator.userAgent);
 
       // Popup-first (tried 2026-07-16) broke sign-in worse than redirect: on real
       // mobile browsers a popup frequently opens as a backgrounded tab whose
