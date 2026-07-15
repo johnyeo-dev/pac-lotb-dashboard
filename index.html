@@ -3479,17 +3479,24 @@
       // us. No sign-in flow can work here; the only fix is opening in a real browser.
       var isInAppBrowser = /FBAN|FBAV|Instagram|Line\/|Twitter|WhatsApp|; ?wv\)/i.test(navigator.userAgent);
 
-      // Popup-first (tried 2026-07-16) broke sign-in worse than redirect: on real
-      // mobile browsers a popup frequently opens as a backgrounded tab whose
-      // postMessage back to the opener never fires, so the promise just hangs
-      // forever — signingIn stayed true and the button went permanently dead
-      // (confirmed live same day). Back to redirect-on-mobile, popup-on-desktop
-      // (the original design) — redirect's own failure mode (iOS "Prevent
-      // Cross-Site Tracking" silently wiping the session) is handled below via
-      // getRedirectResult() instead of avoided by switching flows. A timeout also
-      // guarantees signingIn resets even if a popup does hang, so the button can
-      // never get stuck like this again.
-      var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+      // History on this flow (2026-07-16): started redirect-on-mobile, tried
+      // switching to popup-on-mobile (reverted — looked like popups hang on
+      // mobile), reverted back to redirect. Turned out the real bug the whole
+      // time was an unrelated syntax error breaking the entire script (see
+      // isInAppBrowser fix above) — that "popup hangs" symptom was never
+      // actually observed cleanly, it was this syntax error the whole time.
+      // With that fixed, redirect turned out to have its own real, confirmed
+      // failure: third-party mobile browsers (Arc Search, Brave, DuckDuckGo,
+      // and Safari with "Prevent Cross-Site Tracking") block the storage the
+      // redirect round-trip depends on to restore the session when it comes
+      // back from accounts.google.com — confirmed live with John's phone, and
+      // his device wasn't even stock Safari so the usual iOS Safari-setting
+      // fix didn't apply. Popup avoids that entirely (no cross-domain
+      // navigation, no storage persistence needed across it), so it's now the
+      // default everywhere; redirect is only the fallback when a popup
+      // genuinely can't open. The 15s timeout guarantees signingIn resets even
+      // if a popup does hang on some device, so the button can never get
+      // stuck again regardless of which path runs.
       var signingIn = false;
 
       function startSignIn() {
@@ -3502,14 +3509,6 @@
         var provider = new firebase.auth.GoogleAuthProvider();
         var stuckTimer = setTimeout(function () { signingIn = false; }, 15000);
         function afterAttempt() { clearTimeout(stuckTimer); signingIn = false; }
-        if (isMobile) {
-          sessionStorage.setItem("pac_dash_redirect_attempted", "1");
-          auth.signInWithRedirect(provider).catch(function (e) {
-            afterAttempt();
-            showError((e && e.code ? "[" + e.code + "] " : "") + (e && e.message ? e.message : "Sign-in failed — try again."));
-          });
-          return;
-        }
         auth.signInWithPopup(provider).then(afterAttempt).catch(function (e) {
           afterAttempt();
           if (e && (e.code === "auth/popup-blocked" || e.code === "auth/operation-not-supported-in-this-environment")) {
