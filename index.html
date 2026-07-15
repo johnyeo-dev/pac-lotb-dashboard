@@ -3187,6 +3187,37 @@
         error.classList.remove("show");
       }
 
+      // Mobile browsers (esp. in-app browsers like Telegram/WhatsApp, and Safari/Chrome
+      // on iOS/Android) handle Google's signInWithPopup unreliably — the picker inside
+      // the popup often needs a second click or a manual refresh to complete. Redirect
+      // flow (leaves the page, comes back) is the reliable path on mobile; popup is
+      // still nicer on desktop where it actually works in one click.
+      var isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+      var signingIn = false;
+
+      function startSignIn() {
+        clearError();
+        signingIn = true;
+        var provider = new firebase.auth.GoogleAuthProvider();
+        if (isMobile) {
+          auth.signInWithRedirect(provider);
+        } else {
+          auth.signInWithPopup(provider).catch(function (e) {
+            signingIn = false;
+            if (e && (e.code === "auth/popup-blocked" || e.code === "auth/popup-closed-by-user")) {
+              auth.signInWithRedirect(provider);
+            } else {
+              showError(e && e.message ? e.message : "Sign-in failed — try again.");
+            }
+          });
+        }
+      }
+
+      auth.getRedirectResult().catch(function (e) {
+        signingIn = false;
+        showError(e && e.message ? e.message : "Sign-in failed — try again.");
+      });
+
       auth.onAuthStateChanged(function (user) {
         if (!user) {
           gate.classList.remove("hidden");
@@ -3214,14 +3245,8 @@
       });
 
       googleBtn.addEventListener("click", function () {
-        clearError();
-        auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).catch(function (e) {
-          if (e && (e.code === "auth/popup-blocked" || e.code === "auth/popup-closed-by-user")) {
-            auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-          } else {
-            showError(e && e.message ? e.message : "Sign-in failed — try again.");
-          }
-        });
+        if (signingIn) return;
+        startSignIn();
       });
 
       signoutBtn.addEventListener("click", function () {
