@@ -678,6 +678,41 @@
   .step-text { margin: 0 0 10px; font-size: 16px; line-height: 1.55; color: var(--text-secondary); }
   .step-text:last-child { margin-bottom: 0; }
 
+  /* Customer Playbook (admin runbook) */
+  .playbook-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .playbook-link:hover { text-decoration: underline; }
+  .prompt-box {
+    position: relative;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 0 0 26px;
+  }
+  .prompt-box pre {
+    margin: 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .prompt-box .copy-prompt { float: right; margin: 0 0 8px 12px; font-size: 13px; padding: 7px 12px; }
+  .playbook-links { list-style: none; padding: 0; margin: 12px 0 0; }
+  .playbook-links li { padding: 10px 0; border-bottom: 1px solid var(--gridline); }
+  .playbook-links li:last-child { border-bottom: none; }
+  .playbook-links a { color: var(--text-secondary); font-size: 16px; text-decoration: none; }
+  .playbook-links a:hover { color: var(--accent); }
+
   /* Customer-role view: only Onboarding + Demo panels reachable.
      customer-view = shared chrome hiding (real customers AND John's preview);
      role-customer = real customers only (also hides the admin toolbar —
@@ -1047,7 +1082,7 @@
         <div class="nav-menu" id="nav-menu" hidden>
       <div class="nav-group">
         <p class="nav-group-label">Home</p>
-        <button class="nav-item" data-target="panel-overview" role="tab" aria-selected="true"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg><span>Overview</span></button><button class="nav-item" data-target="panel-onboarding" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 21V4"/><path d="M5.5 4.8c4.8-2.6 8.2 2.4 13-0.2v9c-4.8 2.6-8.2-2.4-13 .2"/></svg><span>Onboarding</span></button>
+        <button class="nav-item" data-target="panel-overview" role="tab" aria-selected="true"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg><span>Overview</span></button><button class="nav-item" data-target="panel-onboarding" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 21V4"/><path d="M5.5 4.8c4.8-2.6 8.2 2.4 13-0.2v9c-4.8 2.6-8.2-2.4-13 .2"/></svg><span>Onboarding</span></button><button class="nav-item" data-target="panel-playbook" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15.5H6.5A2.5 2.5 0 0 0 4 21z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20"/></svg><span>Customer Playbook</span></button>
       </div>
       <div class="nav-group">
         <p class="nav-group-label">Accounts</p>
@@ -3411,6 +3446,87 @@
     </div>
   </section>
       
+  <section class="panel" id="panel-playbook" hidden>
+    <div class="account-header">
+      <h2><span class="acc-icon"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15.5H6.5A2.5 2.5 0 0 0 4 21z"/><path d="M4 18.5A2.5 2.5 0 0 1 6.5 16H20"/></svg></span>Customer Playbook</h2>
+    </div>
+    <p class="fable-subtitle">What to do at every stage of a NextHit customer's life. Only you can see this page.</p>
+
+    <div class="steps">
+      
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4 class="step-title">Someone pays</h4>
+          <p class="step-text">You get a ThriveCart payment email (Gmail monitoring flags it, and ThriveCart notifies you too). Reply to the buyer with the sign-up form so you get their handles and sign-in Gmail.</p>
+          <a class="playbook-link" href="https://forms.gle/1JPQRoMUtjRMxqeQ9" target="_blank" rel="noopener">Sign-up form to send them <svg class="icn" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16"/><path d="M13 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4 class="step-title">Their form arrives</h4>
+          <p class="step-text">The form Telegrams their details to Agent HQ and logs them in the responses sheet. Now paste the New Customer prompt below into ClaudeClaw, fill in their details, and it handles the setup. Or do it by hand: Firestore console, allowlist collection, new doc with their Gmail as the doc ID, fields allowed = true and role = &quot;customer&quot;.</p>
+          <a class="playbook-link" href="https://console.firebase.google.com/project/pac-dashboard-86308/firestore/data/~2Fallowlist" target="_blank" rel="noopener">Firestore allowlist console <svg class="icn" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16"/><path d="M13 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4 class="step-title">Tell them they&#39;re in</h4>
+          <p class="step-text">Send them the dashboard link and remind them to sign in with the exact Gmail they gave you. If they see &quot;no access&quot;, it&#39;s the wrong Google account nine times out of ten.</p>
+          <a class="playbook-link" href="https://pac-lotb-dashboard.vercel.app" target="_blank" rel="noopener">Dashboard sign-in <svg class="icn" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16"/><path d="M13 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4 class="step-title">They cancel</h4>
+          <p class="step-text">Paste the Cancellation prompt below into ClaudeClaw, or by hand: delete their doc in the Firestore allowlist and mark them Cancelled in the responses sheet. Access dies the next time they load the page.</p>
+          <a class="playbook-link" href="https://docs.google.com/spreadsheets/d/1y1lfhh69JUPqBPpZKVWX4h7BNpMp6wmFzPuDAyDUFug/edit" target="_blank" rel="noopener">Responses sheet (Active / Cancelled column) <svg class="icn" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16"/><path d="M13 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="section-label">Prompt: new customer</h3>
+    <div class="prompt-box">
+      <button class="btn-ghost copy-prompt" type="button">Copy prompt</button>
+      <pre>New NextHit customer paid via ThriveCart.
+Name: [name]
+Gmail: [email they will sign in with]
+Instagram: [@handle or none]
+TikTok: [@handle or none]
+Facebook: [page name or none]
+
+Do the full setup:
+1. Add them to the Firestore allowlist (pac-dashboard-86308) as role &quot;customer&quot;, allowed true.
+2. Set up Apify tracking for their public accounts (flag anything private so I can ask them to unlock it).
+3. Build their dashboard view.
+4. Mark them Active in the NextHit onboarding responses sheet.
+5. Give me a short message I can send them with their sign-in link and what to expect.</pre>
+    </div>
+
+    <h3 class="section-label">Prompt: cancellation</h3>
+    <div class="prompt-box">
+      <button class="btn-ghost copy-prompt" type="button">Copy prompt</button>
+      <pre>NextHit customer cancelled: [email]
+
+1. Remove their dashboard access (delete their allowlist doc in Firestore).
+2. Stop their Apify tracking.
+3. Mark them Cancelled in the NextHit onboarding responses sheet.
+4. Confirm to me when done.</pre>
+    </div>
+
+    <h3 class="section-label">Every link in one place</h3>
+    <ul class="playbook-links">
+      <li><a href="https://learningoutofthebox.thrivecart.com/nexthit/" target="_blank" rel="noopener">ThriveCart checkout (what buyers pay through)</a></li>
+      <li><a href="./join.html" target="_blank" rel="noopener">Sales page (/join.html)</a></li>
+      <li><a href="https://forms.gle/1JPQRoMUtjRMxqeQ9" target="_blank" rel="noopener">Sign-up form (handles + Gmail)</a></li>
+      <li><a href="https://docs.google.com/spreadsheets/d/1y1lfhh69JUPqBPpZKVWX4h7BNpMp6wmFzPuDAyDUFug/edit" target="_blank" rel="noopener">Responses sheet (subscriber list, Active/Cancelled)</a></li>
+      <li><a href="https://console.firebase.google.com/project/pac-dashboard-86308/firestore/data/~2Fallowlist" target="_blank" rel="noopener">Firestore allowlist (who can sign in)</a></li>
+    </ul>
+  </section>
+      
   <section class="panel" id="panel-onboarding" hidden>
     <div class="account-header">
       <h2><span class="acc-icon"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 21V4"/><path d="M5.5 4.8c4.8-2.6 8.2 2.4 13-0.2v9c-4.8 2.6-8.2-2.4-13 .2"/></svg></span>Welcome to NextHit</h2>
@@ -3987,6 +4103,17 @@
           goToPanel("panel-overview");
           customerPreviewToggle.innerHTML = previewToggleHtml;
         }
+      });
+
+      // Playbook: copy-prompt buttons
+      document.querySelectorAll(".copy-prompt").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var pre = btn.parentElement.querySelector("pre");
+          navigator.clipboard.writeText(pre.textContent).then(function () {
+            btn.textContent = "Copied";
+            setTimeout(function () { btn.textContent = "Copy prompt"; }, 1500);
+          });
+        });
       });
 
       // Sign out from inside the dashboard (both roles). Reload gives a clean
