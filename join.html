@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>PAC Dashboard: Know what fills your next class before you post it</title>
+<meta name="description" content="A weekly what-to-post plan for tutors, built from what your own audience already proved they love. S$97/month founding rate." />
+<style>
+  /* Same PAC brand tokens as the dashboard (build-dashboard.js) */
+  :root {
+    --surface-1: #121a2e;
+    --page-plane: #0A0F1C;
+    --text-primary: #ffffff;
+    --text-secondary: #d5dceb;
+    --muted: #9fb0cc;
+    --gridline: rgba(255,255,255,0.16);
+    --border: rgba(255,255,255,0.10);
+    --chip-bg: #002D6A;
+    --accent: #0ABFBC;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; }
+  body {
+    background: var(--page-plane);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding-bottom: 60px;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 22px; }
+
+  .top-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; }
+  .brand-mark {
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    background: rgba(10,191,188,0.12);
+    border: 1px solid rgba(10,191,188,0.35);
+    color: var(--accent);
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .signin-link { color: var(--muted); font-size: 14px; font-weight: 600; text-decoration: none; }
+  .signin-link:hover { color: var(--text-primary); }
+
+  .hero { padding: 44px 0 8px; }
+
+  p, li { font-size: 18px; line-height: 1.65; color: var(--text-secondary); }
+  .beat { margin: 0 0 4px; }
+  .beat-strong { color: var(--text-primary); font-weight: 600; }
+  .gap { height: 22px; }
+
+  h2 {
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    margin: 48px 0 16px;
+    color: var(--text-primary);
+  }
+  .tagline-h1 {
+    font-size: 32px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 26px 0 6px;
+  }
+  .tagline-h1 .accent { color: var(--accent); }
+
+  .receipt-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    margin: 24px 0;
+  }
+  .receipt-num { font-size: 34px; font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .receipt-label { font-size: 15px; color: var(--muted); margin-top: 2px; }
+  .receipt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 480px) { .receipt-grid { grid-template-columns: 1fr; } }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: inherit;
+    padding: 15px 26px;
+    border-radius: 12px;
+    border: none;
+    background: var(--accent);
+    color: #04211f;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 14px 24px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--text-primary); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 26px 0 8px; }
+
+  .included { list-style: none; padding: 0; margin: 18px 0; }
+  .included li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gridline);
+  }
+  .included li:last-child { border-bottom: none; }
+  .included .tick { color: var(--accent); flex-shrink: 0; margin-top: 4px; }
+
+  .offer-card {
+    background: var(--surface-1);
+    border: 1px solid rgba(10,191,188,0.45);
+    border-radius: 16px;
+    padding: 28px;
+    margin: 28px 0;
+    text-align: center;
+  }
+  .offer-price { font-size: 44px; font-weight: 800; color: var(--text-primary); }
+  .offer-price .permo { font-size: 18px; font-weight: 600; color: var(--muted); }
+  .offer-pill {
+    display: inline-block;
+    background: rgba(10,191,188,0.14);
+    border: 1px solid rgba(10,191,188,0.4);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 5px 14px;
+    margin-bottom: 14px;
+  }
+  .offer-note { font-size: 15px; color: var(--muted); margin: 10px 0 0; }
+
+  .market-note {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 20px 0;
+    font-size: 16px;
+  }
+
+  .faq-item { border-bottom: 1px solid var(--gridline); padding: 4px 0; }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-q {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 14px 0;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-q::after { content: "+"; color: var(--accent); font-size: 22px; font-weight: 400; }
+  details[open] .faq-q::after { content: "\2013"; }
+  .faq-a { margin: 0 0 16px; }
+
+  .signoff { margin-top: 40px; font-size: 18px; }
+  .signoff .name { color: var(--text-primary); font-weight: 700; margin-top: 6px; }
+
+  .footer-note { margin-top: 44px; font-size: 13px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top-strip">
+      <span class="brand">
+        <span class="brand-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><path d="M4 20v-6"/><path d="M9 20V10"/><path d="M14 20V4"/><path d="M19 20v-9"/></svg></span>
+        PAC Dashboard
+      </span>
+      <a class="signin-link" href="./">Already a member? Sign in</a>
+    </div>
+
+    <div class="hero">
+      <p class="beat">It is 9.47pm on a Tuesday.</p>
+      <p class="beat">You just finished your last lesson.</p>
+      <p class="beat">You open Instagram to post something. Anything.</p>
+      <p class="beat">You stare at the blank caption box.</p>
+      <p class="beat">Nothing comes.</p>
+      <p class="beat beat-strong">You close the app. Same as last week.</p>
+    </div>
+
+    <h2>The spiral nobody talks about</h2>
+    <p class="beat">You don't know what to post.</p>
+    <p class="beat">So you don't post.</p>
+    <p class="beat">So nobody sees you.</p>
+    <p class="beat">So no new enquiries come in.</p>
+    <p class="beat">And you start wondering why your classes are not filling.</p>
+    <div class="gap"></div>
+    <p>It is not because you are a bad tutor.</p>
+    <p>It is because you are posting blind. Or not posting at all.</p>
+
+    <h2>Now look at the tutors with full group classes</h2>
+    <p>They are not more talented than you.</p>
+    <p>They do not post more than you.</p>
+    <p class="beat-strong" style="font-size:18px;">They post knowing.</p>
+    <div class="gap"></div>
+    <p class="beat">They know which post builds trust with parents.</p>
+    <p class="beat">Which post inspires.</p>
+    <p class="beat">Which post converts a follower into an enquiry.</p>
+    <div class="gap"></div>
+    <p>That certainty is the whole difference. Not talent. Not luck. Not posting every day.</p>
+
+    <h2>I know, because I measured mine</h2>
+    <p>One story post about my dad reached 816,000 people.</p>
+    <p>My tips posts barely moved.</p>
+    <div class="receipt-card">
+      <div class="receipt-grid">
+        <div>
+          <div class="receipt-num">14,677</div>
+          <div class="receipt-label">engagement on one story post</div>
+        </div>
+        <div>
+          <div class="receipt-num">816,000</div>
+          <div class="receipt-label">people reached, zero ad spend</div>
+        </div>
+        <div>
+          <div class="receipt-num">20 to 50x</div>
+          <div class="receipt-label">story posts beat tips posts across my 4 accounts</div>
+        </div>
+        <div>
+          <div class="receipt-num">4</div>
+          <div class="receipt-label">accounts measured, every single post</div>
+        </div>
+      </div>
+    </div>
+    <p>I did not guess my way to those numbers. I measured every post I made, found the pattern, and followed it.</p>
+    <p>Then I built the thing that does the measuring.</p>
+
+    <h2 class="tagline-h1">Know what fills your next class, <span class="accent">before you post it</span></h2>
+    <p>Imagine your Monday morning.</p>
+    <p>You open one page. It shows what worked on your accounts last week, what flopped, and why.</p>
+    <p>It hands you this week's post ideas, modeled on your own winning posts. This one builds trust. This one converts.</p>
+    <p>No more blank caption box. No more posting and praying.</p>
+
+    <h2>Don't take my word for it</h2>
+    <p>This is exactly what your dashboard would look like, with sample data.</p>
+    <div class="cta-row">
+      <a class="btn-ghost" href="./?demo=1">See a live example</a>
+    </div>
+
+    <h2>What you get</h2>
+    <ul class="included">
+      <li><span class="tick">✓</span><span>Your Instagram, TikTok and Facebook tracked every week</span></li>
+      <li><span class="tick">✓</span><span>Your top and bottom posts, explained in plain English</span></li>
+      <li><span class="tick">✓</span><span>A weekly what-to-post plan with ready hooks</span></li>
+      <li><span class="tick">✓</span><span>Every idea modeled on YOUR winners, not generic templates</span></li>
+    </ul>
+    <div class="market-note">
+      For context: an agency charges S$800 to S$2,500 a month to post for you. Analytics software gives you charts and leaves the thinking to you. This gives you the thinking.
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-pill">Founding rate</div>
+      <div class="offer-price"><span class="price"></span><span class="permo"> /month</span></div>
+      <p class="offer-note">I set up every founding tutor personally.</p>
+      <p class="offer-note">When the founding group is full, the price goes up.</p>
+      <p class="offer-note">A fraction of what one student pays you in a month.</p>
+      <div class="cta-row" style="justify-content:center;">
+        <a class="btn-primary" href="https://forms.gle/1JPQRoMUtjRMxqeQ9" target="_blank" rel="noopener">Get my dashboard</a>
+      </div>
+    </div>
+
+    <h2>Questions tutors ask me</h2>
+    <details class="faq-item">
+      <summary class="faq-q">My following is tiny. Will this still work?</summary>
+      <p class="faq-a">Yes. The dashboard reads what your audience responds to, whether that audience is 300 parents or 30,000. A small account just means the pattern shows up with less noise.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">I have no time for social media.</summary>
+      <p class="faq-a">That is exactly the point. You stop spending Sunday nights wondering what to post. The plan is waiting for you every week. You just write the post.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Is my data safe?</summary>
+      <p class="faq-a">The dashboard reads public post data only. You sign in with your own Google account. Nothing is ever posted on your behalf, and nobody else can see your dashboard.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-q">Can I cancel?</summary>
+      <p class="faq-a">Yes. Monthly, no lock-in. If it does not help you fill classes, stop paying.</p>
+    </details>
+
+    <h2>If this sounds like you</h2>
+    <p>Fill in the form. I will set up your dashboard personally and message you when it is ready, usually the same day.</p>
+    <div class="cta-row">
+      <a class="btn-primary" href="https://forms.gle/1JPQRoMUtjRMxqeQ9" target="_blank" rel="noopener">Get my dashboard</a>
+      <a class="btn-ghost" href="./?demo=1">See the demo first</a>
+    </div>
+
+    <div class="signoff">
+      <p>See you inside.</p>
+      <p class="name">John</p>
+    </div>
+
+    <p class="footer-note">PAC Dashboard · <a href="./" style="color:var(--muted);">Member sign in</a></p>
+  </div>
+
+  <script>
+    // Single place to change the price everywhere on the page.
+    var PRICE = "S$97";
+    document.querySelectorAll(".price").forEach(function (el) { el.textContent = PRICE; });
+  </script>
+</body>
+</html>
