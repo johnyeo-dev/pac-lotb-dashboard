@@ -3757,12 +3757,21 @@
         showError((e && e.code ? "[" + e.code + "] " : "") + (e && e.message ? e.message : "Sign-in failed — try again."));
       });
 
+      // ?demo=1 in the URL jumps straight to the demo dashboard regardless of
+      // sign-in state — one link works for a signed-out prospect, a signed-in
+      // admin (no need to sign out to check it), or a signed-in customer.
+      var wantsDemo = /(^|[?&])demo(=1)?(&|$)/.test(location.search);
+
       auth.onAuthStateChanged(function (user) {
         if (!user) {
           gate.classList.remove("hidden");
           app.classList.add("hidden");
           googleBtn.hidden = false;
           signoutBtn.hidden = true;
+          if (wantsDemo) {
+            var publicDemo = document.getElementById("panel-demo-public");
+            if (publicDemo) publicDemo.scrollIntoView({ behavior: "instant" });
+          }
           return;
         }
         // Verify the signed-in Google account against the Firestore allowlist.
@@ -3775,6 +3784,11 @@
             clearError();
             applyRole(doc.data().role || "admin");
             unlock();
+            if (wantsDemo) {
+              var role = doc.data().role || "admin";
+              if (role === "admin") demoToggle.click();
+              else goToPanel("panel-demo");
+            }
           } else {
             showError("This Google account (" + user.email + ") doesn't have access. Contact John if you think it should.");
             googleBtn.hidden = true;
