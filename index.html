@@ -33,20 +33,22 @@
   .wrap { max-width: 900px; margin: 0 auto; padding: 0 18px; }
   .icn { flex-shrink: 0; vertical-align: -3px; }
 
-  /* Sign-in gate */
+  /* Sign-in gate — a real public landing page: sign-in card up top, then an
+     always-visible preview (onboarding steps + sample dashboard) below, so
+     prospects can see what they're signing up for before committing. Only the
+     real per-client dashboard (#app) stays behind auth. */
   #gate {
-    position: fixed;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 70% 45% at 50% -5%, rgba(10,191,188,0.14), transparent),
-      var(--page-plane);
+    background: var(--page-plane);
+    padding-bottom: 40px;
+  }
+  #gate.hidden { display: none; }
+  .gate-hero {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 100;
-    padding: 20px;
+    padding: 48px 20px 36px;
+    background: radial-gradient(ellipse 70% 100% at 50% -5%, rgba(10,191,188,0.14), transparent);
   }
-  #gate.hidden { display: none; }
   .gate-card {
     background: var(--surface-1);
     border: 1px solid var(--border);
@@ -56,6 +58,9 @@
     max-width: 380px;
     text-align: center;
   }
+  .gate-preview { padding-top: 8px; }
+  .gate-preview .panel-static:first-child { border-top: 1px solid var(--gridline); padding-top: 32px; }
+  .panel-static { padding-bottom: 10px; margin-bottom: 32px; }
   .gate-mark {
     width: 52px;
     height: 52px;
@@ -805,17 +810,217 @@
 </head>
 <body>
   <div id="gate">
-    <div class="gate-card">
-      <div class="gate-mark"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 19.5v-4"/><path d="M9.5 19.5v-8"/><path d="M14.5 19.5V7.5"/><path d="M19.5 19.5v-15"/></svg></div>
-      <h1>PAC Dashboard</h1>
-      <p class="gate-tagline">Know what fills your next class before you post it.</p>
-      <p class="gate-sub">Private dashboard — sign in to continue.</p>
-      <p class="gate-error" id="gate-error"></p>
-      <button id="gate-google">
-        <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        Sign in with Google
-      </button>
-      <button id="gate-signout" class="gate-secondary" hidden>Sign out &amp; try another account</button>
+    <div class="gate-hero">
+      <div class="gate-card">
+        <div class="gate-mark"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 19.5v-4"/><path d="M9.5 19.5v-8"/><path d="M14.5 19.5V7.5"/><path d="M19.5 19.5v-15"/></svg></div>
+        <h1>PAC Dashboard</h1>
+        <p class="gate-tagline">Know what fills your next class before you post it.</p>
+        <p class="gate-sub">Sign in to get your own dashboard, or see a live example below first.</p>
+        <p class="gate-error" id="gate-error"></p>
+        <button id="gate-google">
+          <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+          Sign in with Google
+        </button>
+        <button id="gate-signout" class="gate-secondary" hidden>Sign out &amp; try another account</button>
+      </div>
+    </div>
+    <div class="wrap gate-preview">
+      
+  <section class="panel-static" id="panel-onboarding-public">
+    <div class="account-header">
+      <h2><span class="acc-icon"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 21V4"/><path d="M5.5 4.8c4.8-2.6 8.2 2.4 13-0.2v9c-4.8 2.6-8.2-2.4-13 .2"/></svg></span>Welcome to the PAC Dashboard</h2>
+    </div>
+    <p class="fable-subtitle">Two quick steps to get access, then a look at what you'll see.</p>
+    <div class="steps">
+      
+      <div class="step-row">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4 class="step-title">Submit your details</h4>
+          <p class="step-text">Fill out the sign-up form with your name, the Gmail address you&#39;ll sign in with, and your Instagram / TikTok / Facebook handles.</p>
+          <a class="btn-primary" href="https://forms.gle/1JPQRoMUtjRMxqeQ9" target="_blank" rel="noopener">Open the sign-up form <svg class="icn" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16"/><path d="M13 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4 class="step-title">Wait for access confirmation</h4>
+          <p class="step-text">We add your Gmail to the dashboard&#39;s access list and message you once it&#39;s ready — usually the same day.</p>
+          
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4 class="step-title">Sign in</h4>
+          <p class="step-text">Come back to this page and sign in with the same Google account you submitted. If you see “no access”, you either signed in with a different account or haven&#39;t been added yet — message John.</p>
+          
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h4 class="step-title">See what your dashboard will look like</h4>
+          <p class="step-text">Scroll down for a live example of the weekly plan, top and bottom posts, and post ideas you&#39;ll get once your own accounts are connected.</p>
+          
+        </div>
+      </div>
+    </div>
+    <p class="outcomes-footer">Questions at any point? Just message John directly.</p>
+  </section>
+      
+  <section class="panel-static" id="panel-demo-public">
+    <div class="account-header">
+      <h2><span class="acc-icon"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.2-3.6 4.1-5.5 7.5-5.5s6.3 1.9 7.5 5.5"/></svg></span>Mrs Lim · Primary English Tuition</h2>
+      <span class="sample-chip">Sample data — not a real client</span>
+    </div>
+    <p class="fable-subtitle">Know what to post this week — based on what your audience already proved they love.</p>
+
+    <div class="plan-box demo-thisweek">
+      <h3>This week from your strategist</h3>
+      <div class="plan-days">
+        
+        <div class="plan-day">
+          <span class="plan-when">POST THIS</span>
+          <div class="plan-what"><span>Your &quot;reading aloud at dinner&quot; story from last Tuesday&#39;s class. Parents responded 4x better to real classroom moments than tips this month — the draft is ready in your ideas below (#1).</span></div>
+        </div>
+        <div class="plan-day">
+          <span class="plan-when">WHAT WON</span>
+          <div class="plan-what"><span>Last week&#39;s winner: &quot;She read the whole page without stopping once&quot; — 58 likes, 11 comments. A real student moment with the child&#39;s outcome front and centre. This is your proven pattern.</span></div>
+        </div>
+        <div class="plan-day">
+          <span class="plan-when">ONE FIX</span>
+          <div class="plan-what"><span>Thursday&#39;s post opened with &quot;5 comprehension tips&quot; — tips-first hooks are your weakest pattern (they average 7 likes). Lead with the moment; let the tips follow inside the post.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="kpi-row" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="kpi-card"><span class="kpi-value">1,208</span><span class="kpi-label">followers</span></div><div class="kpi-card"><span class="kpi-value">31</span><span class="kpi-label">avg engagement</span></div><div class="kpi-card"><span class="kpi-value">412</span><span class="kpi-label">top post</span></div><div class="kpi-card"><span class="kpi-value">30</span><span class="kpi-label">posts tracked</span></div>
+    </div>
+
+    <div class="insight-box">
+      <h3>What's working on your page</h3>
+      <ul><li>Real student moments with the child&#39;s outcome in the first line outperform tips posts 10-20x on this page — every post above 150 engagement is a named, specific moment.</li><li>Spoken dialogue hooks (&quot;a parent asked me...&quot;) consistently pull comments from parents who recognise themselves — your comment sections are where trial enquiries start.</li><li>Posts that sell the method (SEALS, comprehension frameworks) are your weakest — parents buy the after-state (&quot;she reads on her own now&quot;), not the mechanism.</li></ul>
+    </div>
+
+    <h3 class="section-label">Your top performers</h3>
+    <div class="rank-list">
+      <div class="rank-row">
+        <span class="rank-badge">·</span>
+        <div class="rank-body">
+          <span class="rank-label">She read the whole page without stopping once. Her mum cried in the car. Here&#39;s what changed in 6 weeks...</span>
+          <div class="bar-track"><div class="bar-fill" style="width:100%; background:#0ABFBC;"></div></div>
+          <div class="metric-row"><span class="metric-chip">Real student moment · child&#39;s outcome in line one</span></div>
+        </div>
+        <span class="rank-value">412</span>
+      </div>
+      <div class="rank-row">
+        <span class="rank-badge">·</span>
+        <div class="rank-body">
+          <span class="rank-label">A parent asked me yesterday: &quot;Why does my son hate reading?&quot; I asked her one question back that changed the conversation.</span>
+          <div class="bar-track"><div class="bar-fill" style="width:69.66019417475728%; background:#0ABFBC;"></div></div>
+          <div class="metric-row"><span class="metric-chip">Spoken dialogue hook · parent sees themselves</span></div>
+        </div>
+        <span class="rank-value">287</span>
+      </div>
+      <div class="rank-row">
+        <span class="rank-badge">·</span>
+        <div class="rank-body">
+          <span class="rank-label">I almost gave up tutoring in 2023. A P4 girl who wouldn&#39;t speak in class is the reason I didn&#39;t.</span>
+          <div class="bar-track"><div class="bar-fill" style="width:48.05825242718447%; background:#0ABFBC;"></div></div>
+          <div class="metric-row"><span class="metric-chip">Vulnerability with real stakes</span></div>
+        </div>
+        <span class="rank-value">198</span>
+      </div></div>
+
+    <h3 class="section-label">Your weakest posts (and why)</h3>
+    <div class="rank-list">
+      <div class="rank-row">
+        <span class="rank-badge">·</span>
+        <div class="rank-body">
+          <span class="rank-label">5 comprehension tips every P5 parent should know 📚</span>
+          <div class="bar-track"><div class="bar-fill" style="width:3%; background:#5b6b85;"></div></div>
+          <div class="metric-row"><span class="metric-chip">Tips-first hook · no moment, no person</span></div>
+        </div>
+        <span class="rank-value">7</span>
+      </div>
+      <div class="rank-row">
+        <span class="rank-badge">·</span>
+        <div class="rank-body">
+          <span class="rank-label">Enrolment open for Term 4! Limited slots available.</span>
+          <div class="bar-track"><div class="bar-fill" style="width:3%; background:#5b6b85;"></div></div>
+          <div class="metric-row"><span class="metric-chip">Ask with no story attached</span></div>
+        </div>
+        <span class="rank-value">5</span>
+      </div>
+      <div class="rank-row">
+        <span class="rank-badge">·</span>
+        <div class="rank-body">
+          <span class="rank-label">What is the SEALS method? A thread on answering open-ended questions.</span>
+          <div class="bar-track"><div class="bar-fill" style="width:3%; background:#5b6b85;"></div></div>
+          <div class="metric-row"><span class="metric-chip">Method-first · sells the process, not the outcome</span></div>
+        </div>
+        <span class="rank-value">4</span>
+      </div></div>
+
+    <h3 class="section-label">This week's post ideas — modeled on YOUR winners</h3>
+    <div class="ideas-list" style="margin-top:0;">
+      
+      <div class="idea-card" style="--acc:#0ABFBC;">
+        <div class="idea-num">1</div>
+        <div class="idea-body">
+          <h4 class="idea-title">The dinner-table read-aloud</h4>
+          <div class="idea-tags">
+            <span class="idea-tag idea-tag-proof">proof</span>
+            <span class="idea-tag idea-tag-effort">quick</span>
+          </div>
+          <p class="idea-hook">&quot;Can I read it to you?&quot; Six weeks ago this girl hid her book under the table.</p>
+          <p class="idea-angle"><strong>Angle:</strong> Tuesday&#39;s classroom moment → the before/after arc parents crave. End on what changed at home, not what you did in class.</p>
+          <p class="idea-context"><strong>Why:</strong> Mirrors your 412-engagement winner: child&#39;s outcome, first line, no method talk.</p>
+        </div>
+      </div>
+      <div class="idea-card" style="--acc:#0ABFBC;">
+        <div class="idea-num">2</div>
+        <div class="idea-body">
+          <h4 class="idea-title">The question that changes the conversation</h4>
+          <div class="idea-tags">
+            <span class="idea-tag idea-tag-trust">trust</span>
+            <span class="idea-tag idea-tag-effort">quick</span>
+          </div>
+          <p class="idea-hook">&quot;Why does my son hate reading?&quot; Wrong question. Here&#39;s the one I ask instead.</p>
+          <p class="idea-angle"><strong>Angle:</strong> Dialogue hook → reframe → one practical thing a parent can try tonight.</p>
+          <p class="idea-context"><strong>Why:</strong> Your #2 post proved dialogue hooks pull comments; the tonight-action makes it shareable in parent groups.</p>
+        </div>
+      </div>
+      <div class="idea-card" style="--acc:#0ABFBC;">
+        <div class="idea-num">3</div>
+        <div class="idea-body">
+          <h4 class="idea-title">What I tell parents at the first meeting</h4>
+          <div class="idea-tags">
+            <span class="idea-tag idea-tag-trust">trust</span>
+            <span class="idea-tag idea-tag-effort">needs prep</span>
+          </div>
+          <p class="idea-hook">Every first meeting, a parent apologises for their child. Every time, I stop them.</p>
+          <p class="idea-angle"><strong>Angle:</strong> Named identity (&quot;parents of reluctant readers&quot;) + validation of a private worry, out loud.</p>
+          <p class="idea-context"><strong>Why:</strong> &quot;I see you&quot; posts drive your comments — people comment to say &quot;this is me.&quot;</p>
+        </div>
+      </div>
+      <div class="idea-card" style="--acc:#0ABFBC;">
+        <div class="idea-num">4</div>
+        <div class="idea-body">
+          <h4 class="idea-title">Term 4 doors open — carried by a story</h4>
+          <div class="idea-tags">
+            <span class="idea-tag idea-tag-harvest">harvest</span>
+            <span class="idea-tag idea-tag-effort">quick</span>
+          </div>
+          <p class="idea-hook">The last seat in my Tuesday class belongs to a boy who wouldn&#39;t read a menu in January.</p>
+          <p class="idea-angle"><strong>Angle:</strong> One enrolment ask, wrapped in your strongest proof story. One CTA only.</p>
+          <p class="idea-context"><strong>Why:</strong> Your bare &quot;enrolment open&quot; post got 5 likes — the same ask carried by a story is how your page converts attention into trials.</p>
+        </div>
+      </div>
+    </div>
+  </section>
     </div>
   </div>
 
