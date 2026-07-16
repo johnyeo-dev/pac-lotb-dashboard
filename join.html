@@ -283,6 +283,7 @@
       <div class="cta-row" style="justify-content:center;">
         <a class="btn-primary pay-link" href="" target="_blank" rel="noopener">Join for <span class="price"></span>/month</a>
       </div>
+      <p class="offer-note">The button opens a chat with me. I will send you the payment link there, and set you up the same day.</p>
     </div>
 
     <h2>Questions tutors ask me</h2>
@@ -304,7 +305,7 @@
     </details>
 
     <h2>If this sounds like you</h2>
-    <p>Join below. Once your payment is in, I will set up your dashboard personally and message you when it is ready, usually the same day.</p>
+    <p>Tap join below. It opens a chat with me, I send you the payment link, and once your payment is in I set up your dashboard personally, usually the same day.</p>
     <div class="cta-row">
       <a class="btn-primary pay-link" href="" target="_blank" rel="noopener">Join for <span class="price"></span>/month</a>
       <a class="btn-ghost" href="./?demo=1">See the demo first</a>
@@ -321,7 +322,10 @@
   <script>
     // Single place to change the price and payment link everywhere on the page.
     var PRICE = "S$97";
-    var PAYMENT_URL = ""; // PASTE THE CHECKOUT LINK HERE (e.g. ThriveCart). Empty = buttons hidden.
+    // INTERIM: opens a Messenger chat with John's page (facebook.com/johnyeojr) —
+    // he sends the payment link personally. Swap for the real checkout URL
+    // (e.g. ThriveCart) when it exists. Empty = buttons hidden.
+    var PAYMENT_URL = "https://m.me/johnyeojr";
     document.querySelectorAll(".price").forEach(function (el) { el.textContent = PRICE; });
     document.querySelectorAll(".pay-link").forEach(function (el) {
       if (PAYMENT_URL) el.href = PAYMENT_URL;
