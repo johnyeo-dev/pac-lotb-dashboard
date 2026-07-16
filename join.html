@@ -281,7 +281,7 @@
       <p class="offer-note">When the founding group is full, the price goes up.</p>
       <p class="offer-note">A fraction of what one student pays you in a month.</p>
       <div class="cta-row" style="justify-content:center;">
-        <a class="btn-primary" href="https://forms.gle/1JPQRoMUtjRMxqeQ9" target="_blank" rel="noopener">Get my dashboard</a>
+        <a class="btn-primary pay-link" href="" target="_blank" rel="noopener">Join for <span class="price"></span>/month</a>
       </div>
     </div>
 
@@ -304,9 +304,9 @@
     </details>
 
     <h2>If this sounds like you</h2>
-    <p>Fill in the form. I will set up your dashboard personally and message you when it is ready, usually the same day.</p>
+    <p>Join below. Once your payment is in, I will set up your dashboard personally and message you when it is ready, usually the same day.</p>
     <div class="cta-row">
-      <a class="btn-primary" href="https://forms.gle/1JPQRoMUtjRMxqeQ9" target="_blank" rel="noopener">Get my dashboard</a>
+      <a class="btn-primary pay-link" href="" target="_blank" rel="noopener">Join for <span class="price"></span>/month</a>
       <a class="btn-ghost" href="./?demo=1">See the demo first</a>
     </div>
 
@@ -319,9 +319,14 @@
   </div>
 
   <script>
-    // Single place to change the price everywhere on the page.
+    // Single place to change the price and payment link everywhere on the page.
     var PRICE = "S$97";
+    var PAYMENT_URL = ""; // PASTE THE CHECKOUT LINK HERE (e.g. ThriveCart). Empty = buttons hidden.
     document.querySelectorAll(".price").forEach(function (el) { el.textContent = PRICE; });
+    document.querySelectorAll(".pay-link").forEach(function (el) {
+      if (PAYMENT_URL) el.href = PAYMENT_URL;
+      else el.style.display = "none"; // never ship a dead buy button
+    });
   </script>
 </body>
 </html>
