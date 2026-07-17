@@ -371,9 +371,34 @@
   .section-label { font-size: 17px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 0 0 14px; font-weight: 700; }
 
   /* Growth Planner */
-  .planner-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
-  .planner-field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-secondary); }
+  .planner-controls { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .planner-start-field { max-width: 240px; }
+  .planner-scenario {
+    display: grid;
+    grid-template-columns: 110px 1fr 1fr;
+    gap: 12px;
+    align-items: end;
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .planner-scenario-name { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--text-primary); padding-bottom: 12px; }
+  @media (max-width: 560px) {
+    .planner-scenario { grid-template-columns: 1fr 1fr; }
+    .planner-scenario-name { grid-column: 1 / -1; padding-bottom: 0; }
+  }
+  .planner-legend { display: flex; flex-wrap: wrap; gap: 16px; margin: -12px 0 24px; }
+  .planner-legend-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-secondary); }
+  .planner-tip-row { display: flex; align-items: center; gap: 6px; }
+  .planner-tooltip strong { display: block; margin-bottom: 2px; }
+  .planner-gain { font-size: 12px; color: var(--muted); font-weight: 400; }
+  .planner-table th .cmp-swatch { display: inline-block; vertical-align: middle; margin-right: 4px; }
+  .planner-field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-secondary); min-width: 0; }
   .planner-field input {
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
     font-family: inherit;
     font-size: 18px;
     font-weight: 700;
@@ -385,7 +410,6 @@
     padding: 10px 12px;
   }
   .planner-field input:focus { outline: none; border-color: var(--accent); }
-  @media (max-width: 560px) { .planner-controls { grid-template-columns: 1fr; } }
 
   .planner-chart-box { position: relative; background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 24px; }
   .planner-chart { width: 100%; height: auto; display: block; overflow: visible; }
@@ -412,8 +436,9 @@
   }
   .planner-tooltip[hidden] { display: none; }
 
+  .planner-table-wrap { overflow-x: auto; }
   .planner-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
-  .planner-table th, .planner-table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--border); font-size: 15px; }
+  .planner-table th, .planner-table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--border); font-size: 15px; white-space: nowrap; }
   .planner-table th { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; }
   .planner-table td { color: var(--text-primary); }
   .planner-table tr:last-child td { border-bottom: none; }
@@ -1253,29 +1278,64 @@
     
     <div class="planner-widget">
       <div class="planner-controls">
-        <label class="planner-field">
+        <label class="planner-field planner-start-field">
           <span>Starting followers</span>
           <input type="number" class="planner-start" id="planner-start-ov" min="0" step="1" value="2523">
         </label>
-        <label class="planner-field">
-          <span>New followers per video</span>
-          <input type="number" class="planner-per-video" id="planner-per-video-ov" min="0" step="1" value="20">
-        </label>
-        <label class="planner-field">
-          <span>Videos per week</span>
-          <input type="number" class="planner-per-week" id="planner-per-week-ov" min="0" step="0.5" value="3">
-        </label>
+        
+        <div class="planner-scenario" data-scenario="0">
+          <span class="planner-scenario-name"><span class="cmp-swatch" style="background:#0ABFBC;"></span>Scenario 1</span>
+          <label class="planner-field">
+            <span>New followers per video</span>
+            <input type="number" class="planner-per-video" id="planner-per-video-0-ov" min="0" step="1" value="20">
+          </label>
+          <label class="planner-field">
+            <span>Videos per week</span>
+            <input type="number" class="planner-per-week" id="planner-per-week-0-ov" min="0" step="0.5" value="3">
+          </label>
+        </div>
+        <div class="planner-scenario" data-scenario="1">
+          <span class="planner-scenario-name"><span class="cmp-swatch" style="background:#4a9af0;"></span>Scenario 2</span>
+          <label class="planner-field">
+            <span>New followers per video</span>
+            <input type="number" class="planner-per-video" id="planner-per-video-1-ov" min="0" step="1" value="50">
+          </label>
+          <label class="planner-field">
+            <span>Videos per week</span>
+            <input type="number" class="planner-per-week" id="planner-per-week-1-ov" min="0" step="0.5" value="5">
+          </label>
+        </div>
+        <div class="planner-scenario" data-scenario="2">
+          <span class="planner-scenario-name"><span class="cmp-swatch" style="background:#f0a44a;"></span>Scenario 3</span>
+          <label class="planner-field">
+            <span>New followers per video</span>
+            <input type="number" class="planner-per-video" id="planner-per-video-2-ov" min="0" step="1" value="100">
+          </label>
+          <label class="planner-field">
+            <span>Videos per week</span>
+            <input type="number" class="planner-per-week" id="planner-per-week-2-ov" min="0" step="0.5" value="7">
+          </label>
+        </div>
       </div>
 
       <div class="planner-chart-box">
-        <svg class="planner-chart" viewBox="0 0 640 260" preserveAspectRatio="none" role="img" aria-label="Projected follower growth over 3 months"></svg>
+        <svg class="planner-chart" viewBox="0 0 640 260" preserveAspectRatio="none" role="img" aria-label="Projected follower growth over 3 months, three scenarios compared"></svg>
         <div class="planner-tooltip" hidden></div>
       </div>
 
-      <table class="planner-table">
-        <thead><tr><th>Milestone</th><th>New followers gained</th><th>Projected total followers</th></tr></thead>
-        <tbody class="planner-table-body"></tbody>
-      </table>
+      <div class="planner-legend">
+        <span class="planner-legend-item"><span class="cmp-swatch" style="background:#0ABFBC;"></span>Scenario 1</span><span class="planner-legend-item"><span class="cmp-swatch" style="background:#4a9af0;"></span>Scenario 2</span><span class="planner-legend-item"><span class="cmp-swatch" style="background:#f0a44a;"></span>Scenario 3</span>
+      </div>
+
+      <div class="planner-table-wrap">
+        <table class="planner-table">
+          <thead><tr>
+            <th>Milestone</th>
+            <th><span class="cmp-swatch" style="background:#0ABFBC;"></span> Scenario 1</th><th><span class="cmp-swatch" style="background:#4a9af0;"></span> Scenario 2</th><th><span class="cmp-swatch" style="background:#f0a44a;"></span> Scenario 3</th>
+          </tr></thead>
+          <tbody class="planner-table-body"></tbody>
+        </table>
+      </div>
     </div>
 
     <h3 class="section-label">Best post across everything</h3>
@@ -3310,29 +3370,64 @@
     
     <div class="planner-widget">
       <div class="planner-controls">
-        <label class="planner-field">
+        <label class="planner-field planner-start-field">
           <span>Starting followers</span>
           <input type="number" class="planner-start" id="planner-start-tab" min="0" step="1" value="2523">
         </label>
-        <label class="planner-field">
-          <span>New followers per video</span>
-          <input type="number" class="planner-per-video" id="planner-per-video-tab" min="0" step="1" value="20">
-        </label>
-        <label class="planner-field">
-          <span>Videos per week</span>
-          <input type="number" class="planner-per-week" id="planner-per-week-tab" min="0" step="0.5" value="3">
-        </label>
+        
+        <div class="planner-scenario" data-scenario="0">
+          <span class="planner-scenario-name"><span class="cmp-swatch" style="background:#0ABFBC;"></span>Scenario 1</span>
+          <label class="planner-field">
+            <span>New followers per video</span>
+            <input type="number" class="planner-per-video" id="planner-per-video-0-tab" min="0" step="1" value="20">
+          </label>
+          <label class="planner-field">
+            <span>Videos per week</span>
+            <input type="number" class="planner-per-week" id="planner-per-week-0-tab" min="0" step="0.5" value="3">
+          </label>
+        </div>
+        <div class="planner-scenario" data-scenario="1">
+          <span class="planner-scenario-name"><span class="cmp-swatch" style="background:#4a9af0;"></span>Scenario 2</span>
+          <label class="planner-field">
+            <span>New followers per video</span>
+            <input type="number" class="planner-per-video" id="planner-per-video-1-tab" min="0" step="1" value="50">
+          </label>
+          <label class="planner-field">
+            <span>Videos per week</span>
+            <input type="number" class="planner-per-week" id="planner-per-week-1-tab" min="0" step="0.5" value="5">
+          </label>
+        </div>
+        <div class="planner-scenario" data-scenario="2">
+          <span class="planner-scenario-name"><span class="cmp-swatch" style="background:#f0a44a;"></span>Scenario 3</span>
+          <label class="planner-field">
+            <span>New followers per video</span>
+            <input type="number" class="planner-per-video" id="planner-per-video-2-tab" min="0" step="1" value="100">
+          </label>
+          <label class="planner-field">
+            <span>Videos per week</span>
+            <input type="number" class="planner-per-week" id="planner-per-week-2-tab" min="0" step="0.5" value="7">
+          </label>
+        </div>
       </div>
 
       <div class="planner-chart-box">
-        <svg class="planner-chart" viewBox="0 0 640 260" preserveAspectRatio="none" role="img" aria-label="Projected follower growth over 3 months"></svg>
+        <svg class="planner-chart" viewBox="0 0 640 260" preserveAspectRatio="none" role="img" aria-label="Projected follower growth over 3 months, three scenarios compared"></svg>
         <div class="planner-tooltip" hidden></div>
       </div>
 
-      <table class="planner-table">
-        <thead><tr><th>Milestone</th><th>New followers gained</th><th>Projected total followers</th></tr></thead>
-        <tbody class="planner-table-body"></tbody>
-      </table>
+      <div class="planner-legend">
+        <span class="planner-legend-item"><span class="cmp-swatch" style="background:#0ABFBC;"></span>Scenario 1</span><span class="planner-legend-item"><span class="cmp-swatch" style="background:#4a9af0;"></span>Scenario 2</span><span class="planner-legend-item"><span class="cmp-swatch" style="background:#f0a44a;"></span>Scenario 3</span>
+      </div>
+
+      <div class="planner-table-wrap">
+        <table class="planner-table">
+          <thead><tr>
+            <th>Milestone</th>
+            <th><span class="cmp-swatch" style="background:#0ABFBC;"></span> Scenario 1</th><th><span class="cmp-swatch" style="background:#4a9af0;"></span> Scenario 2</th><th><span class="cmp-swatch" style="background:#f0a44a;"></span> Scenario 3</th>
+          </tr></thead>
+          <tbody class="planner-table-body"></tbody>
+        </table>
+      </div>
     </div>
   </section>
       
@@ -4173,10 +4268,10 @@ Do the full setup:
 
       // Growth Planner: pure client-side projection, no data leaves the page.
       // Bound per-widget so the same planner can render on Overview and its own tab.
+      var PLANNER_COLORS = ["#0ABFBC", "#4a9af0", "#f0a44a"];
       document.querySelectorAll(".planner-widget").forEach(function (widget) {
         var startInput = widget.querySelector(".planner-start");
-        var perVideoInput = widget.querySelector(".planner-per-video");
-        var perWeekInput = widget.querySelector(".planner-per-week");
+        var scenarioEls = widget.querySelectorAll(".planner-scenario");
         var svg = widget.querySelector(".planner-chart");
         var tooltip = widget.querySelector(".planner-tooltip");
         var tableBody = widget.querySelector(".planner-table-body");
@@ -4200,15 +4295,19 @@ Do the full setup:
 
         function render() {
           var start = num(startInput, 0);
-          var perVideo = num(perVideoInput, 0);
-          var perWeek = num(perWeekInput, 0);
-          var newPerWeek = perVideo * perWeek;
+          var scenarios = Array.prototype.map.call(scenarioEls, function (row, i) {
+            var perVideo = num(row.querySelector(".planner-per-video"), 0);
+            var perWeek = num(row.querySelector(".planner-per-week"), 0);
+            var newPerWeek = perVideo * perWeek;
+            var series = [];
+            for (var w = 0; w <= WEEKS; w++) series.push(start + newPerWeek * w);
+            return { color: PLANNER_COLORS[i % PLANNER_COLORS.length], newPerWeek: newPerWeek, series: series };
+          });
 
-          var series = [];
-          for (var w = 0; w <= WEEKS; w++) series.push(start + newPerWeek * w);
-
-          var minY = Math.min.apply(null, series);
-          var maxY = Math.max.apply(null, series);
+          var allValues = [];
+          scenarios.forEach(function (s) { allValues = allValues.concat(s.series); });
+          var minY = Math.min.apply(null, allValues);
+          var maxY = Math.max.apply(null, allValues);
           if (minY === maxY) maxY = minY + 1;
 
           function xFor(w) { return PAD_L + (w / WEEKS) * plotW; }
@@ -4239,36 +4338,33 @@ Do the full setup:
             svg.appendChild(lbl);
           });
 
-          // Line
-          var d = series.map(function (v, w) { return (w === 0 ? "M" : "L") + xFor(w).toFixed(1) + "," + yFor(v).toFixed(1); }).join(" ");
-          svg.appendChild(el("path", { class: "planner-line", d: d }));
-
-          // Month markers + direct labels
-          monthTicks.forEach(function (t) {
-            var v = series[t.w];
-            var cx = xFor(t.w), cy = yFor(v);
-            svg.appendChild(el("circle", { class: "planner-marker", cx: cx, cy: cy, r: 5 }));
-            var lbl = el("text", {
-              class: "planner-marker-label",
-              x: cx,
-              y: cy - 12,
-              "text-anchor": t.w === 0 ? "start" : t.w === 12 ? "end" : "middle",
-            });
-            lbl.textContent = Math.round(v).toLocaleString();
+          // One line per scenario, end-value label at Month 3 (2px surface ring
+          // on markers keeps overlapping lines distinguishable).
+          scenarios.forEach(function (s, idx) {
+            var d = s.series.map(function (v, w) { return (w === 0 ? "M" : "L") + xFor(w).toFixed(1) + "," + yFor(v).toFixed(1); }).join(" ");
+            svg.appendChild(el("path", { class: "planner-line", d: d, style: "stroke:" + s.color + ";" }));
+            var endV = s.series[WEEKS];
+            svg.appendChild(el("circle", { class: "planner-marker", cx: xFor(WEEKS), cy: yFor(endV), r: 5, style: "fill:" + s.color + ";" }));
+            var lbl = el("text", { class: "planner-marker-label", x: xFor(WEEKS) - 10, y: yFor(endV) - 10, "text-anchor": "end" });
+            lbl.textContent = Math.round(endV).toLocaleString();
             svg.appendChild(lbl);
           });
 
-          // Hover layer
+          // Hover layer: one crosshair, one dot per scenario, all values in the tooltip.
           var crosshair = el("line", { class: "planner-crosshair", x1: 0, x2: 0, y1: PAD_T, y2: H - PAD_B });
-          var hoverDot = el("circle", { class: "planner-hover-dot", r: 5 });
           svg.appendChild(crosshair);
-          svg.appendChild(hoverDot);
+          var hoverDots = scenarios.map(function (s) {
+            var dot = el("circle", { class: "planner-hover-dot", r: 5, style: "fill:" + s.color + ";" });
+            svg.appendChild(dot);
+            return dot;
+          });
           var hitRect = el("rect", { x: PAD_L, y: PAD_T, width: plotW, height: plotH, fill: "transparent" });
           svg.appendChild(hitRect);
 
           function showTooltip(w, clientX, clientY) {
-            var v = series[w];
-            tooltip.textContent = "Week " + w + " · " + Math.round(v).toLocaleString() + " followers";
+            tooltip.innerHTML = "<strong>Week " + w + "</strong>" + scenarios.map(function (s, i) {
+              return '<span class="planner-tip-row"><span class="cmp-swatch" style="background:' + s.color + ';"></span>' + Math.round(s.series[w]).toLocaleString() + "</span>";
+            }).join("");
             tooltip.hidden = false;
             var boxRect = svg.parentElement.getBoundingClientRect();
             tooltip.style.left = (clientX - boxRect.left) + "px";
@@ -4276,14 +4372,16 @@ Do the full setup:
             crosshair.setAttribute("x1", xFor(w));
             crosshair.setAttribute("x2", xFor(w));
             crosshair.style.opacity = 1;
-            hoverDot.setAttribute("cx", xFor(w));
-            hoverDot.setAttribute("cy", yFor(v));
-            hoverDot.style.opacity = 1;
+            hoverDots.forEach(function (dot, i) {
+              dot.setAttribute("cx", xFor(w));
+              dot.setAttribute("cy", yFor(scenarios[i].series[w]));
+              dot.style.opacity = 1;
+            });
           }
           function hideTooltip() {
             tooltip.hidden = true;
             crosshair.style.opacity = 0;
-            hoverDot.style.opacity = 0;
+            hoverDots.forEach(function (dot) { dot.style.opacity = 0; });
           }
           hitRect.addEventListener("mousemove", function (e) {
             var rect = svg.getBoundingClientRect();
@@ -4294,16 +4392,19 @@ Do the full setup:
           });
           hitRect.addEventListener("mouseleave", hideTooltip);
 
-          // Table: months 1-3
+          // Table: months 1-3, one column per scenario (total, with monthly gain).
           var rows = [1, 2, 3].map(function (m) {
-            var total = start + newPerWeek * (m * 4);
-            var gained = newPerWeek * 4;
-            return "<tr><td>Month " + m + "</td><td>+" + Math.round(gained).toLocaleString() + "</td><td>" + Math.round(total).toLocaleString() + "</td></tr>";
+            var cells = scenarios.map(function (s) {
+              var total = s.series[m * 4];
+              var gained = s.newPerWeek * 4;
+              return "<td>" + Math.round(total).toLocaleString() + ' <span class="planner-gain">+' + Math.round(gained).toLocaleString() + "/mo</span></td>";
+            }).join("");
+            return "<tr><td>Month " + m + "</td>" + cells + "</tr>";
           });
           tableBody.innerHTML = rows.join("");
         }
 
-        [startInput, perVideoInput, perWeekInput].forEach(function (input) {
+        widget.querySelectorAll("input").forEach(function (input) {
           input.addEventListener("input", render);
         });
         render();
