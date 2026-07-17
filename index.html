@@ -109,7 +109,17 @@
     justify-content: center;
   }
   .gate-card h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: -0.01em; }
-  .gate-tagline { color: var(--accent); font-size: 16px; font-weight: 600; line-height: 1.45; margin: 0 0 10px; }
+  .gate-tagline {
+    color: #eaf1ff;
+    background: #2f6fed;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.45;
+    margin: 0 0 14px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    display: inline-block;
+  }
   .gate-sub { color: var(--muted); font-size: 15px; margin: 0 0 24px; }
   .gate-card button {
     width: 100%;
@@ -144,7 +154,16 @@
 
   header { padding: 26px 0 16px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
   header h1 { font-size: 30px; margin: 0 0 4px; letter-spacing: -0.01em; }
-  .site-tagline { color: var(--text-secondary); font-size: 17px; margin: 0 0 6px; }
+  .site-tagline {
+    color: #eaf1ff;
+    background: #2f6fed;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    display: inline-block;
+  }
   .header-meta { color: var(--muted); font-size: 14px; margin: 0; }
   .header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; padding-top: 4px; }
   .info-btn {
@@ -351,6 +370,52 @@
 
   .section-label { font-size: 17px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 0 0 14px; font-weight: 700; }
 
+  /* Growth Planner */
+  .planner-controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
+  .planner-field { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--text-secondary); }
+  .planner-field input {
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-primary);
+    background: var(--surface-1);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .planner-field input:focus { outline: none; border-color: var(--accent); }
+  @media (max-width: 560px) { .planner-controls { grid-template-columns: 1fr; } }
+
+  .planner-chart-box { position: relative; background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 24px; }
+  #planner-chart { width: 100%; height: auto; display: block; overflow: visible; }
+  .planner-gridline { stroke: var(--gridline); stroke-width: 1; }
+  .planner-axis-label { fill: var(--muted); font-size: 11px; }
+  .planner-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  .planner-marker { fill: var(--accent); stroke: var(--surface-1); stroke-width: 2; }
+  .planner-marker-label { fill: var(--text-primary); font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .planner-crosshair { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; }
+  .planner-hover-dot { fill: var(--accent); opacity: 0; }
+  .planner-tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--surface-2, #1a2338);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    transform: translate(-50%, -115%);
+  }
+  .planner-tooltip[hidden] { display: none; }
+
+  .planner-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .planner-table th, .planner-table td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--border); font-size: 15px; }
+  .planner-table th { color: var(--text-secondary); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; }
+  .planner-table td { color: var(--text-primary); }
+  .planner-table tr:last-child td { border-bottom: none; }
+
   .rank-list { display: flex; flex-direction: column; gap: 18px; margin-bottom: 28px; }
   .rank-row { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; }
   .rank-badge {
@@ -406,6 +471,15 @@
   .chip-sub { font-size: 13px; opacity: 0.75; }
 
   /* Overview tab */
+  .cmp-box { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 18px 16px; margin-bottom: 28px; display: flex; flex-direction: column; gap: 18px; }
+  .cmp-subhead { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 0 0 10px; }
+  .cmp-chart { display: flex; flex-direction: column; gap: 12px; }
+  .cmp-row { display: grid; grid-template-columns: 150px 1fr auto; gap: 10px; align-items: center; }
+  .cmp-label { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cmp-swatch { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .cmp-value { font-size: 14px; font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  @media (max-width: 520px) { .cmp-row { grid-template-columns: 118px 1fr auto; gap: 6px; } .cmp-label { font-size: 12px; } }
+
   .ov-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
   .ov-card {
     text-align: left;
@@ -1090,7 +1164,7 @@
       </div>
       <div class="nav-group">
         <p class="nav-group-label">Strategy</p>
-        <button class="nav-item" data-target="panel-outcomes" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg><span>The 10 Outcomes</span></button><button class="nav-item" data-target="panel-cot-content" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h9.5L19.5 8v12.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1z"/><path d="M15 3.5V8h4.5"/><path d="M8.5 12.5h7M8.5 16h7"/></svg><span>COT Content</span></button><button class="nav-item" data-target="panel-fable-analysis" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.5 6.5 0 0 1 4 11.6c-.8.6-1.3 1.3-1.4 2.2l-.1.7h-5l-.1-.7c-.1-.9-.6-1.6-1.4-2.2A6.5 6.5 0 0 1 12 3z"/><path d="M9.8 20.5h4.4"/></svg><span>Fable Analysis</span></button><button class="nav-item" data-target="panel-pipeline" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 19.5v-4"/><path d="M9.5 19.5v-8"/><path d="M14.5 19.5V7.5"/><path d="M19.5 19.5v-15"/></svg><span>Content Pipeline</span></button>
+        <button class="nav-item" data-target="panel-planner" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 16.5l4.5-5 3.5 3 5.5-7"/><path d="M13 6.5h4.5V11"/></svg><span>Growth Planner</span></button><button class="nav-item" data-target="panel-outcomes" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg><span>The 10 Outcomes</span></button><button class="nav-item" data-target="panel-cot-content" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h9.5L19.5 8v12.5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1z"/><path d="M15 3.5V8h4.5"/><path d="M8.5 12.5h7M8.5 16h7"/></svg><span>COT Content</span></button><button class="nav-item" data-target="panel-fable-analysis" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.5 6.5 0 0 1 4 11.6c-.8.6-1.3 1.3-1.4 2.2l-.1.7h-5l-.1-.7c-.1-.9-.6-1.6-1.4-2.2A6.5 6.5 0 0 1 12 3z"/><path d="M9.8 20.5h4.4"/></svg><span>Fable Analysis</span></button><button class="nav-item" data-target="panel-pipeline" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 19.5v-4"/><path d="M9.5 19.5v-8"/><path d="M14.5 19.5V7.5"/><path d="M19.5 19.5v-15"/></svg><span>Content Pipeline</span></button>
       </div></div>
       </div>
       <nav class="tabbar customer-tabbar" id="customer-tabbar" role="tablist" hidden><button class="nav-item" data-target="panel-onboarding" role="tab" aria-selected="true"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 21V4"/><path d="M5.5 4.8c4.8-2.6 8.2 2.4 13-0.2v9c-4.8 2.6-8.2-2.4-13 .2"/></svg><span>Get started</span></button><button class="nav-item" data-target="panel-demo" role="tab" aria-selected="false"><svg class="icn" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Example dashboard</span></button></nav>
@@ -1126,6 +1200,51 @@
         <span class="ov-label">avg engagement</span>
         <span class="ov-sub">30 posts tracked</span>
       </button></div>
+
+    <h3 class="section-label">Accounts compared</h3>
+    <div class="cmp-box">
+      
+    <h4 class="cmp-subhead">Avg engagement</h4>
+    <div class="cmp-chart">
+      <div class="cmp-row">
+        <span class="cmp-label"><span class="cmp-swatch" style="background:#0ABFBC;"></span>PAC Facebook</span>
+        <div class="bar-track"><div class="bar-fill" style="width:100%; background:#0ABFBC;"></div></div>
+        <span class="cmp-value">504</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-label"><span class="cmp-swatch" style="background:#2dd4b0;"></span>LOTB TikTok</span>
+        <div class="bar-track"><div class="bar-fill" style="width:26.38888888888889%; background:#2dd4b0;"></div></div>
+        <span class="cmp-value">133</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-label"><span class="cmp-swatch" style="background:#4a9af0;"></span>LOTB Instagram</span>
+        <div class="bar-track"><div class="bar-fill" style="width:3%; background:#4a9af0;"></div></div>
+        <span class="cmp-value">14</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-label"><span class="cmp-swatch" style="background:#0ABFBC;"></span>PAC Instagram</span>
+        <div class="bar-track"><div class="bar-fill" style="width:3%; background:#0ABFBC;"></div></div>
+        <span class="cmp-value">5</span>
+      </div></div>
+      
+    <h4 class="cmp-subhead">Followers</h4>
+    <div class="cmp-chart">
+      <div class="cmp-row">
+        <span class="cmp-label"><span class="cmp-swatch" style="background:#4a9af0;"></span>LOTB Instagram</span>
+        <div class="bar-track"><div class="bar-fill" style="width:100%; background:#4a9af0;"></div></div>
+        <span class="cmp-value">1,150</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-label"><span class="cmp-swatch" style="background:#2dd4b0;"></span>LOTB TikTok</span>
+        <div class="bar-track"><div class="bar-fill" style="width:89.39130434782608%; background:#2dd4b0;"></div></div>
+        <span class="cmp-value">1,028</span>
+      </div>
+      <div class="cmp-row">
+        <span class="cmp-label"><span class="cmp-swatch" style="background:#0ABFBC;"></span>PAC Instagram</span>
+        <div class="bar-track"><div class="bar-fill" style="width:30%; background:#0ABFBC;"></div></div>
+        <span class="cmp-value">345</span>
+      </div></div>
+    </div>
 
     <h3 class="section-label">Best post across everything</h3>
     <div class="spotlight" style="--acc:#0ABFBC;">
@@ -3151,6 +3270,38 @@
     
   </section>
       
+  <section class="panel" id="panel-planner" hidden>
+    <div class="account-header">
+      <h2><span class="acc-icon"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 16.5l4.5-5 3.5 3 5.5-7"/><path d="M13 6.5h4.5V11"/></svg></span>Growth Planner</h2>
+    </div>
+    <p class="fable-subtitle">Set your video cadence and see where your follower count lands over the next 3 months.</p>
+
+    <div class="planner-controls">
+      <label class="planner-field">
+        <span>Starting followers</span>
+        <input type="number" id="planner-start" min="0" step="1" value="2523">
+      </label>
+      <label class="planner-field">
+        <span>New followers per video</span>
+        <input type="number" id="planner-per-video" min="0" step="1" value="20">
+      </label>
+      <label class="planner-field">
+        <span>Videos per week</span>
+        <input type="number" id="planner-per-week" min="0" step="0.5" value="3">
+      </label>
+    </div>
+
+    <div class="planner-chart-box">
+      <svg id="planner-chart" viewBox="0 0 640 260" preserveAspectRatio="none" role="img" aria-label="Projected follower growth over 3 months"></svg>
+      <div class="planner-tooltip" id="planner-tooltip" hidden></div>
+    </div>
+
+    <table class="planner-table">
+      <thead><tr><th>Milestone</th><th>New followers gained</th><th>Projected total followers</th></tr></thead>
+      <tbody id="planner-table-body"></tbody>
+    </table>
+  </section>
+      
   <section class="panel" id="panel-outcomes" hidden>
     <div class="account-header">
       <h2><span class="acc-icon"><svg class="icn" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg></span>The 10 Outcomes</h2>
@@ -3985,6 +4136,143 @@ Do the full setup:
       document.querySelectorAll(".ov-card").forEach(function (card) {
         card.addEventListener("click", function () { goToPanel(card.dataset.jump); });
       });
+
+      // Growth Planner: pure client-side projection, no data leaves the page.
+      (function () {
+        var startInput = document.getElementById("planner-start");
+        var perVideoInput = document.getElementById("planner-per-video");
+        var perWeekInput = document.getElementById("planner-per-week");
+        var svg = document.getElementById("planner-chart");
+        var tooltip = document.getElementById("planner-tooltip");
+        var tableBody = document.getElementById("planner-table-body");
+        if (!startInput || !svg) return;
+
+        var WEEKS = 12; // 3 months at 4 weeks/month
+        var W = 640, H = 260, PAD_L = 55, PAD_R = 20, PAD_T = 20, PAD_B = 34;
+        var plotW = W - PAD_L - PAD_R, plotH = H - PAD_T - PAD_B;
+        var svgNS = "http://www.w3.org/2000/svg";
+
+        function num(el, fallback) {
+          var v = parseFloat(el.value);
+          return isFinite(v) && v >= 0 ? v : fallback;
+        }
+
+        function el(tag, attrs) {
+          var n = document.createElementNS(svgNS, tag);
+          for (var k in attrs) n.setAttribute(k, attrs[k]);
+          return n;
+        }
+
+        function render() {
+          var start = num(startInput, 0);
+          var perVideo = num(perVideoInput, 0);
+          var perWeek = num(perWeekInput, 0);
+          var newPerWeek = perVideo * perWeek;
+
+          var series = [];
+          for (var w = 0; w <= WEEKS; w++) series.push(start + newPerWeek * w);
+
+          var minY = Math.min.apply(null, series);
+          var maxY = Math.max.apply(null, series);
+          if (minY === maxY) maxY = minY + 1;
+
+          function xFor(w) { return PAD_L + (w / WEEKS) * plotW; }
+          function yFor(v) { return PAD_T + (1 - (v - minY) / (maxY - minY)) * plotH; }
+
+          while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+          // Gridlines + y labels (4 bands)
+          for (var i = 0; i <= 3; i++) {
+            var val = minY + ((maxY - minY) * i) / 3;
+            var y = yFor(val);
+            svg.appendChild(el("line", { class: "planner-gridline", x1: PAD_L, x2: W - PAD_R, y1: y, y2: y }));
+            var label = el("text", { class: "planner-axis-label", x: PAD_L - 8, y: y + 4, "text-anchor": "end" });
+            label.textContent = Math.round(val).toLocaleString();
+            svg.appendChild(label);
+          }
+
+          // X-axis month labels
+          var monthTicks = [
+            { w: 0, label: "Today" },
+            { w: 4, label: "Month 1" },
+            { w: 8, label: "Month 2" },
+            { w: 12, label: "Month 3" },
+          ];
+          monthTicks.forEach(function (t) {
+            var lbl = el("text", { class: "planner-axis-label", x: xFor(t.w), y: H - 10, "text-anchor": t.w === 0 ? "start" : t.w === 12 ? "end" : "middle" });
+            lbl.textContent = t.label;
+            svg.appendChild(lbl);
+          });
+
+          // Line
+          var d = series.map(function (v, w) { return (w === 0 ? "M" : "L") + xFor(w).toFixed(1) + "," + yFor(v).toFixed(1); }).join(" ");
+          svg.appendChild(el("path", { class: "planner-line", d: d }));
+
+          // Month markers + direct labels
+          monthTicks.forEach(function (t) {
+            var v = series[t.w];
+            var cx = xFor(t.w), cy = yFor(v);
+            svg.appendChild(el("circle", { class: "planner-marker", cx: cx, cy: cy, r: 5 }));
+            var lbl = el("text", {
+              class: "planner-marker-label",
+              x: cx,
+              y: cy - 12,
+              "text-anchor": t.w === 0 ? "start" : t.w === 12 ? "end" : "middle",
+            });
+            lbl.textContent = Math.round(v).toLocaleString();
+            svg.appendChild(lbl);
+          });
+
+          // Hover layer
+          var crosshair = el("line", { class: "planner-crosshair", x1: 0, x2: 0, y1: PAD_T, y2: H - PAD_B });
+          var hoverDot = el("circle", { class: "planner-hover-dot", r: 5 });
+          svg.appendChild(crosshair);
+          svg.appendChild(hoverDot);
+          var hitRect = el("rect", { x: PAD_L, y: PAD_T, width: plotW, height: plotH, fill: "transparent" });
+          svg.appendChild(hitRect);
+
+          function showTooltip(w, clientX, clientY) {
+            var v = series[w];
+            tooltip.textContent = "Week " + w + " · " + Math.round(v).toLocaleString() + " followers";
+            tooltip.hidden = false;
+            var boxRect = svg.parentElement.getBoundingClientRect();
+            tooltip.style.left = (clientX - boxRect.left) + "px";
+            tooltip.style.top = (clientY - boxRect.top) + "px";
+            crosshair.setAttribute("x1", xFor(w));
+            crosshair.setAttribute("x2", xFor(w));
+            crosshair.style.opacity = 1;
+            hoverDot.setAttribute("cx", xFor(w));
+            hoverDot.setAttribute("cy", yFor(v));
+            hoverDot.style.opacity = 1;
+          }
+          function hideTooltip() {
+            tooltip.hidden = true;
+            crosshair.style.opacity = 0;
+            hoverDot.style.opacity = 0;
+          }
+          hitRect.addEventListener("mousemove", function (e) {
+            var rect = svg.getBoundingClientRect();
+            var xInViewBox = ((e.clientX - rect.left) / rect.width) * W;
+            var w = Math.round(((xInViewBox - PAD_L) / plotW) * WEEKS);
+            w = Math.max(0, Math.min(WEEKS, w));
+            showTooltip(w, e.clientX, e.clientY);
+          });
+          hitRect.addEventListener("mouseleave", hideTooltip);
+
+          // Table: months 1-3
+          var rows = [1, 2, 3].map(function (m) {
+            var total = start + newPerWeek * (m * 4);
+            var gained = newPerWeek * 4;
+            return "<tr><td>Month " + m + "</td><td>+" + Math.round(gained).toLocaleString() + "</td><td>" + Math.round(total).toLocaleString() + "</td></tr>";
+          });
+          tableBody.innerHTML = rows.join("");
+        }
+
+        [startInput, perVideoInput, perWeekInput].forEach(function (input) {
+          input.addEventListener("input", render);
+        });
+        render();
+      })();
 
       function timeAgo(iso) {
         if (!iso) return "never recorded";
