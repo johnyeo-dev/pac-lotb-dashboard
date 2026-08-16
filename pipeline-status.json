@@ -142,8 +142,8 @@
       "destination": "This dashboard (self)",
       "trackable": true,
       "expectedHours": 192,
-      "lastRun": "2026-08-09T23:06:53.352Z",
-      "lastOutput": "refreshed 4 accounts, top: LOTB TikTok (2,687 mum-story); PAC Facebook CSV stale (9 Jul)",
+      "lastRun": "2026-08-16T23:07:01.398Z",
+      "lastOutput": "refreshed 4 accounts, top: LOTB TikTok; PAC FB data stale (39d)",
       "status": "ok"
     }
   ]
